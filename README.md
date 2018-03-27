@@ -62,3 +62,10 @@ sh testing.sh
 * Move all libs inside lib folder
 * make if you want a program with shared libs or make -f Makefile.static if you want a staic program.
 * Makefiles are so simple (http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/)
+
+## Contact
+
+if I can help you in something just let me know, 
+liesware 4t liesware d0t com , 
+or if you want to contribute/improve or if you have a better idea please write me.
+
