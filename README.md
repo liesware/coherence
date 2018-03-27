@@ -63,6 +63,9 @@ sh testing.sh
 * make if you want a program with shared libs or make -f Makefile.static if you want a staic program.
 * Makefiles are so simple (http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/)
 
+## Wiki
+Please see https://github.com/liesware/coherence/wiki
+
 ## Contact
 
 if I can help you in something just let me know, 
