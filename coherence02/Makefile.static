@@ -1,0 +1,18 @@
+CC = g++
+
+#CFLAGS = -static -D DEBUG -g -O5 -Werror
+
+CFLAGS= -static  -Werror
+
+INCLUDES = -luv -lcryptopp -largon2  -lpthread 
+
+LIBS = -L./lib/cryptopp/ -L./lib/argon2/
+
+TARGET = coherence
+
+all: $(TARGET)
+
+$(TARGET): $(TARGET).c
+	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c $(INCLUDES) $(LIBS) 
+
+
