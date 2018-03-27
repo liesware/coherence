@@ -39,7 +39,8 @@ Coherence is and TCP server which provides an json interface to perfom cryptogra
 
 
 ## Quickstart
+```
+cd coherence
 
-in bin folder, you have a coherence static version, it does not use shared libs, so you can run it.
-when you run coherence, run sh testing.sh to test it.
+```
 
