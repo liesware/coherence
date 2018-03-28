@@ -2,7 +2,7 @@ CC = g++
 
 #CFLAGS = -D DEBUG -g -Werror
 
-CFALAGS= -Werror
+CFLAGS= -Werror
 
 INCLUDES = -Ilibuv/ -Icryptopp/ -Iargon2/
 
@@ -14,5 +14,3 @@ all: $(TARGET)
 
 $(TARGET): $(TARGET).c
 	$(CC) $(CFLAGS) $(INCLUDES) $(LIBS) -o $(TARGET) $(TARGET).c
-
-
