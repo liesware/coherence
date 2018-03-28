@@ -21,8 +21,8 @@ Coherence is and TCP server which provides an json interface to perfom cryptogra
 
 ## Target
 
-* Be cryptoserver - (it's like openssl, tcp/json insted of bash)
-* Be an open source (software) alternative to HSM
+* Be cryptoserver (it's like openssl, tcp/json insted of bash)
+* Be an open source kind of alternative to HSM
 
  
 ## Features
@@ -65,7 +65,7 @@ The log file is print in statndard output, so you can redirect the standard erro
 * Rename CRYPTOPP_5_6_5 to cryptopp, phc-winner-argon2 to argon2
 * Move all libs inside lib folder
 * make if you want a program with shared libs or make -f Makefile.static if you want a staic program.
-* Makefiles are so simple (http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/)
+* Makefiles are so simple (http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/), you can modify without problem
 
 ## Wiki
 Please see https://github.com/liesware/coherence/wiki
@@ -75,4 +75,3 @@ Please see https://github.com/liesware/coherence/wiki
 if I can help you in something just let me know, 
 liesware 4t liesware d0t com , 
 or if you want to contribute/improve or if you have a better idea please write me.
-
