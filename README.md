@@ -33,7 +33,7 @@ Coherence is and TCP server which provides an json interface to perfom cryptogra
 
 
 ## Quickstart
-#### Is very important to clone this repo, because here is the test to validate coherence server or.
+#### Is very important to clone this repo, because here is the test to validate coherence server
 
 Install glibc-static.
 Inside bin folder there is a coherence version compile with -static, so you shoul not have problems to run it, because it does not depend on shared libs. 
