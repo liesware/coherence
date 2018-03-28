@@ -23,6 +23,7 @@ Coherence is and TCP server which provides an json interface to perfom cryptogra
 
 * Be cryptoserver (it's like openssl, tcp/json insted of bash)
 * Be an open source kind of alternative to HSM
+* Provide post quantum cryptography algorithms
 
  
 ## Features
