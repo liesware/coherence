@@ -18,13 +18,6 @@
 
 Coherence is and TCP server which provides an json interface to perfom cryptographic operations like encrypt, decrypt, digital signatures, key exchage, message authentication code, random numbers, hash functions.
 
-
-## Target
-
-* Be cryptoserver (it's like openssl, tcp/json insted of bash)
-* Be an open source kind of alternative to HSM
-* Provide post quantum cryptography algorithms
-
  
 ## Features
 
@@ -70,6 +63,12 @@ The log file is print in statndard output, so you can redirect the standard erro
 
 ## Wiki
 Please see https://github.com/liesware/coherence/wiki
+
+## Target
+
+* Be cryptoserver (it's like openssl, tcp/json insted of bash)
+* Be an open source kind of alternative to HSM
+* Provide post quantum cryptography algorithms
 
 ## Contact
 
