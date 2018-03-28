@@ -95,12 +95,14 @@ void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
 
     clock_t t;
     t = clock();
+/*
     log_file.open ("file_test/coherence.log" ,ios::app);
     if (log_file.is_open()){
       //printf("Coherence server started and login\n");
     } 
     else
       printf("Unable to open log file\n");  
+*/
         
     string str_json;
     str_json.clear();
@@ -125,8 +127,9 @@ void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
       log_info.exec_time=(float)t/CLOCKS_PER_SEC;  
       string log_js="{}";
       parse_log(log_info, log_js);
-      log_file<<log_js<<endl;
-      log_file.close(); 	  
+      cout<<log_js<<endl;
+//      log_file<<log_js<<endl;
+//      log_file.close(); 	  
 	  			
 	}        
     else{
@@ -147,8 +150,9 @@ void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
       log_info.exec_time=(float)t/CLOCKS_PER_SEC;  
       string log_js="{}";
       parse_log(log_info, log_js);
-      log_file<<log_js<<endl;
-      log_file.close(); 
+      cout<<log_js<<endl;
+//      log_file<<log_js<<endl;
+//      log_file.close(); 
 	  
     }                           
   }  
@@ -175,15 +179,20 @@ void on_new_connection(uv_stream_t *server, int status) {
   }
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+  if(argc!=3){
+    printf(" IP PORT \n");
+    return 1;
+  }	
   banner();
+    
   	
   loop = uv_default_loop();
   uv_tcp_t server;
   uv_tcp_init(loop, &server);
   uv_tcp_simultaneous_accepts(&server, 1);
     
-  uv_ip4_addr("0.0.0.0", 6613, &addr);
+  uv_ip4_addr(argv[1], atoi(argv[2]), &addr);
   uv_tcp_bind(&server, (const struct sockaddr*)&addr, 0);
   int r = uv_listen((uv_stream_t*)&server, 128, on_new_connection);
   if(r){
