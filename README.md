@@ -52,6 +52,10 @@ In other tab
 cd coherence/coherence02/
 sh testing.sh
 ```
+The log file is print in statndard output, so you can redirect the standard error and standard out messages to a log file.
+```
+./coherence  > coherence.log 2>&1
+```
 
 ## Compile
 * Clone rapidjson 1.1.x (https://github.com/Tencent/rapidjson.git)
