@@ -50,6 +50,20 @@ The log file is print in statndard output, so you can redirect the standard erro
 ```
 ./coherence  > coherence.log 2>&1
 ```
+## Docker image
+```
+git clone https://github.com/liesware/coherence.git
+
+docker pull liesware/coherence
+docker run -p 6613:6613 docker.io/liesware/coherence:02  /coherence/coherence 0.0.0.0 6613  > coherence.log 2>&1 &
+
+cd coherence/coherence02/
+sh testing.sh
+
+```
+https://hub.docker.com/r/liesware/coherence/
+
+
 
 ## Compile
 * Clone rapidjson 1.1.x (https://github.com/Tencent/rapidjson.git)
