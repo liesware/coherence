@@ -16,7 +16,7 @@
 
 ## Abstract
 
-Coherence is a TCP server which provides an json interface to perfom cryptographic operations like encrypt, decrypt, digital signatures, key exchage, message authentication code, random numbers, hash functions.
+Coherence is a TCP server which provides an json interface to perfom cryptographic operations like encrypt, digital signatures, key exchage, message authentication code, random numbers, hash functions.
 
  
 ## Features
@@ -26,7 +26,7 @@ Coherence is a TCP server which provides an json interface to perfom cryptograph
 * Block ciphers: AES, RC6, MARS, Twofish, Serpent, CAST-256.
 * Block ciphers modes: CTR, GCM.
 * Message authentication codes: HMAC(SHA3, SHA2, SHA1, WHIRLPOOL),  CMAC(AES, RC6, MARS, Twofish, Serpent, CAST-256), VMAC(AES, RC6, MARS, Twofish, Serpent, CAST-256), Poly1305.
-* RSA: Key generation, digital signature, encryption and decryption.
+* RSA: Key generation, digital signature, encryption.
 * DSA: Key generation, digital signature.
 * DH: Key generation, key exchange (rfc and custom parameters).
 * ECC: Key generation, ECIES, ECDSA, ECDH.
@@ -40,7 +40,7 @@ Inside bin folder there is a coherence version compile with -static, so you shou
 git clone https://github.com/liesware/coherence.git
 cd coherence/coherence02/bin/
 chmod 550 coherence
-./coherence
+./coherence 0.0.0.0 6613  > coherence.log 2>&1 &
 ```
 In other tab
 ```
