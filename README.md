@@ -16,7 +16,7 @@
 
 ## Abstract
 
-Coherence is a TCP server which provides an json interface to perfom cryptographic operations like encrypt, digital signatures, key exchage, message authentication code, random numbers, hash functions.
+Coherence is a TCP server which provides an json interface to perfom cryptographic operations like encrypt, digital signatures, key exchage, message authentication code, random numbers, hash functions. Basically hsm core features.
 
  
 ## Features
