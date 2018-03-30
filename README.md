@@ -87,8 +87,13 @@ Please see https://github.com/liesware/coherence/wiki
 * Be an open source kind of alternative to HSM
 * Provide post quantum cryptography algorithms
 
+## Version
+This is the version 0.2, all the versions in github  are even, odd versions are to develop , even versions  are to fix bugs.
+
+All the versions before 1.0 are called Essence.
+
 ## Contact
 
 if I can help you in something just let me know, 
 liesware 4t liesware d0t com , 
-or if you want to contribute/improve or if you have a better idea please write me.
+or if you want to contribute/improve, have a better idea , give an opinion, propose new features, please write me.
