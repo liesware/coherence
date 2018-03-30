@@ -6,8 +6,9 @@
 
  </pre>
 
-"Privacy is the power to selectively reveal oneself to the world." 
+"Privacy is the power to selectively reveal oneself to the world". Eric Hughes
 - https://www.activism.net/cypherpunk/manifesto.html
+- http://www.coderfreedom.org/
 
 # Coherence
 
