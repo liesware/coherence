@@ -40,7 +40,7 @@ Inside bin folder there is a coherence version compile with -static, so you shou
 git clone https://github.com/liesware/coherence.git
 cd coherence/coherence02/bin/
 chmod 550 coherence
-./coherence 0.0.0.0 6613  > coherence.log 2>&1 &
+./coherence 0.0.0.0 6613  
 ```
 In other tab
 ```
@@ -49,7 +49,7 @@ sh testing.sh
 ```
 The log file is print in statndard output, so you can redirect the standard error and standard out messages to a log file.
 ```
-./coherence  > coherence.log 2>&1
+./coherence 0.0.0.0 6613 > coherence.log 2>&1 &
 ```
 ## Docker image
 
