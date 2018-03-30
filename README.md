@@ -1,4 +1,4 @@
-# Welcome to Cryptoserver
+# Welcome to (Cryptoserver)
 <pre>
  _______  _____  _     _ _______  ______ _______ __   _ _______ _______
  |       |     | |_____| |______ |_____/ |______ | \  | |       |______
@@ -16,7 +16,7 @@
 
 ## Abstract
 
-Coherence is and TCP server which provides an json interface to perfom cryptographic operations like encrypt, decrypt, digital signatures, key exchage, message authentication code, random numbers, hash functions.
+Coherence is a TCP server which provides an json interface to perfom cryptographic operations like encrypt, decrypt, digital signatures, key exchage, message authentication code, random numbers, hash functions.
 
  
 ## Features
@@ -32,8 +32,7 @@ Coherence is and TCP server which provides an json interface to perfom cryptogra
 * ECC: Key generation, ECIES, ECDSA, ECDH.
 
 
-## Quickstart
-#### Is very important to clone this repo, because here is the test to validate coherence server
+## Quickstart (Linux)
 
 Install glibc-static.
 Inside bin folder there is a coherence version compile with -static, so you shoul not have problems to run it, because it does not depend on shared libs. 
@@ -58,6 +57,7 @@ The log file is print in statndard output, so you can redirect the standard erro
 git clone https://github.com/liesware/coherence.git
 
 docker pull liesware/coherence
+
 docker run -p 6613:6613 docker.io/liesware/coherence:02  /coherence/coherence 0.0.0.0 6613  > coherence.log 2>&1 &
 
 cd coherence/coherence02/
@@ -66,9 +66,9 @@ sh testing.sh
 ```
 https://hub.docker.com/r/liesware/coherence/
 
+On windows you shoud not have problems , it is almost the same 
 
-
-## Compile
+## Compile (*nix)
 * Clone rapidjson 1.1.x (https://github.com/Tencent/rapidjson.git)
 * Clone cryptopp 5.6.5 (http://github.com/weidai11/cryptopp/releases/tag/CRYPTOPP_5_6_5) and install (https://www.cryptopp.com/wiki/Compiling)
 * Clone libuv 1.x (https://github.com/libuv/libuv.git) and install (see libuv Readme)
