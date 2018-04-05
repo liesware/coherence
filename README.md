@@ -97,6 +97,4 @@ All the versions before 1.0 are called Essence.
 
 ## Contact
 
-if I can help you in something just let me know, 
-liesware 4t liesware d0t com , 
-or if you want to contribute/improve, have a better idea , give an opinion, propose new features, please write me.
+liesware 4t liesware d0t com , only concise and well-reasoned feedback are welcome. please be critic with yourself before writing.
