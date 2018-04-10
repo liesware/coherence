@@ -19,7 +19,7 @@ def argon(data_js):
 	data_js_n=sending(json.dumps(req))
 	answ=json.loads(data_js_n)
 	print "Recived argon: \n" + (json.dumps(answ)) +"\n\n\n"
-	verify= '{ "version": 1 , "algorithm":"ARGON2V" ,"family":"argon2i","plaintext": "0123456789ABCDEF","hex":1,"pwd":""}';
+	verify= '{ "version": 1 , "algorithm":"ARGON2" ,"family":"argon2i","plaintext": "0123456789ABCDEF","hex":1,"pwd":"", "operation":"verify"}';
 	req=json.loads(verify)
 	req["pwd"]=answ["hash"]
 	print "Send passwd \n " + json.dumps(req) +"\n"
@@ -29,6 +29,6 @@ def argon(data_js):
 
 
 argon2='{ "version": 1 , "algorithm":"ARGON2" ,"family":"argon2i","plaintext": "0123456789ABCDEF","t_cost":10,"m_cost":16,"parallelism":4,\
-"salt":"ABABABABABABABABABABABABABABABAB","hashlen":32, "hex":1}'
+"salt":"ABABABABABABABABABABABABABABABAB","hashlen":32, "hex":1, "operation":"hash"}'
 
 argon(argon2)
