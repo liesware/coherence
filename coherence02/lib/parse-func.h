@@ -413,7 +413,8 @@ int check_ops(Document& d, stru_param& req_val, string& answ_js){
     req_val.operation= d["operation"].GetString();
     if(strncmp(req_val.operation.c_str(), "enc",sizeof("enc")) !=0 && strncmp(req_val.operation.c_str(), "dec",sizeof("dec"))!=0
       &&strncmp(req_val.operation.c_str(), "sign",sizeof("sign")) !=0 && strncmp(req_val.operation.c_str(), "verify",sizeof("verify"))!=0
-      &&strncmp(req_val.operation.c_str(), "gen",sizeof("gen")) !=0 && strncmp(req_val.operation.c_str(), "agree",sizeof("agree")) !=0){
+      &&strncmp(req_val.operation.c_str(), "gen",sizeof("gen")) !=0 && strncmp(req_val.operation.c_str(), "agree",sizeof("agree")) !=0
+      &&strncmp(req_val.operation.c_str(), "hash",sizeof("hash")) !=0 ){
     req_val.error.clear();    
 	req_val.error="Bad operation enc/dec/sign/very ";
 	req_val.tag="error";  
