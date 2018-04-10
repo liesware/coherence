@@ -76,7 +76,7 @@ int check_pwd(Document& d, stru_param& req_val, string& answ_js){
 
 
 ////////////////////////////////////////////////////////////////////////
-int ARGON2_(string& payload, string& digest, string& family, int t_cost, 
+int ARGON2_h(string& payload, string& digest, string& family, int t_cost, 
             int m_cost, int parallelism, string& salt, int hashlen, int& binary, string& error){
   
   error.clear();
@@ -192,7 +192,7 @@ int ARGON2_V(string& payload, string& family, string& pwd, string& verify,int& b
 }
 
 //PARSE ARGON2////////////////////////////////////////////////////////////////
-int parse_argon2(Document& d, stru_param& req_val, string& answ_js){
+int parse_argon2h(Document& d, stru_param& req_val, string& answ_js){
    if(d.HasMember("plaintext")&&d.HasMember("family")&&d.HasMember("t_cost")&&d.HasMember("m_cost")
        &&d.HasMember("parallelism")&&d.HasMember("salt")&&d.HasMember("hashlen")){
 	
@@ -207,7 +207,7 @@ int parse_argon2(Document& d, stru_param& req_val, string& answ_js){
 	
     req_val.payload=req_val.plaintext;
     		    
-    ARGON2_(req_val.payload, req_val.hash,req_val.family,req_val.t_cost,
+    ARGON2_h(req_val.payload, req_val.hash,req_val.family,req_val.t_cost,
     req_val.m_cost,req_val.parallelism,req_val.salt,req_val.hashlen,req_val.hex,req_val.error);
         
      req_val.tag.clear();
@@ -273,6 +273,41 @@ int parse_argon2v(Document& d, stru_param& req_val, string& answ_js){
    else{
 	req_val.error.clear();    
 	req_val.error="Not plaintext/family/pwd  ";
+	req_val.tag="error";  
+	Addstr2json(answ_js, req_val.tag, req_val.error); 	  
+#ifdef DEBUG	    
+    cerr << req_val.error;
+#endif
+    return 1;			   
+   }    
+  } 
+
+////////////////////////////////////////////////////////////////////////
+int parse_argon2(Document& d, stru_param& req_val, string& answ_js){
+#ifdef DEBUG		
+    printf("Good algorithm ARGON2 ");
+#endif
+
+   if(d.HasMember("operation")){		   
+     if(check_ops(d,req_val,answ_js)!=0)
+       return 1;
+     
+     if(strncmp(req_val.operation.c_str(), "hash",sizeof("hash")) == 0){
+	   parse_argon2h(d, req_val, answ_js);   
+	 }   
+     else if (strncmp(req_val.operation.c_str(), "verify",sizeof("verify")) == 0){
+	   parse_argon2v(d, req_val, answ_js); 
+	 }  
+     else{
+       req_val.error="Bad Block operation ";  
+       answ_error(req_val,answ_js); 
+       return 1;	   
+     }    
+
+   }      
+   else{
+	req_val.error.clear();    
+	req_val.error="Not operation ";
 	req_val.tag="error";  
 	Addstr2json(answ_js, req_val.tag, req_val.error); 	  
 #ifdef DEBUG	    

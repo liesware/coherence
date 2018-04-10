@@ -132,9 +132,6 @@ int PARSING(string& str_json, string& answ_js ){
    else if(strncmp(req_val.algorithm.c_str(), "ARGON2",sizeof("ARGON2")) == 0){
     parse_argon2(d,req_val,answ_js);      
   }   
-   else if(strncmp(req_val.algorithm.c_str(), "ARGON2V",sizeof("ARGON2V")) == 0){
-    parse_argon2v(d,req_val,answ_js);      
-  }
    else if(strncmp(req_val.algorithm.c_str(), "RAND_RP",sizeof("RAND_RP")) == 0){
     parse_rand(d,req_val,answ_js);      
   }
