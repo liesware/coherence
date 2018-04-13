@@ -81,6 +81,10 @@ On windows you should not have problems , it is almost the same
 * make if you want a program with shared libs or make -f Makefile.static if you want a staic program.
 * Makefiles are so simple (http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/), you can modify without problem
 
+## Examples 
+testing.sh exec argon2.py, dh.py, dsa.py, ecc.py, hash.js, mac.js, rand.js, rsa.py, stream.py.
+The code is very simple and with basic programming knowledge you should be able to understand it.
+
 ## Wiki
 Please see https://github.com/liesware/coherence/wiki
 
