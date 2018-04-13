@@ -69,7 +69,7 @@ sh testing.sh
 ```
 https://hub.docker.com/r/liesware/coherence/
 
-On windows you shoud not have problems , it is almost the same 
+On windows you should not have problems , it is almost the same 
 
 ## Compile (*nix)
 * Clone rapidjson 1.1.x (https://github.com/Tencent/rapidjson.git)
