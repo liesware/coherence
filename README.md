@@ -38,7 +38,7 @@ Coherence is a TCP server which provides an json interface to perfom cryptograph
 ## Quickstart (Linux)
 
 Install glibc-static.
-Inside bin folder there is a coherence version compile with -static, so you shoul not have problems to run it, because it does not depend on shared libs. 
+Inside bin folder there is a coherence version compile with -static, so you should not have problems to run it, because it does not depend on shared libs. 
 ```
 git clone https://github.com/liesware/coherence.git
 cd coherence/coherence02/bin/
@@ -50,7 +50,7 @@ In other tab
 cd coherence/coherence02/
 sh testing.sh
 ```
-The log file is print in statndard output, so you can redirect the standard error and standard out messages to a log file.
+The log file is print in standard output, so you can redirect the standard error and standard out messages to a log file.
 ```
 ./coherence 0.0.0.0 6613 > coherence.log 2>&1 &
 ```
