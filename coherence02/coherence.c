@@ -120,7 +120,7 @@ void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
 	  char *paramsp=strdup( answer.c_str());          
 	  uv_buf_t wrbuf= uv_buf_init(paramsp, answer.length());
 	  uv_write(req, client, &wrbuf, 1, echo_write);
-	  uv_close((uv_handle_t*) client, NULL);			
+	  //uv_close((uv_handle_t*) client, NULL);			
 	  free(paramsp);
 	  
 	  t = clock()-t;
