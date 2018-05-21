@@ -60,7 +60,7 @@ int RSA_GEN(string& privkey ,string& pubkey,int& rsalen,string& error ){
   return 0;
 }
 
-
+template <typename T>
 int RSA_SIGN(string& type, string& payload,string& privkey, string& sign, int& binary,string& error ){
   error.clear();
   sign.clear();
@@ -81,7 +81,7 @@ int RSA_SIGN(string& type, string& payload,string& privkey, string& sign, int& b
       return 1;   
     }
 
-     RSASS<PSS, SHA1>::Signer signer(PrivateKey);     
+     T signer(PrivateKey);     
      if (strncmp(type.c_str(), "string",sizeof("string")) == 0){
        if(binary==0)
          StringSource( payload, true, new SignerFilter( prng, signer,new HexEncoder(new StringSink(sign))));
@@ -112,6 +112,7 @@ int RSA_SIGN(string& type, string& payload,string& privkey, string& sign, int& b
   return 0;
 }
 
+template <typename T>
 int RSA_V(string& type, string& payload,string& pubkey, string& sign, string& verify, int& binary,string& error ){
   error.clear();
   RSA::PublicKey PublicKey;
@@ -133,7 +134,7 @@ int RSA_V(string& type, string& payload,string& pubkey, string& sign, string& ve
       return 1;   
     }
 
-     RSASS<PSS, SHA1>::Verifier verifier( PublicKey ); 
+     T verifier( PublicKey ); 
      string payload_e;
      
      if(binary==0)
@@ -291,6 +292,8 @@ int parse_rsa_sign(Document& d, stru_param& req_val, string& answ_js){
        return 1;
      if(check_bin(d,req_val,answ_js)!=0)
        return 1;
+     if(check_hash_sign(d,req_val,answ_js)!=0)
+       return 1;        
      
     req_val.payload=req_val.plaintext;           	
 	}
@@ -321,8 +324,25 @@ int parse_rsa_sign(Document& d, stru_param& req_val, string& answ_js){
     answ_error(req_val,answ_js); 
     return 1;	   
   }   
-     
-  RSA_SIGN(req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.error);
+
+  if(strncmp(req_val.hash_sign.c_str(), "sha3_512",sizeof("sha3_512")) == 0){
+    RSA_SIGN<RSASS<PSS, SHA3_512>::Signer >
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.error); 
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha3_384",sizeof("sha3_384")) == 0){
+    RSA_SIGN<RSASS<PSS, SHA3_384>::Signer >
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.error); 
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha3_256",sizeof("sha3_256")) == 0){
+    RSA_SIGN<RSASS<PSS, SHA3_256>::Signer >
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.error); 
+  }    	                   
+  else{
+    req_val.error="Bad hash sign algorithm ";  
+    answ_error(req_val,answ_js); 
+    return 1;	   
+  }    
+  
   sign_anws(req_val,answ_js);
 
   return 0;   	  	 	 
@@ -382,9 +402,26 @@ int parse_rsa_v(Document& d, stru_param& req_val, string& answ_js){
   }   
 
 
-  RSA_V(req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex,req_val.error);
-  verify_anws(req_val,answ_js); 	  	 	 
-	
+  if(strncmp(req_val.hash_sign.c_str(), "sha3_512",sizeof("sha3_512")) == 0){
+    RSA_V<RSASS<PSS, SHA3_512>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex,req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha3_384",sizeof("sha3_384")) == 0){
+    RSA_V<RSASS<PSS, SHA3_384>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex,req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha3_256",sizeof("sha3_256")) == 0){
+    RSA_V<RSASS<PSS, SHA3_256>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex,req_val.error);
+  }    	                   
+  else{
+    req_val.error="Bad hash sign algorithm ";  
+    answ_error(req_val,answ_js); 
+    return 1;	   
+  } 
+
+  verify_anws(req_val,answ_js);
+  return 0; 	  	 	 	
 }
 
 

@@ -649,3 +649,22 @@ int keys_anws(stru_param& req_val, string& answ_js){
 
   return 0;
 }
+////////////////////////////////////////////////////////////////////////
+int check_hash_sign(Document& d, stru_param& req_val, string& answ_js){    
+  if(d.HasMember("hash_sign") && d["hash_sign"].IsString() ){
+	req_val.hash_sign=d["hash_sign"].GetString();
+	if(Isjson(req_val.hash_sign,req_val.error)!=0){
+	  req_val.error+=" hash_sign no ascii ";
+	  req_val.tag="error";  
+	  Addstr2json(answ_js, req_val.tag, req_val.error); 	  
+#ifdef DEBUG	    
+      cerr << req_val.error;
+#endif
+      return 1;		  
+	} 	
+  }
+  else
+    req_val.hash_sign="sha3_256";
+      
+  return 0;      
+}
