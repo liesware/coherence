@@ -50,6 +50,7 @@ typedef struct params{
   string privkey;
   string sharedkey;
   string sharedpub;
+  string hash_sign;
 //DH
   string p;
   string g;

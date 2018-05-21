@@ -196,274 +196,161 @@ int EC_GEN(OID& CURVE, string& privkey, string& pubkey, string& error){
     return 1;
   }
 }
-////////////////////////////////////////////////////////////////////////
+
+template <typename T>
 int ECIES_ENC(string& payload,string& pubkey, string& result, int& binary, string& field, string& error ){
   error.clear();
   string key;
   AutoSeededRandomPool prng;
-  if(strncmp(field.c_str(), "ecp",sizeof("ecp"))==0){  
-    ECIES<ECP>::Encryptor Encryptor;  
-    LoadPublicKey(Encryptor.AccessPublicKey(), pubkey,error);
-    Encryptor.GetPublicKey(). ThrowIfInvalid(prng, 3);
+  T Encryptor;  
+  LoadPublicKey(Encryptor.AccessPublicKey(), pubkey,error);
+  Encryptor.GetPublicKey(). ThrowIfInvalid(prng, 3);
   
-    try{    
-      if(binary==0)	 
-        StringSource( payload, true,new PK_EncryptorFilter( prng, Encryptor,new HexEncoder(new StringSink(result))));
-      else if(binary==1)
-        StringSource( payload, true,new HexDecoder(new PK_EncryptorFilter( prng, Encryptor,new HexEncoder(new StringSink(result)))));
-	  else{
-	    error+="Bad binary bool ";
-	    return 1;
-	  }
-    }
-    catch(const CryptoPP::Exception& e){ 
-	  error="Fail ECIES enc ";
-	  error+=e.what() ;
+  try{    
+    if(binary==0)	 
+      StringSource( payload, true,new PK_EncryptorFilter( prng, Encryptor,new HexEncoder(new StringSink(result))));
+    else if(binary==1)
+      StringSource( payload, true,new HexDecoder(new PK_EncryptorFilter( prng, Encryptor,new HexEncoder(new StringSink(result)))));
+    else{
+	  error+="Bad binary bool ";
+	  return 1;
+	}
+  }
+  catch(const CryptoPP::Exception& e){ 
+  error="Fail ECIES enc ";
+  error+=e.what() ;
 #ifdef DEBUG					 
-	  cerr << error << endl;
+  cerr << error << endl;
 #endif					
-      return 1;
-    }          		  
-  } 
-  else if(strncmp(field.c_str(), "ec2n",sizeof("ec2n"))==0){  
-    ECIES<EC2N>::Encryptor Encryptor;  
-    LoadPublicKey(Encryptor.AccessPublicKey(), pubkey,error);
-    Encryptor.GetPublicKey(). ThrowIfInvalid(prng, 3);
-  
-    try{    
-      if(binary==0)	 
-        StringSource( payload, true,new PK_EncryptorFilter( prng, Encryptor,new HexEncoder(new StringSink(result))));
-      else if(binary==1)
-        StringSource( payload, true,new HexDecoder(new PK_EncryptorFilter( prng, Encryptor,new HexEncoder(new StringSink(result)))));
-	  else{
-	    error+="Bad binary bool ";
-	    return 1;
-	  }
-    }
-    catch(const CryptoPP::Exception& e){ 
-	  error="Fail ECIES enc ";
-	  error+=e.what() ;
-#ifdef DEBUG					 
-	  cerr << error << endl;
-#endif					
-      return 1;
-    }          		  
-  } 
-  else {
-    error="Bad field ";
-#ifdef DEBUG					 
-	cerr << error << endl;
-#endif					
-    return 1;  
-  } 
+  return 1;
+  }          		   
           
   return 0;
 }
 
+template <typename T>
 int ECIES_DEC(string& payload,string& privkey, string& result, string& field, string& error ){
   error.clear();
   string key;
   AutoSeededRandomPool prng;
 
-  if(strncmp(field.c_str(), "ecp",sizeof("ecp"))==0){  
-    ECIES<ECP>::Decryptor Decryptor; 
-    try{
-      LoadPrivateKey(Decryptor.AccessPrivateKey(), privkey, error);
-      Decryptor.GetPrivateKey(). ThrowIfInvalid(prng, 3);      
-      StringSource( payload, true,new HexDecoder(new PK_DecryptorFilter( prng, Decryptor,new StringSink( result ))));
-      if(Isjson(result,error)!=0){
-        result.clear();
-        error.clear();
-        StringSource( payload, true,new HexDecoder(new PK_DecryptorFilter( prng, Decryptor,new HexEncoder(new StringSink( result )))));
-	  }    
-    }
-    catch(const CryptoPP::Exception& e){ 
-	  error="Fail ECIES dec";
-	  error+=e.what() ;
-#ifdef DEBUG					 
-	  cerr << error << endl;
-#endif					
-      return 1;
-    }   
+  T Decryptor; 
+  try{
+    LoadPrivateKey(Decryptor.AccessPrivateKey(), privkey, error);
+    Decryptor.GetPrivateKey(). ThrowIfInvalid(prng, 3);      
+    StringSource( payload, true,new HexDecoder(new PK_DecryptorFilter( prng, Decryptor,new StringSink( result ))));
+    if(Isjson(result,error)!=0){
+      result.clear();
+      error.clear();
+      StringSource( payload, true,new HexDecoder(new PK_DecryptorFilter( prng, Decryptor,new HexEncoder(new StringSink( result )))));
+	}    
   }
-  else if(strncmp(field.c_str(), "ec2n",sizeof("ec2n"))==0){  
-    ECIES<EC2N>::Decryptor Decryptor; 
-    try{
-      LoadPrivateKey(Decryptor.AccessPrivateKey(), privkey, error);
-      Decryptor.GetPrivateKey(). ThrowIfInvalid(prng, 3);      
-      StringSource( payload, true,new HexDecoder(new PK_DecryptorFilter( prng, Decryptor,new StringSink( result ))));
-      if(Isjson(result,error)!=0){
-        result.clear();
-        error.clear();
-        StringSource( payload, true,new HexDecoder(new PK_DecryptorFilter( prng, Decryptor,new HexEncoder(new StringSink( result )))));
-	  }    
-    }
-    catch(const CryptoPP::Exception& e){ 
-	  error="Fail ECIES dec";
-	  error+=e.what() ;
+  catch(const CryptoPP::Exception& e){ 
+  error="Fail ECIES dec";
+  error+=e.what() ;
 #ifdef DEBUG					 
-	  cerr << error << endl;
+  cerr << error << endl;
 #endif					
-      return 1;
-    }   
-  }
-  else {
-    error="Bad field ";
-#ifdef DEBUG					 
-	cerr << error << endl;
-#endif					
-    return 1;  
+   return 1;
   }   
-                
+                   
   return 0;
 }
+
 ////////////////////////////////////////////////////////////////////////
+template <typename T,typename T2>
 int ECDSA_SIGN(string& type, string& payload,string& privkey, string& sign, int& binary, string field,string& error ){
   error.clear();
   sign.clear();
-  if(strncmp(field.c_str(), "ecp",sizeof("ecp"))==0){   
-    ECDSA<ECP, SHA1>::PrivateKey PrivateKey;
-    string key;
-    AutoSeededRandomPool prng;
+
+  T PrivateKey;
+  string key;
+  AutoSeededRandomPool prng;
   
-    try{
-	  StringSource(privkey,true,new HexDecoder( new StringSink(key)));  
-      StringSource source(key, true);
-      PrivateKey.Load(source);  
+  try{
+    StringSource(privkey,true,new HexDecoder( new StringSink(key)));  
+    StringSource source(key, true);
+    PrivateKey.Load(source);  
 
-      if(false == PrivateKey.Validate (prng, 3)){        
-	    error="Private key validation failed";
+    if(false == PrivateKey.Validate (prng, 3)){        
+	  error="Private key validation failed";
 #ifdef DEBUG					 
-	    cerr << error << endl;
+	  cerr << error << endl;
 #endif					
-        return 1;   
-      }
+      return 1;   
+     }
 
-       ECDSA<ECP,SHA1>::Signer signer( PrivateKey );     
-       if (strncmp(type.c_str(), "string",sizeof("string")) == 0){
-         if(binary==0)
-           StringSource( payload, true, new SignerFilter( prng, signer,new HexEncoder(new StringSink(sign))));
-        else if(binary==1)
-          StringSource(payload, true, new HexDecoder( new SignerFilter( prng, signer,new HexEncoder(new StringSink(sign)))));
-   	    else{
-	      error+="Bad binary bool ";
-	      return 1;
-	    }	           
-       }  
-       else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
-         FileSource( payload.c_str(), true, new SignerFilter( prng, signer,new HexEncoder(new StringSink(sign))));
-         payload+=".sign";
-         StringSource(sign, true, new HexDecoder(new FileSink(payload.c_str())));
-       }
-       else
-         error="Bad type";  
-
+    T2 signer( PrivateKey ); 
+    if (strncmp(type.c_str(), "string",sizeof("string")) == 0){
+      if(binary==0)
+        StringSource( payload, true, new SignerFilter( prng, signer,new HexEncoder(new StringSink(sign))));
+      else if(binary==1)
+        StringSource(payload, true, new HexDecoder( new SignerFilter( prng, signer,new HexEncoder(new StringSink(sign)))));
+   	  else{
+	    error+="Bad binary bool ";
+	    return 1;
+	  }	           
+    }  
+    else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
+      FileSource( payload.c_str(), true, new SignerFilter( prng, signer,new HexEncoder(new StringSink(sign))));
+      payload+=".sign";
+      StringSource(sign, true, new HexDecoder(new FileSink(payload.c_str())));
+    }
+    else
+      error="Bad type";  
     }
     catch(const CryptoPP::Exception& e){ 
-	  error="Fail ECDSA save priv";
+	  error="Fail ECDSA sign ";
 #ifdef DEBUG					 
 	  cerr << error << endl;
 #endif					
       return 1;
     }   
-  }
-  else if(strncmp(field.c_str(), "ec2n",sizeof("ec2n"))==0){   
-    ECDSA<EC2N, SHA1>::PrivateKey PrivateKey;
-    string key;
-    AutoSeededRandomPool prng;
-  
-    try{
-	  StringSource(privkey,true,new HexDecoder( new StringSink(key)));  
-      StringSource source(key, true);
-      PrivateKey.Load(source);  
-
-      if(false == PrivateKey.Validate (prng, 3)){        
-	    error="Private key validation failed";
-#ifdef DEBUG					 
-	    cerr << error << endl;
-#endif					
-        return 1;   
-      }
-
-       ECDSA<EC2N,SHA1>::Signer signer( PrivateKey );     
-       if (strncmp(type.c_str(), "string",sizeof("string")) == 0){
-         if(binary==0)
-           StringSource( payload, true, new SignerFilter( prng, signer,new HexEncoder(new StringSink(sign))));
-        else if(binary==1)
-          StringSource(payload, true, new HexDecoder( new SignerFilter( prng, signer,new HexEncoder(new StringSink(sign)))));
-   	    else{
-	      error+="Bad binary bool ";
-	      return 1;
-	    }	           
-       }  
-       else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
-         FileSource( payload.c_str(), true, new SignerFilter( prng, signer,new HexEncoder(new StringSink(sign))));
-         payload+=".sign";
-         StringSource(sign, true, new HexDecoder(new FileSink(payload.c_str())));
-       }
-       else
-         error="Bad type";  
-
-    }
-    catch(const CryptoPP::Exception& e){ 
-	  error="Fail ECDSA save priv";
-#ifdef DEBUG					 
-	  cerr << error << endl;
-#endif					
-      return 1;
-    }   
-  }          
-  else {
-    error="Bad field ";
-#ifdef DEBUG					 
-	cerr << error << endl;
-#endif					
-    return 1;  
-  }                  
+    
   return 0;
 }
 
+template <typename T,typename T2>
 int ECDSA_V(string& type, string& payload,string& pubkey, string& sign, string& verify, int& binary, string& field,string& error ){
   error.clear();
   string key,ecdsasign;
   AutoSeededRandomPool prng;
  
-  if(strncmp(field.c_str(), "ecp",sizeof("ecp"))==0){   
-    ECDSA<ECP, SHA1>::PublicKey PublicKey;   
-    try{
-	  StringSource(pubkey,true,new HexDecoder( new StringSink(key)));  
-      StringSource source(key, true);
-      PublicKey.Load(source);
+  T PublicKey;   
+  try{
+	StringSource(pubkey,true,new HexDecoder( new StringSink(key)));  
+    StringSource source(key, true);
+    PublicKey.Load(source);
     
-      StringSource(sign,true,new HexDecoder( new StringSink(ecdsasign)));     
+    StringSource(sign,true,new HexDecoder( new StringSink(ecdsasign)));     
 
-      if(false == PublicKey.Validate (prng, 3)){        
-	    error="Public key validation failed";
+    if(false == PublicKey.Validate (prng, 3)){        
+	  error="Public key validation failed";
 #ifdef DEBUG					 
-	    cerr << error << endl;
+	  cerr << error << endl;
 #endif					
-        return 1;   
-      }
+      return 1;   
+    }
 
-       ECDSA<ECP,SHA1>::Verifier  verifier( PublicKey ); 
-       string payload_e;
+    T2 verifier( PublicKey ); 
+    string payload_e;
      
-       if(binary==0)
-         payload_e=payload;
-       else if(binary==1)
-         StringSource(payload, true, new HexDecoder( new StringSink(payload_e)));
-	   else{
-	     error+="Bad binary bool ";
-	     return 1;
-	   }	
+    if(binary==0)
+      payload_e=payload;
+    else if(binary==1)
+      StringSource(payload, true, new HexDecoder( new StringSink(payload_e)));
+	else{
+	 error+="Bad binary bool ";
+	 return 1;
+	}	
               
-       if (strncmp(type.c_str(), "string",sizeof("string")) == 0)
-         StringSource( payload_e+ecdsasign, true,new SignatureVerificationFilter(verifier, NULL , SignatureVerificationFilter::THROW_EXCEPTION| SignatureVerificationFilter::SIGNATURE_AT_END ));
-       else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){ 
-         FileSource( payload.c_str(), true,new SignatureVerificationFilter(verifier, NULL, SignatureVerificationFilter::THROW_EXCEPTION | SignatureVerificationFilter::SIGNATURE_AT_END ));
-       } 
-       verify="ECDSA_OK" ;
-
+    if(strncmp(type.c_str(), "string",sizeof("string")) == 0)
+      StringSource( payload_e+ecdsasign, true,new SignatureVerificationFilter(verifier, NULL , SignatureVerificationFilter::THROW_EXCEPTION| SignatureVerificationFilter::SIGNATURE_AT_END ));
+    else if(strncmp(type.c_str(), "file",sizeof("file")) == 0){ 
+      FileSource( payload.c_str(), true,new SignatureVerificationFilter(verifier, NULL, SignatureVerificationFilter::THROW_EXCEPTION | SignatureVerificationFilter::SIGNATURE_AT_END ));
+    } 
+    
+    verify="ECDSA_OK" ;
     }
     catch(const CryptoPP::Exception& e){ 
 	  error="Fail ECDSA verify";
@@ -471,340 +358,90 @@ int ECDSA_V(string& type, string& payload,string& pubkey, string& sign, string& 
 	  cerr << error << endl;
 #endif					
       return 1;
-    }   
-  } 
-  else if(strncmp(field.c_str(), "ec2n",sizeof("ec2n"))==0){   
-    ECDSA<EC2N, SHA1>::PublicKey PublicKey;   
-    try{
-	  StringSource(pubkey,true,new HexDecoder( new StringSink(key)));  
-      StringSource source(key, true);
-      PublicKey.Load(source);
-    
-      StringSource(sign,true,new HexDecoder( new StringSink(ecdsasign)));     
-
-      if(false == PublicKey.Validate (prng, 3)){        
-	    error="Public key validation failed";
-#ifdef DEBUG					 
-	    cerr << error << endl;
-#endif					
-        return 1;   
-      }
-
-       ECDSA<EC2N,SHA1>::Verifier  verifier( PublicKey ); 
-       string payload_e;
-     
-       if(binary==0)
-         payload_e=payload;
-       else if(binary==1)
-         StringSource(payload, true, new HexDecoder( new StringSink(payload_e)));
-	   else{
-	     error+="Bad binary bool ";
-	     return 1;
-	   }	
-              
-       if (strncmp(type.c_str(), "string",sizeof("string")) == 0)
-         StringSource( payload_e+ecdsasign, true,new SignatureVerificationFilter(verifier, NULL , SignatureVerificationFilter::THROW_EXCEPTION| SignatureVerificationFilter::SIGNATURE_AT_END ));
-       else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){ 
-         FileSource( payload.c_str(), true,new SignatureVerificationFilter(verifier, NULL, SignatureVerificationFilter::THROW_EXCEPTION | SignatureVerificationFilter::SIGNATURE_AT_END ));
-       } 
-       verify="ECDSA_OK" ;
-
-    }
-    catch(const CryptoPP::Exception& e){ 
-	  error="Fail ECDSA verify";
-#ifdef DEBUG					 
-	  cerr << error << endl;
-#endif					
-      return 1;
-    }   
-  }
-  else {
-    error="Bad field ";
-#ifdef DEBUG					 
-	cerr << error << endl;
-#endif					
-    return 1;  
-  }                
+    }    
+                
   return 0;
 }
+
 ////////////////////////////////////////////////////////////////////////
+template <typename T>
 int ECDH_GEN(OID& CURVE, string& privkey, string& pubkey, string&field ,string& error){  
   AutoSeededRandomPool rng;
   
-  if(strncmp(field.c_str(), "ecp",sizeof("ecp"))==0){
-    try{
-	  ECDH <ECP>::Domain ecdh(CURVE);	 
-	  SecByteBlock priv(ecdh.PrivateKeyLength()), pub(ecdh.PublicKeyLength());
-	  ecdh.GenerateKeyPair(rng, priv, pub);
+  try{
+    T ecdh(CURVE);	 
+	SecByteBlock priv(ecdh.PrivateKeyLength()), pub(ecdh.PublicKeyLength());
+	ecdh.GenerateKeyPair(rng, priv, pub);
 	
-	  string key;
-      HexEncoder hex(new StringSink(key));
-	  key = "";		
-	  hex.Put(priv.BytePtr(), priv.SizeInBytes());
-	  hex.MessageEnd();
-      privkey=key;
+	string key;
+    HexEncoder hex(new StringSink(key));
+	key = "";		
+	hex.Put(priv.BytePtr(), priv.SizeInBytes());
+	hex.MessageEnd();
+    privkey=key;
 	
-	  key = "";		
-	  hex.Put(pub.BytePtr(), pub.SizeInBytes());
-	  hex.MessageEnd();
-	  pubkey=key;	  	  
+	key = "";		
+	hex.Put(pub.BytePtr(), pub.SizeInBytes());
+	hex.MessageEnd();
+	pubkey=key;	  	  
   
-    }
-    catch(const CryptoPP::Exception& d){
-      error=d.what();
-#ifdef DEBUG					 
-	  cerr << error << endl;
-	  cerr << "Fail ECDH GEN" << endl;
-#endif					
-      return 1;
-    }
   }
-  else if(strncmp(field.c_str(), "ec2n",sizeof("ec2n"))==0){
-    try{ 	  
-	  ECDH <EC2N>::Domain ecdh(CURVE);	 
-	  SecByteBlock priv(ecdh.PrivateKeyLength()), pub(ecdh.PublicKeyLength());
-	  ecdh.GenerateKeyPair(rng, priv, pub);
-	
-	  string key;
-      HexEncoder hex(new StringSink(key));
-	  key = "";		
-	  hex.Put(priv.BytePtr(), priv.SizeInBytes());
-	  hex.MessageEnd();
-      privkey=key;
-	
-	  key = "";		
-	  hex.Put(pub.BytePtr(), pub.SizeInBytes());
-	  hex.MessageEnd();
-	  pubkey=key;	  	  
-      
-    }
-    catch(const CryptoPP::Exception& d){
-      error=d.what();
-#ifdef DEBUG					 
-	  cerr << error << endl;
-	  cerr << "Fail ECDH GEN" << endl;
-#endif					
-      return 1;
-    }
-  }  
-  else {
-    error="Bad field ";
+  catch(const CryptoPP::Exception& d){
+    error=d.what();
 #ifdef DEBUG					 
 	cerr << error << endl;
+	cerr << "Fail ECDH GEN" << endl;
 #endif					
-    return 1;  
-  }       
+    return 1;
+  }         
     
-  return 0;  
-  
+  return 0;    
 }
 
-
-
+template <typename T>
 int ECDH_A(OID& CURVE, string& privkey, string& sharedpub, string& sharedkey, string&field  ,string& error){  
   AutoSeededRandomPool rnd;
-  //cout<<"priv: "<<privkey<<endl;
-  //cout<<"sharedpub: "<<sharedpub<<endl;
   
-  if(strncmp(field.c_str(), "ecp",sizeof("ecp"))==0){
-    try{ 	  
-	  ECDH <ECP>::Domain dh(CURVE);
+  try{ 	  
+    T dh(CURVE);
 	    
-      SecByteBlock priv_key(privkey.size()/2);
-      SecByteBlock pub_shared(sharedpub.size()/2);     
-      SecByteBlock shared(dh.AgreedValueLength()); 
+    SecByteBlock priv_key(privkey.size()/2);
+    SecByteBlock pub_shared(sharedpub.size()/2);     
+    SecByteBlock shared(dh.AgreedValueLength()); 
    
-      string priv,spub;
+    string priv,spub;
 
-      StringSource k(privkey, true, new HexDecoder(new StringSink(priv)));
-      memcpy( priv_key, priv.data(),priv_key.size());
-      StringSource k1(sharedpub, true, new HexDecoder(new StringSink(spub)));
-      memcpy( pub_shared, spub.data(),pub_shared.size()); 
+    StringSource k(privkey, true, new HexDecoder(new StringSink(priv)));
+    memcpy( priv_key, priv.data(),priv_key.size());
+    StringSource k1(sharedpub, true, new HexDecoder(new StringSink(spub)));
+    memcpy( pub_shared, spub.data(),pub_shared.size()); 
 
     if(!dh.Agree(shared, priv_key, pub_shared)){
-  	    error="Failed to reach shared secret";  	  
-  	    return 1;
-  	  }
-
-	  string key;
-      HexEncoder hex(new StringSink(key));
-	  key = "";		
-	  hex.Put(shared.BytePtr(), shared.SizeInBytes());
-	  hex.MessageEnd();
-	  //cout << "Private key: " << key << endl;
-  	  sharedkey=key; 
-
-  
+  	  error="Failed to reach shared secret";  	  
+  	  return 1;
     }
-    catch(const CryptoPP::Exception& d){
-      error=d.what();
-#ifdef DEBUG					 
-	  cerr << error << endl;
-	  cerr << "Fail DHAGREE" << endl;
-#endif					
-      return 1;
+
+	string key;
+    HexEncoder hex(new StringSink(key));
+	key = "";		
+	hex.Put(shared.BytePtr(), shared.SizeInBytes());
+	hex.MessageEnd();
+	//cout << "Private key: " << key << endl;
+  	sharedkey=key;   
     }
-  }
-  else if(strncmp(field.c_str(), "ec2n",sizeof("ec2n"))==0){
-    try{ 	  
-	  ECDH <EC2N>::Domain dh(CURVE);
-	    
-      SecByteBlock priv_key(dh.PrivateKeyLength());
-      SecByteBlock pub_shared(dh.PublicKeyLength());     
-      SecByteBlock shared(dh.AgreedValueLength()); 
-   
-      string priv,spub;
-
-      StringSource k(privkey, true, new HexDecoder(new StringSink(priv)));
-      memcpy( priv_key, priv.data(),dh.PrivateKeyLength());
-      StringSource k1(sharedpub, true, new HexDecoder(new StringSink(spub)));
-      memcpy( pub_shared, spub.data(),dh.PublicKeyLength()); 
-
-    if(!dh.Agree(shared, priv_key, pub_shared)){
-  	    error="Failed to reach shared secret";  	  
-  	    return 1;
-  	  }
-
-	  string key;
-      HexEncoder hex(new StringSink(key));
-	  key = "";		
-	  hex.Put(shared.BytePtr(), shared.SizeInBytes());
-	  hex.MessageEnd();
-	  //cout << "Private key: " << key << endl;
-  	  sharedkey=key; 
-
-  
-    }
-    catch(const CryptoPP::Exception& d){
-      error=d.what();
-#ifdef DEBUG					 
-	  cerr << error << endl;
-	  cerr << "Fail DHAGREE" << endl;
-#endif					
-      return 1;
-    }
-  }  
-  else {
-    error="Bad field ";
+  catch(const CryptoPP::Exception& d){
+    error=d.what();
 #ifdef DEBUG					 
 	cerr << error << endl;
+	cerr << "Fail DHAGREE" << endl;
 #endif					
-    return 1;  
-  }       
+    return 1;
+  }
     
-  return 0;  
-  
+  return 0;    
 }
 
 
-////////////////////////////////////////////////////////////////////////
-/*
-int parse_ec_gen(Document& d, stru_param& req_val, string& answ_js){
-   if(d.HasMember("curve")){     
-     if(check_curve(d,req_val,answ_js)!=0)
-       return 1;
-     
-     if(strncmp(req_val.curve.c_str(), "secp256k1",sizeof("secp256k1")) == 0){
-	   OID CURVE=CryptoPP::ASN1::secp256k1();	
-       EC_GEN <CryptoPP::ECIES < ECP >::PrivateKey,CryptoPP::ECIES < ECP >::PublicKey>
-         (CURVE, req_val.privkey, req_val.pubkey, req_val.error);               
-     }
-     else if(strncmp(req_val.curve.c_str(), "brainpoolP256r1",sizeof("brainpoolP256r1")) == 0){
-	   OID CURVE=CryptoPP::ASN1::brainpoolP256r1();	
-       EC_GEN <CryptoPP::ECIES < ECP >::PrivateKey,CryptoPP::ECIES < ECP >::PublicKey>
-         (CURVE, req_val.privkey, req_val.pubkey, req_val.error);               
-     }
-     else if(strncmp(req_val.curve.c_str(), "brainpoolP320r1",sizeof("brainpoolP320r1")) == 0){
-	   OID CURVE=CryptoPP::ASN1::brainpoolP320r1();	
-       EC_GEN <CryptoPP::ECIES < ECP >::PrivateKey,CryptoPP::ECIES < ECP >::PublicKey>
-         (CURVE, req_val.privkey, req_val.pubkey, req_val.error);               
-     }
-     else if(strncmp(req_val.curve.c_str(), "secp384r1",sizeof("secp384r1")) == 0){
-	   OID CURVE=CryptoPP::ASN1::secp384r1();	
-       EC_GEN <CryptoPP::ECIES < ECP >::PrivateKey,CryptoPP::ECIES < ECP >::PublicKey>
-         (CURVE, req_val.privkey, req_val.pubkey, req_val.error);               
-     }
-     else if(strncmp(req_val.curve.c_str(), "brainpoolP384r1",sizeof("brainpoolP384r1")) == 0){
-	   OID CURVE=CryptoPP::ASN1::brainpoolP384r1();	
-       EC_GEN <CryptoPP::ECIES < ECP >::PrivateKey,CryptoPP::ECIES < ECP >::PublicKey>
-         (CURVE, req_val.privkey, req_val.pubkey, req_val.error);               
-     }  
-     else if(strncmp(req_val.curve.c_str(), "secp521r1",sizeof("secp521r1")) == 0){
-	   OID CURVE=CryptoPP::ASN1::secp521r1();	
-       EC_GEN <CryptoPP::ECIES < ECP >::PrivateKey,CryptoPP::ECIES < ECP >::PublicKey>
-         (CURVE, req_val.privkey, req_val.pubkey, req_val.error);               
-     }
-     else if(strncmp(req_val.curve.c_str(), "brainpoolP512r1",sizeof("brainpoolP512r1")) == 0){
-	   OID CURVE=CryptoPP::ASN1::brainpoolP512r1();	
-       EC_GEN <CryptoPP::ECIES < ECP >::PrivateKey,CryptoPP::ECIES < ECP >::PublicKey>
-         (CURVE, req_val.privkey, req_val.pubkey, req_val.error);               
-     }               
-     else if(strncmp(req_val.curve.c_str(), "sect283k1",sizeof("sect283k1")) == 0){
-	   OID CURVE=CryptoPP::ASN1::sect283k1();	
-       EC_GEN <CryptoPP::ECIES < EC2N >::PrivateKey,CryptoPP::ECIES < EC2N >::PublicKey>
-         (CURVE, req_val.privkey, req_val.pubkey, req_val.error);               
-     }
-     else if(strncmp(req_val.curve.c_str(), "sect283r1",sizeof("sect283r1")) == 0){
-	   OID CURVE=CryptoPP::ASN1::sect283r1();	
-       EC_GEN <CryptoPP::ECIES < EC2N >::PrivateKey,CryptoPP::ECIES < EC2N >::PublicKey>
-         (CURVE, req_val.privkey, req_val.pubkey, req_val.error);               
-     }
-     else if(strncmp(req_val.curve.c_str(), "sect409k1",sizeof("sect409k1")) == 0){
-	   OID CURVE=CryptoPP::ASN1::sect409k1();	
-       EC_GEN <CryptoPP::ECIES < EC2N >::PrivateKey,CryptoPP::ECIES < EC2N >::PublicKey>
-         (CURVE, req_val.privkey, req_val.pubkey, req_val.error);               
-     }
-     else if(strncmp(req_val.curve.c_str(), "sect409r1",sizeof("sect409r1")) == 0){
-	   OID CURVE=CryptoPP::ASN1::sect409r1();	
-       EC_GEN <CryptoPP::ECIES < EC2N >::PrivateKey,CryptoPP::ECIES < EC2N >::PublicKey>
-         (CURVE, req_val.privkey, req_val.pubkey, req_val.error);               
-     }  
-     else if(strncmp(req_val.curve.c_str(), "sect571k1",sizeof("sect571k1")) == 0){
-	   OID CURVE=CryptoPP::ASN1::sect571k1();	
-       EC_GEN <CryptoPP::ECIES < EC2N >::PrivateKey,CryptoPP::ECIES < EC2N >::PublicKey>
-         (CURVE, req_val.privkey, req_val.pubkey, req_val.error);               
-     }
-     else if(strncmp(req_val.curve.c_str(), "sect571r1",sizeof("sect571r1")) == 0){
-	   OID CURVE=CryptoPP::ASN1::sect571r1();	
-       EC_GEN <CryptoPP::ECIES < EC2N >::PrivateKey,CryptoPP::ECIES < EC2N >::PublicKey>
-         (CURVE, req_val.privkey, req_val.pubkey, req_val.error);               
-     }                                      
-     else{
-       req_val.error="Bad curve ";  
-       answ_error(req_val,answ_js); 
-       return 1;	   
-     }      
- 
-     req_val.tag.clear();
-     req_val.tag="algorithm";  
-	 Addstr2json(answ_js, req_val.tag, req_val.algorithm); 
-     req_val.tag.clear();
-     req_val.tag="curve";  
-	 Addstr2json(answ_js, req_val.tag, req_val.curve); 
-     req_val.tag.clear();
-     req_val.tag="privkey";  
-	 Addstr2json(answ_js, req_val.tag, req_val.privkey);
-     req_val.tag.clear();
-     req_val.tag="pubkey";  
-	 Addstr2json(answ_js, req_val.tag, req_val.pubkey);	 
-     req_val.tag.clear();	 
-     req_val.tag="error";  
-	 Addstr2json(answ_js, req_val.tag, req_val.error);      
-     	 	 
-   }
-   else{   
-	req_val.error.clear();    
-	req_val.error="not enought parameters to ECC gen";
-	req_val.tag="error";  
-	Addstr2json(answ_js, req_val.tag, req_val.error); 	  
-#ifdef DEBUG	    
-    cerr << req_val.error;
-#endif
-    return 1;	   
-   } 
-  
-}
-*/
 ////////////////////////////////////////////////////////////////////////
 int parse_ec_gen(Document& d, stru_param& req_val, string& answ_js){
    if(d.HasMember("curve")){     
@@ -852,9 +489,7 @@ int parse_ec_gen(Document& d, stru_param& req_val, string& answ_js){
   
 }
 
-
 ////////////////////////////////////////////////////////////////////////
-
 int parse_ecies(Document& d, stru_param& req_val, string& answ_js){
   if(d.HasMember("type") ){
   	 if(check_type(d,req_val,answ_js)!=0)
@@ -900,8 +535,18 @@ int parse_ecies(Document& d, stru_param& req_val, string& answ_js){
       
       req_val.payload=req_val.plaintext;
       
-        ECIES_ENC(req_val.payload, req_val.pubkey, req_val.result, req_val.hex ,req_val.field, req_val.error);
-        cipher_anws(req_val,answ_js);   
+      
+      if(strncmp(req_val.field.c_str(), "ecp",sizeof("ecp")) == 0){
+        ECIES_ENC <ECIES<ECP>::Encryptor>
+        (req_val.payload, req_val.pubkey, req_val.result, req_val.hex ,req_val.field, req_val.error);              
+      }               
+      else if(strncmp(req_val.field.c_str(), "ec2n",sizeof("ec2n")) == 0){
+        ECIES_ENC <ECIES<EC2N>::Encryptor>
+        (req_val.payload, req_val.pubkey, req_val.result, req_val.hex ,req_val.field, req_val.error);
+      }          
+      cipher_anws(req_val,answ_js);   
+    
+    
     }
     else if(strncmp(req_val.operation.c_str(), "dec",sizeof("dec")&&d.HasMember("plaintext") && d.HasMember("privkey")) == 0){	    
       if(check_plain(d,req_val,answ_js)!=0)
@@ -913,7 +558,15 @@ int parse_ecies(Document& d, stru_param& req_val, string& answ_js){
       
       req_val.payload=req_val.plaintext;
       
-      ECIES_DEC(req_val.payload, req_val.privkey, req_val.result, req_val.field,req_val.error);
+      
+      if(strncmp(req_val.field.c_str(), "ecp",sizeof("ecp")) == 0){
+        ECIES_DEC <ECIES<ECP>::Decryptor>
+        (req_val.payload, req_val.privkey, req_val.result, req_val.field,req_val.error);             
+      }               
+      else if(strncmp(req_val.field.c_str(), "ec2n",sizeof("ec2n")) == 0){
+        ECIES_DEC <ECIES<EC2N>::Decryptor>
+        (req_val.payload, req_val.privkey, req_val.result, req_val.field,req_val.error);
+      }              
       cipher_anws(req_val,answ_js);   
     }        
     else{
@@ -931,8 +584,6 @@ int parse_ecies(Document& d, stru_param& req_val, string& answ_js){
   }  
   
   return 0;
-
-
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -956,7 +607,9 @@ int parse_ecdsa_sign(Document& d, stru_param& req_val, string& answ_js){
      if(check_bin(d,req_val,answ_js)!=0)
        return 1;
      if(check_field(d,req_val,answ_js)!=0)
-      return 1;  
+      return 1;
+     if(check_hash_sign(d,req_val,answ_js)!=0)
+       return 1;        
      
     req_val.payload=req_val.plaintext;           	
 	}
@@ -987,8 +640,48 @@ int parse_ecdsa_sign(Document& d, stru_param& req_val, string& answ_js){
     answ_error(req_val,answ_js); 
     return 1;	   
   }   
+
+
+  if(strncmp(req_val.field.c_str(), "ecp",sizeof("ecp")) == 0){
+	if(strncmp(req_val.hash_sign.c_str(), "sha3_512",sizeof("sha3_512")) == 0){
+      ECDSA_SIGN <ECDSA<ECP, SHA3_512>::PrivateKey, ECDSA<ECP,SHA3_512>::Signer>
+        (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error); 
+    }
+	else if(strncmp(req_val.hash_sign.c_str(), "sha3_384",sizeof("sha3_384")) == 0){
+      ECDSA_SIGN <ECDSA<ECP, SHA3_384>::PrivateKey, ECDSA<ECP,SHA3_384>::Signer>
+        (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error); 
+    }
+	else if(strncmp(req_val.hash_sign.c_str(), "sha3_256",sizeof("sha3_256")) == 0){
+      ECDSA_SIGN <ECDSA<ECP, SHA3_256>::PrivateKey, ECDSA<ECP,SHA3_256>::Signer>
+        (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error); 
+    }    	                   
+    else{
+      req_val.error="Bad hash sign algorithm ";  
+      answ_error(req_val,answ_js); 
+      return 1;	   
+    }      
+  }               
+  else if(strncmp(req_val.field.c_str(), "ec2n",sizeof("ec2n")) == 0){
+	if(strncmp(req_val.hash_sign.c_str(), "sha3_512",sizeof("sha3_512")) == 0){
+      ECDSA_SIGN <ECDSA<EC2N, SHA3_512>::PrivateKey, ECDSA<EC2N,SHA3_512>::Signer>
+        (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error); 
+    }
+	else if(strncmp(req_val.hash_sign.c_str(), "sha3_384",sizeof("sha3_384")) == 0){
+      ECDSA_SIGN <ECDSA<EC2N, SHA3_384>::PrivateKey, ECDSA<EC2N,SHA3_384>::Signer>
+        (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error); 
+    }
+	else if(strncmp(req_val.hash_sign.c_str(), "sha3_256",sizeof("sha3_256")) == 0){
+      ECDSA_SIGN <ECDSA<EC2N, SHA3_256>::PrivateKey, ECDSA<EC2N,SHA3_256>::Signer>
+        (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error); 
+    }    	                   
+    else{
+      req_val.error="Bad hash sign algorithm ";  
+      answ_error(req_val,answ_js); 
+      return 1;	   
+    }      
+
+  }  
      
-  ECDSA_SIGN(req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
   sign_anws(req_val,answ_js);
 
   return 0;   	  	 	 
@@ -1017,6 +710,8 @@ int parse_ecdsa_v(Document& d, stru_param& req_val, string& answ_js){
        return 1;
      if(check_field(d,req_val,answ_js)!=0)
       return 1;
+     if(check_hash_sign(d,req_val,answ_js)!=0)
+       return 1; 
      
     req_val.payload=req_val.plaintext;           	
 	}
@@ -1050,8 +745,46 @@ int parse_ecdsa_v(Document& d, stru_param& req_val, string& answ_js){
     return 1;	   
   }   
 
+  if(strncmp(req_val.field.c_str(), "ecp",sizeof("ecp")) == 0){
+	if(strncmp(req_val.hash_sign.c_str(), "sha3_512",sizeof("sha3_512")) == 0){
+      ECDSA_V<ECDSA<ECP, SHA3_512>::PublicKey, ECDSA<ECP,SHA3_512>::Verifier>
+        (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+	else if(strncmp(req_val.hash_sign.c_str(), "sha3_384",sizeof("sha3_384")) == 0){
+      ECDSA_V<ECDSA<ECP, SHA3_384>::PublicKey, ECDSA<ECP,SHA3_384>::Verifier>
+        (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+	else if(strncmp(req_val.hash_sign.c_str(), "sha3_256",sizeof("sha3_256")) == 0){
+      ECDSA_V<ECDSA<ECP, SHA3_256>::PublicKey, ECDSA<ECP,SHA3_256>::Verifier>
+        (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }    	                   
+    else{
+      req_val.error="Bad hash sign algorithm ";  
+      answ_error(req_val,answ_js); 
+      return 1;	   
+    }  	  
+	               
+  }               
+  else if(strncmp(req_val.field.c_str(), "ec2n",sizeof("ec2n")) == 0){
+	if(strncmp(req_val.hash_sign.c_str(), "sha3_512",sizeof("sha3_512")) == 0){
+      ECDSA_V<ECDSA<EC2N, SHA3_512>::PublicKey, ECDSA<EC2N,SHA3_512>::Verifier>
+        (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+	else if(strncmp(req_val.hash_sign.c_str(), "sha3_384",sizeof("sha3_384")) == 0){
+      ECDSA_V<ECDSA<EC2N, SHA3_384>::PublicKey, ECDSA<EC2N,SHA3_384>::Verifier>
+        (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+	else if(strncmp(req_val.hash_sign.c_str(), "sha3_256",sizeof("sha3_256")) == 0){
+      ECDSA_V<ECDSA<EC2N, SHA3_256>::PublicKey, ECDSA<EC2N,SHA3_256>::Verifier>
+        (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }    	                   
+    else{
+      req_val.error="Bad hash sign algorithm ";  
+      answ_error(req_val,answ_js); 
+      return 1;	   
+    }  
+  }  
 
-  ECDSA_V(req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
   verify_anws(req_val,answ_js); 	  	 	 
 	
 }
@@ -1092,6 +825,7 @@ int parse_ecdsa(Document& d, stru_param& req_val, string& answ_js){
   return 0;
 
 }
+
 ////////////////////////////////////////////////////////////////////////
 int parse_ecdh_a(Document& d, stru_param& req_val, string& answ_js){
   if(d.HasMember("curve")&&d.HasMember("privkey") && d.HasMember("sharedpub")){     
@@ -1102,7 +836,17 @@ int parse_ecdh_a(Document& d, stru_param& req_val, string& answ_js){
      if(check_a_keys(d,req_val,answ_js)!=0)
       return 1;     
      
-     ECDH_A(req_val.CURVE,req_val.privkey, req_val.sharedpub, req_val.sharedkey, req_val.field, req_val.error);
+     
+     if(strncmp(req_val.field.c_str(), "ecp",sizeof("ecp")) == 0){
+       ECDH_A<ECDH <ECP>::Domain>
+       (req_val.CURVE,req_val.privkey, req_val.sharedpub, req_val.sharedkey, req_val.field, req_val.error);
+             
+     }               
+     else if(strncmp(req_val.field.c_str(), "ec2n",sizeof("ec2n")) == 0){
+       ECDH_A<ECDH <EC2N>::Domain>
+       (req_val.CURVE,req_val.privkey, req_val.sharedpub, req_val.sharedkey, req_val.field, req_val.error);
+     } 
+     
      req_val.tag.clear();
      req_val.tag="algorithm";  
 	 Addstr2json(answ_js, req_val.tag, req_val.algorithm); 
@@ -1136,7 +880,16 @@ int parse_ecdh_gen(Document& d, stru_param& req_val, string& answ_js){
      if(search_field_curve(d, req_val, answ_js)!=0)
        return 1;  
 
-     ECDH_GEN(req_val.CURVE, req_val.privkey, req_val.pubkey, req_val.field, req_val.error);
+     if(strncmp(req_val.field.c_str(), "ecp",sizeof("ecp")) == 0){
+       ECDH_GEN<ECDH <ECP>::Domain>
+       (req_val.CURVE, req_val.privkey, req_val.pubkey, req_val.field, req_val.error);
+             
+     }               
+     else if(strncmp(req_val.field.c_str(), "ec2n",sizeof("ec2n")) == 0){
+       ECDH_GEN<ECDH <EC2N>::Domain>
+       (req_val.CURVE, req_val.privkey, req_val.pubkey, req_val.field, req_val.error);
+     } 
+
      req_val.tag.clear();
      req_val.tag="algorithm";  
 	 Addstr2json(answ_js, req_val.tag, req_val.algorithm); 
@@ -1151,7 +904,8 @@ int parse_ecdh_gen(Document& d, stru_param& req_val, string& answ_js){
 	 Addstr2json(answ_js, req_val.tag, req_val.pubkey);	 
      req_val.tag.clear();	 
      req_val.tag="error";  
-	 Addstr2json(answ_js, req_val.tag, req_val.error);  
+	 Addstr2json(answ_js, req_val.tag, req_val.error); 	  	 	 
+	  
   }
   else{
 	req_val.error.clear();    
