@@ -233,9 +233,8 @@ int ECIES_DEC(string& payload,string& privkey, string& result, string& field, st
   error.clear();
   string key;
   AutoSeededRandomPool prng;
-
   T Decryptor; 
-  try{
+  try{  	  
     LoadPrivateKey(Decryptor.AccessPrivateKey(), privkey, error);
     Decryptor.GetPrivateKey(). ThrowIfInvalid(prng, 3);      
     StringSource( payload, true,new HexDecoder(new PK_DecryptorFilter( prng, Decryptor,new StringSink( result ))));
@@ -525,7 +524,12 @@ int parse_ecies(Document& d, stru_param& req_val, string& answ_js){
     if(check_field(d,req_val,answ_js)!=0)
       return 1;
     	  	  
-    if(strncmp(req_val.operation.c_str(), "enc",sizeof("enc")&&d.HasMember("plaintext") && d.HasMember("pubkey")) == 0){	    
+    if(strncmp(req_val.operation.c_str(), "enc",sizeof("enc")) == 0){
+	  if(!(d.HasMember("plaintext") && d.HasMember("pubkey"))){
+	    req_val.error+="Not plaintext/pubkey tag ";  
+        answ_error(req_val,answ_js); 
+	    return 1;
+	  }  			    
       if(check_plain(d,req_val,answ_js)!=0)
         return 1;          
       if(check_bin(d,req_val,answ_js)!=0)
@@ -548,7 +552,13 @@ int parse_ecies(Document& d, stru_param& req_val, string& answ_js){
     
     
     }
-    else if(strncmp(req_val.operation.c_str(), "dec",sizeof("dec")&&d.HasMember("plaintext") && d.HasMember("privkey")) == 0){	    
+    else if(strncmp(req_val.operation.c_str(), "dec",sizeof("dec")) == 0){
+	  if(!(d.HasMember("plaintext") && d.HasMember("privkey"))){
+	    req_val.error+="Not plaintext/privkey tag ";  
+        answ_error(req_val,answ_js); 
+	    return 1;
+	  }  
+	  			     			    
       if(check_plain(d,req_val,answ_js)!=0)
         return 1;          
       if(check_bin(d,req_val,answ_js)!=0)
@@ -557,9 +567,8 @@ int parse_ecies(Document& d, stru_param& req_val, string& answ_js){
         return 1;                  
       
       req_val.payload=req_val.plaintext;
-      
-      
-      if(strncmp(req_val.field.c_str(), "ecp",sizeof("ecp")) == 0){
+         
+      if(strncmp(req_val.field.c_str(), "ecp",sizeof("ecp")) == 0){		  
         ECIES_DEC <ECIES<ECP>::Decryptor>
         (req_val.payload, req_val.privkey, req_val.result, req_val.field,req_val.error);             
       }               
