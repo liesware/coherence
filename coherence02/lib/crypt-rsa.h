@@ -309,6 +309,8 @@ int parse_rsa_sign(Document& d, stru_param& req_val, string& answ_js){
         return 1; 
      if(check_keys(d,req_val,answ_js)!=0)
        return 1;
+     if(check_hash_sign(d,req_val,answ_js)!=0)
+       return 1;        
        
      req_val.hex=0;
      req_val.payload=req_val.file;                	
@@ -370,6 +372,8 @@ int parse_rsa_v(Document& d, stru_param& req_val, string& answ_js){
        return 1;
      if(check_signs(d,req_val,answ_js)!=0)
        return 1;
+     if(check_hash_sign(d,req_val,answ_js)!=0)
+       return 1;        
      
     req_val.payload=req_val.plaintext;           	
 	}
@@ -385,6 +389,8 @@ int parse_rsa_v(Document& d, stru_param& req_val, string& answ_js){
         return 1; 
      if(check_keys(d,req_val,answ_js)!=0)
        return 1;
+     if(check_hash_sign(d,req_val,answ_js)!=0)
+       return 1;        
        
      req_val.hex=0;
      req_val.payload=req_val.file;                	
@@ -446,7 +452,12 @@ int parse_rsa_cipher(Document& d, stru_param& req_val, string& answ_js){
     if(check_ops(d,req_val,answ_js)!=0)
     return 1;
     	  	  
-    if(strncmp(req_val.operation.c_str(), "enc",sizeof("enc")&&d.HasMember("plaintext") && d.HasMember("pubkey")) == 0){	    
+    if(strncmp(req_val.operation.c_str(), "enc",sizeof("enc")) == 0){	
+	  if(!(d.HasMember("plaintext") && d.HasMember("pubkey"))){
+	    req_val.error+="Not plaintext/pubkey tag ";  
+        answ_error(req_val,answ_js); 
+	    return 1;
+	  } 		    
       if(check_plain(d,req_val,answ_js)!=0)
         return 1;          
       if(check_bin(d,req_val,answ_js)!=0)
@@ -459,7 +470,12 @@ int parse_rsa_cipher(Document& d, stru_param& req_val, string& answ_js){
       RSA_ENC(req_val.payload, req_val.pubkey, req_val.result, req_val.hex ,req_val.error);
       cipher_anws(req_val,answ_js);   
     }
-    else if(strncmp(req_val.operation.c_str(), "dec",sizeof("dec")&&d.HasMember("plaintext") && d.HasMember("privkey")) == 0){	    
+    else if(strncmp(req_val.operation.c_str(), "dec",sizeof("dec")) == 0){
+	  if(!(d.HasMember("plaintext") && d.HasMember("privkey"))){
+	    req_val.error+="Not plaintext/privkey tag ";  
+        answ_error(req_val,answ_js); 
+	    return 1;
+	  } 			    
       if(check_plain(d,req_val,answ_js)!=0)
         return 1;          
       if(check_bin(d,req_val,answ_js)!=0)

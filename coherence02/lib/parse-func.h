@@ -468,16 +468,17 @@ int check_fam(Document& d, stru_param& req_val, string& answ_js){
 int check_keys(Document& d, stru_param& req_val, string& answ_js){
   if(d.HasMember("privkey") && d["privkey"].IsString()){
 	req_val.privkey=d["privkey"].GetString();
-	if(Isb16(req_val.key,req_val.error)!=0){
+	if(Isb16(req_val.privkey,req_val.error)!=0){
 	  req_val.error+=" Key no hex  ";
 	  req_val.tag="error";  
 	  Addstr2json(answ_js, req_val.tag, req_val.error); 	  
 #ifdef DEBUG	    
       cerr << req_val.error;
 #endif
+       return 1;
 	}
   }	
-  else if(d.HasMember("pubkey") && d["pubkey"].IsString()){
+  if(d.HasMember("pubkey") && d["pubkey"].IsString()){
 	req_val.pubkey=d["pubkey"].GetString();
 	if(Isb16(req_val.pubkey,req_val.error)!=0){
 	  req_val.error+=" Key no hex  ";
@@ -488,7 +489,8 @@ int check_keys(Document& d, stru_param& req_val, string& answ_js){
 #endif
       return 1;		  
 	}
-  }	
+  }
+/*  	
   else{
 	  req_val.error+="No Key";
 	  req_val.tag="error";  
@@ -498,7 +500,10 @@ int check_keys(Document& d, stru_param& req_val, string& answ_js){
 #endif
       return 1;		  
   }
-  
+*/ 
+#ifdef DEBUG	    
+      cout << "Good keys ";
+#endif 
   return 0;
 }
 
