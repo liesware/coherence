@@ -59,9 +59,9 @@ The log file is print in standard output, so you can redirect the standard error
 ```
 git clone https://github.com/liesware/coherence.git
 
-docker pull liesware/coherence
+docker pull liesware/coherence:06
 
-docker run -p 6613:6613 docker.io/liesware/coherence:02  /coherence/coherence 0.0.0.0 6613  > coherence.log 2>&1 &
+docker run -p 6613:6613 docker.io/liesware/coherence:06  /coherence/coherence 0.0.0.0 6613  > coherence.log 2>&1 &
 
 cd coherence/coherence02/
 sh testing.sh
