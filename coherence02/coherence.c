@@ -126,6 +126,7 @@ void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
 	  t = clock()-t;
       log_info.exec_time=(float)t/CLOCKS_PER_SEC;  
       string log_js="{}";
+      log_info.req="{\"error\":\"Bad json string format request\"}";
       parse_log(log_info, log_js);
       cout<<log_js<<endl;
 //      log_file<<log_js<<endl;

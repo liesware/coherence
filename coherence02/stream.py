@@ -42,7 +42,7 @@ data_js=['{ "version": 1 , "algorithm":"" , "type":"string", "plaintext": "61626
 
 data_f=['{ "version": 1 , "algorithm":"" , "type":"file", "file": "file_test/AB.mayhem","operation":"enc","key":"","iv":"" }']
 
-blocks=["AES","RC6","MARS","SERPENT","TWOFISH","CAST256"]
+blocks=["AES","RC6","MARS","SERPENT","TWOFISH","CAST256", "CAMELLIA"]
 
 for i in data_js:
 	temp_js=json.loads(i)

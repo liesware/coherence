@@ -269,7 +269,7 @@ int parse_rsa_gen(Document& d, stru_param& req_val, string& answ_js){
 #endif
     return 1;	   
    } 	
-	
+  return 0;	
 }
 
 //RSASIGN////////////////////////////////////////////////////////////////

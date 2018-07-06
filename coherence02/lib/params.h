@@ -1,5 +1,6 @@
 #include <iostream>
 #include "cryptopp/oids.h"
+#include "libntru/src/ntru.h"
 
 
 using namespace  std;
@@ -58,7 +59,10 @@ typedef struct params{
 //ECC
   string curve;
   string field;
-  OID CURVE;        
+  OID CURVE;
+//NTRU
+  string parameter;
+  struct NtruEncParams params_;          
 //json
   string tag;
   string value;

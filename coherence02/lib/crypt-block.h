@@ -12,6 +12,8 @@
 #include "cryptopp/aes.h"
 #include "cryptopp/ccm.h"
 #include "cryptopp/gcm.h"
+#include "cryptopp/camellia.h"
+
 
 
 using namespace CryptoPP;
@@ -393,7 +395,10 @@ int parse_block(Document& d, stru_param& req_val, string& answ_js){
 	  } 	 	
       else if(strncmp(req_val.algorithm.c_str(), "CAST256",sizeof("CAST256")) == 0){
         BLOCK_ENC_CTR<CTR_Mode< CAST256 >::Encryption>(req_val.payload, req_val.type, req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error); 	 	
-	  }	
+	  }
+      else if(strncmp(req_val.algorithm.c_str(), "CAMELLIA",sizeof("CAMELLIA")) == 0){
+        BLOCK_ENC_CTR<CTR_Mode< Camellia >::Encryption>(req_val.payload, req_val.type, req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error); 	 	
+	  }		  	
       else{
         req_val.error="Bad Block algorithm ";  
         answ_error(req_val,answ_js); 
@@ -422,7 +427,10 @@ int parse_block(Document& d, stru_param& req_val, string& answ_js){
 	  } 	 	
       else if(strncmp(req_val.algorithm.c_str(), "CAST256",sizeof("CAST256")) == 0){
         BLOCK_ENC_GCM<GCM< CAST256 >::Encryption>(req_val.payload, req_val.adata,  req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error); 	 	
-	  }	
+	  }
+      else if(strncmp(req_val.algorithm.c_str(), "CAMELLIA",sizeof("CAMELLIA")) == 0){
+        BLOCK_ENC_GCM<GCM< Camellia >::Encryption>(req_val.payload, req_val.adata,  req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error); 	 	
+	  }		  	
       else{
         req_val.error="Bad Block algorithm ";  
         answ_error(req_val,answ_js); 
@@ -451,6 +459,9 @@ int parse_block(Document& d, stru_param& req_val, string& answ_js){
       else if(strncmp(req_val.algorithm.c_str(), "CAST256",sizeof("CAST256")) == 0){
         BLOCK_DEC_CTR<CTR_Mode< CAST256 >::Decryption>(req_val.payload, req_val.type, req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error); 	 	
 	  }	
+      else if(strncmp(req_val.algorithm.c_str(), "CAMELLIA",sizeof("CAMELLIA")) == 0){
+        BLOCK_DEC_CTR<CTR_Mode< Camellia >::Decryption>(req_val.payload, req_val.type, req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error); 	 	
+	  }		  
       else{
         req_val.error="Bad Block algorithm ";  
         answ_error(req_val,answ_js); 
@@ -480,6 +491,9 @@ int parse_block(Document& d, stru_param& req_val, string& answ_js){
       else if(strncmp(req_val.algorithm.c_str(), "CAST256",sizeof("CAST256")) == 0){
         BLOCK_DEC_GCM<GCM< CAST256 >::Decryption>(req_val.payload, req_val.adata,  req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error); 	 	
 	  }	
+      else if(strncmp(req_val.algorithm.c_str(), "CAMELLIA",sizeof("CAMELLIA")) == 0){
+        BLOCK_DEC_GCM<GCM< Camellia >::Decryption>(req_val.payload, req_val.adata,  req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error); 	 	
+	  }	  
       else{
         req_val.error="Bad Block algorithm ";  
         answ_error(req_val,answ_js); 

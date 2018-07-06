@@ -61,7 +61,7 @@ var fam_hash=['sha3_512','sha3_384','sha3_256','sha3_224',
 'sha_512','sha_384','sha_256','sha_224',
 'sha_1','whirlpool']
 
-var fam_block=['aes', 'rc6', 'mars','serpent','twofish', 'cast256']
+var fam_block=['aes', 'rc6', 'mars','serpent','twofish', 'cast256','camellia']
 
 
 var mac_json=[

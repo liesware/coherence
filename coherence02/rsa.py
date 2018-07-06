@@ -42,6 +42,7 @@ def rsa(data_js, bits):
 	json_enc='{ "version": 1 , "algorithm":"RSA", "type":"string","pubkey": "" ,"operation":"enc", "plaintext":"hello world!!!" }'
 	req=json.loads(json_enc)
 	req["pubkey"]=answ["pubkey"]
+	print "Send enc : \n " + json.dumps(req) +"\n"
 	data_js_n=sending(json.dumps(req))
 	answ_3=json.loads(data_js_n)
 	print "Recived  enc done: \n"+(json.dumps(answ_3)) +"\n\n\n"
@@ -49,6 +50,7 @@ def rsa(data_js, bits):
 	req["plaintext"]=answ_3["result"]
 	req["pubkey"]=""
 	req["operation"]="dec"
+	print "Send dec : \n " + json.dumps(req) +"\n"
 	data_js_n=sending(json.dumps(req))
 	answ_3=json.loads(data_js_n)
 	print "Recived  enc done: \n"+(json.dumps(answ_3)) +"\n\n\n"	

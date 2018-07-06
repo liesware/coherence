@@ -27,6 +27,7 @@ def ecc_pb(data_js):
 	req=json.loads(json_enc)
 	req["pubkey"]=answ["pubkey"]
 	req["curve"]=curve
+	print "Recived  enc: \n"+(json.dumps(req)) +"\n\n\n" 
 	data_js_n=sending(json.dumps(req))
 	answ_1=json.loads(data_js_n)
 	print "Recived  enc done: \n"+(json.dumps(answ_1)) +"\n"
