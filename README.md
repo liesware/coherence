@@ -26,9 +26,9 @@ Coherence is a TCP server which provides an json interface to perfom cryptograph
 * Hash functions: SHA3, SHA2, SHA1, WHIRLPOOL, Blake2b.
 * Password-hashing function: Argon2
 * Stream ciphers: Sosemanuk, Salsa20/20.
-* Block ciphers: AES, RC6, MARS, Twofish, Serpent, CAST-256.
+* Block ciphers: AES, RC6, MARS, Twofish, Serpent, CAST-256, Camellia.
 * Block ciphers modes: CTR, GCM.
-* Message authentication codes: HMAC(SHA3, SHA2, SHA1, WHIRLPOOL),  CMAC(AES, RC6, MARS, Twofish, Serpent, CAST-256), VMAC(AES, RC6, MARS, Twofish, Serpent, CAST-256), Poly1305.
+* Message authentication codes: HMAC(SHA3, SHA2, SHA1, WHIRLPOOL),  CMAC(AES, RC6, MARS, Twofish, Serpent, CAST-256, Camellia), VMAC(AES, RC6, MARS, Twofish, Serpent, CAST-256, Camellia), Poly1305.
 * RSA: Key generation, digital signature, encryption.
 * DSA: Key generation, digital signature.
 * DH: Key generation, key exchange (rfc and custom parameters).
