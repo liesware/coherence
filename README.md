@@ -33,7 +33,7 @@ Coherence is a TCP server which provides an json interface to perfom cryptograph
 * DSA: Key generation, digital signature.
 * DH: Key generation, key exchange (rfc and custom parameters).
 * ECC: Key generation, ECIES, ECDSA, ECDH.
-
+* Post-Quantum Cryptography: NTRU.
 
 ## Quickstart (Linux)
 
