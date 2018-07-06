@@ -7,4 +7,5 @@ python dsa.py
 python rsa.py
 python argon2.py
 python ecc.py
-node rand.js
+python ntru.py
+#node rand.js

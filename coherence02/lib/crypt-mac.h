@@ -19,6 +19,7 @@
 #include "cryptopp/serpent.h"
 #include "cryptopp/twofish.h"
 #include "cryptopp/cast.h"
+#include "cryptopp/camellia.h"
 
 #include "cryptopp/filters.h"
 #include "cryptopp/hex.h"
@@ -433,7 +434,10 @@ int parse_cmac(Document& d, stru_param& req_val, string& answ_js){
   }
   else if(strncmp(req_val.family.c_str(), "cast256",sizeof("cast256")) == 0){
     CMACING<CAST256>(req_val.payload, req_val.type, req_val.mac, req_val.key , req_val.hex,req_val.error);      
-  } 	
+  }
+  else if(strncmp(req_val.family.c_str(), "camellia",sizeof("camellia")) == 0){
+    CMACING<Camellia>(req_val.payload, req_val.type, req_val.mac, req_val.key , req_val.hex,req_val.error);      
+  }    	
   else{
     req_val.error="Bad Cmac algorithm ";  
     answ_error(req_val,answ_js); 
@@ -528,7 +532,10 @@ int parse_vmac(Document& d, stru_param& req_val, string& answ_js){
   }
   else if(strncmp(req_val.family.c_str(), "cast256",sizeof("cast256")) == 0){
     VMACING<CAST256>(req_val.payload, req_val.type, req_val.mac, req_val.key , req_val.iv, req_val.hex,req_val.error);      
-  } 	
+  }
+  else if(strncmp(req_val.family.c_str(), "camellia",sizeof("camellia")) == 0){
+    VMACING<Camellia>(req_val.payload, req_val.type, req_val.mac, req_val.key , req_val.iv, req_val.hex,req_val.error);      
+  }    	
   else{
     req_val.error="Bad Vmac algorithm ";  
     answ_error(req_val,answ_js); 

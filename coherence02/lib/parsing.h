@@ -19,6 +19,7 @@
 #include "crypt-block.h"
 #include "crypt-rsa.h"
 #include "crypt-ecc.h"
+#include "crypt-ntru.h"
 
 #include <stdio.h>
 
@@ -165,6 +166,9 @@ int PARSING(string& str_json, string& answ_js ){
    else if(strncmp(req_val.algorithm.c_str(), "CAST256",sizeof("CAST256")) == 0){
     parse_block(d,req_val,answ_js);      
   }
+   else if(strncmp(req_val.algorithm.c_str(), "CAMELLIA",sizeof("CAMELLIA")) == 0){
+    parse_block(d,req_val,answ_js);      
+  }  
    else if(strncmp(req_val.algorithm.c_str(), "RSA",sizeof("RSA")) == 0){
     parse_rsa(d,req_val,answ_js);      
   }
@@ -179,7 +183,10 @@ int PARSING(string& str_json, string& answ_js ){
   }
   else if(strncmp(req_val.algorithm.c_str(), "ECDH",sizeof("ECDH")) == 0){
     parse_ecdh(d,req_val,answ_js);      
-  }                                                                 
+  }
+  else if(strncmp(req_val.algorithm.c_str(), "NTRU",sizeof("NTRU")) == 0){
+    parse_ntru(d,req_val,answ_js);      
+  }                                                                    
   else{ 
   req_val.error="Bad algorithm";
   req_val.tag="error";  

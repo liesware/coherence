@@ -299,7 +299,7 @@ int parse_argon2(Document& d, stru_param& req_val, string& answ_js){
 	   parse_argon2v(d, req_val, answ_js); 
 	 }  
      else{
-       req_val.error="Bad Block operation ";  
+       req_val.error="Bad argon2 operation ";  
        answ_error(req_val,answ_js); 
        return 1;	   
      }    
