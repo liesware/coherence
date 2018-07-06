@@ -96,7 +96,7 @@ Please see https://github.com/liesware/coherence/wiki
 * Provide post quantum cryptography algorithms
 
 ## Version
-This is the version 0.2, all the versions in github  are even, odd versions are to develop , even versions  are to fix bugs.
+This is the version 0.6, all the versions in github  are even, odd versions are to develop , even versions  are to fix bugs.
 
 All the versions before 1.0 are called Essence.
 
