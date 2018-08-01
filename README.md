@@ -17,8 +17,7 @@
 
 
 ## Abstract
-Cohenrence is cryptographic server, it provides a TCP server whith an json interface to perfom cryptographic operations. 
-It helps to create cryptographic protocols for modern web apps  to protect data, for exmaple: data base encryption, digital signatures, file encryption.
+Cohenrence is cryptographic server, it provides a TCP server whith an json interface to perfom cryptographic operations. It helps you to create your own cryptographic protocols for modern web apps to protect data, for exmaple: data base encryption, digital signatures, file encryption.
 
 
  
