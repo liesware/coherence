@@ -17,8 +17,9 @@
 
 
 ## Abstract
+Cohenrence is cryptographic server, it provides a TCP server whith an json interface to perfom cryptographic operations. 
+It helps to ceate cryptographic protocols for web apps, for exmaple: data base encryption, digital signatures, file encryption.
 
-Coherence is a TCP server which provides an json interface to perfom cryptographic operations like encrypt, digital signatures, key exchage, message authentication code, random numbers, hash functions. For example it can be used for data base encryption.
 
  
 ## Features
@@ -92,7 +93,8 @@ Please see https://github.com/liesware/coherence/wiki
 ## Target
 
 * Be cryptoserver (it's like openssl, tcp/json insted of bash)
-* Be an open source kind of alternative to HSM
+* Be an open source kind of alternative to 
+
 * Provide post quantum cryptography algorithms
 
 ## Version
