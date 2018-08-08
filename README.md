@@ -72,14 +72,8 @@ https://hub.docker.com/r/liesware/coherence/
 On windows you should not have problems , it is almost the same 
 
 ## Compile (*nix)
-* Clone rapidjson 1.1.x (https://github.com/Tencent/rapidjson.git)
-* Clone cryptopp 5.6.5 (http://github.com/weidai11/cryptopp/releases/tag/CRYPTOPP_5_6_5) and install (https://www.cryptopp.com/wiki/Compiling)
-* Clone libuv 1.x (https://github.com/libuv/libuv.git) and install (see libuv Readme)
-* Clone libargon2 (https://github.com/P-H-C/phc-winner-argon2) and install (see libargon2 Readme)
-* Rename CRYPTOPP_5_6_5 to cryptopp, phc-winner-argon2 to argon2
-* Move all libs inside lib folder
-* make if you want a program with shared libs or make -f Makefile.static if you want a staic program.
-* Makefiles are so simple (http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/), you can modify without problem
+* wget https://raw.githubusercontent.com/liesware/coherence/master/install.sh
+* sh install.sh
 
 ## Examples 
 testing.sh exec argon2.py, dh.py, dsa.py, ecc.py, hash.js, mac.js, rand.js, rsa.py, stream.py.
