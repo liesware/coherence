@@ -4,15 +4,15 @@ CC = g++
 
 CFLAGS= -static -Werror
 
-INCLUDES = -luv -lcryptopp -largon2  -lpthread -lntru 
+INCLUDES = -luv -lcryptopp -largon2  -lpthread -lntru
 
-LIBS = -L./lib/cryptopp/ -L./lib/argon2/ -L./lib/libuv/ -L./lib/libntru/
+LIBS = -L./lib/cryptopp/ -L./lib/argon2/ -L./lib/libuv/.libs/ -L./lib/libntru/
+
+SRC = -I./lib/libuv/src/ -I./lib/libuv/include/ -I./lib/rapidjson/include/
 
 TARGET = coherence
 
 all: $(TARGET)
 
 $(TARGET): $(TARGET).c
-	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c $(INCLUDES) $(LIBS) 
-
-
+	$(CC) $(CFLAGS) -o ./bin/$(TARGET) $(TARGET).c  $(SRC) $(INCLUDES) $(LIBS)
