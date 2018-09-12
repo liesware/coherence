@@ -43,11 +43,11 @@ int ok_buff(const uv_buf_t *buf){
 #endif
 		  return 1;
 	    }
-      }
+    }
 	  return 0;
 	}
 	else
-	 return 1;
+	  return 1;
 }
 
 
@@ -55,6 +55,10 @@ void alloc_buffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf) {
   buf->base = (char*)malloc(suggested_size);
   buf->len = suggested_size;
   memset (buf->base,'\0',suggested_size);
+}
+
+void on_close(uv_handle_t* handle) {
+  free(handle);
 }
 
 void echo_write(uv_write_t *req, int status) {
@@ -69,7 +73,7 @@ void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
       if (nread != UV_EOF) {
           fprintf(stderr, "Read error %s\n", uv_err_name(nread));
           try{
-            uv_close((uv_handle_t*) client, NULL);
+            uv_close((uv_handle_t*) client, on_close);
           }
           catch(int * e){
              cout << "An exception occurred. " << e << '\n';
@@ -83,11 +87,11 @@ void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
     uv_write_t *req = (uv_write_t *) malloc(sizeof(uv_write_t));
 
     sockaddr_in cli_addr;
-    int name_len;
+    int name_len= sizeof(cli_addr);
     uv_tcp_t* uv_client = (uv_tcp_t*)client;
     uv_tcp_getpeername(uv_client, (struct sockaddr*) &cli_addr, &name_len);
-    char ip[INET6_ADDRSTRLEN] = {0};
-    inet_ntop(AF_INET, &cli_addr.sin_addr, ip, INET6_ADDRSTRLEN);
+    char ip[INET_ADDRSTRLEN];
+    inet_ntop(AF_INET, &cli_addr.sin_addr, ip, INET_ADDRSTRLEN);
 
     log_info.timestamp=(int)time(NULL);
     log_info.ip=ip;
@@ -101,14 +105,6 @@ void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
 
     clock_t t;
     t = clock();
-/*
-    log_file.open ("file_test/coherence.log" ,ios::app);
-    if (log_file.is_open()){
-      //printf("Coherence server started and login\n");
-    }
-    else
-      printf("Unable to open log file\n");
-*/
 
     string str_json;
     str_json.clear();
@@ -117,29 +113,26 @@ void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
 
     if(ok_buff(buf)!=0){
       answer.clear();
-	  answer="{\"error\":\"Bad Buffer, plase see https://github.com/liesware/coherence  and report bugs\"}";
+	    answer="{\"error\":\"Bad Buffer, plase see https://github.com/liesware/coherence  and report bugs\"}";
 #ifdef DEBUG
 	  printf("\nSended: %s\n",answer.c_str());
 #endif
       log_info.answ=answer;
 
-	  char *paramsp=strdup( answer.c_str());
-	  uv_buf_t wrbuf= uv_buf_init(paramsp, answer.length());
-	  uv_write(req, client, &wrbuf, 1, echo_write);
-	  //uv_close((uv_handle_t*) client, NULL);
-	  free(paramsp);
+	    char *paramsp=strdup( answer.c_str());
+	    uv_buf_t wrbuf= uv_buf_init(paramsp, answer.length());
+	    uv_write(req, client, &wrbuf, 1, echo_write);
+	    free(paramsp);
 
-	  t = clock()-t;
+	    t = clock()-t;
       log_info.exec_time=(float)t/CLOCKS_PER_SEC;
       string log_js="{}";
       log_info.req="{\"error\":\"Bad json string format request\"}";
       parse_log(log_info, log_js);
       cout<<log_js<<endl;
-//      log_file<<log_js<<endl;
-//      log_file.close();
 
 	}
-    else{
+  else{
 
 	  PARSING(str_json , answer);
 #ifdef DEBUG
@@ -150,24 +143,20 @@ void echo_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
 	  char *paramsp=strdup( answer.c_str());
 	  uv_buf_t wrbuf= uv_buf_init(paramsp, answer.length());
 	  uv_write(req, client, &wrbuf, 1, echo_write);
-	  //uv_close((uv_handle_t*) client, NULL);
 	  free(paramsp);
 
 	  t = clock()-t;
-      log_info.exec_time=(float)t/CLOCKS_PER_SEC;
-      string log_js="{}";
-      parse_log(log_info, log_js);
-      cout<<log_js<<endl;
-//      log_file<<log_js<<endl;
-//      log_file.close();
+    log_info.exec_time=(float)t/CLOCKS_PER_SEC;
+    string log_js="{}";
+    parse_log(log_info, log_js);
+    cout<<log_js<<endl;
 
-    }
   }
+ }
 
-  if (buf->base) {
-      free(buf->base);
-  }
-  uv_close((uv_handle_t*) client, NULL);
+  free(buf->base);
+  uv_close((uv_handle_t*) client, on_close);
+
 }
 
 void on_new_connection(uv_stream_t *server, int status) {
@@ -182,7 +171,7 @@ void on_new_connection(uv_stream_t *server, int status) {
       uv_read_start((uv_stream_t*)client, alloc_buffer, echo_read);
   }
   else {
-    uv_close((uv_handle_t*) client, NULL);
+    uv_close((uv_handle_t*) client, on_close);
   }
 }
 
@@ -201,7 +190,7 @@ int main(int argc, char *argv[]) {
 
   uv_ip4_addr(argv[1], atoi(argv[2]), &addr);
   uv_tcp_bind(&server, (const struct sockaddr*)&addr, 0);
-  int r = uv_listen((uv_stream_t*)&server, 128, on_new_connection);
+  int r= uv_listen((uv_stream_t*)&server, 128, on_new_connection);
   if(r){
     fprintf(stderr, "Listen error %s\n", uv_strerror(r));
       return 1;
@@ -212,5 +201,7 @@ int main(int argc, char *argv[]) {
   printf("Process started\n");
 #endif
 
-  return uv_run(loop, UV_RUN_DEFAULT);
+  r= uv_run(loop, UV_RUN_DEFAULT);
+
+  return r;
 }
