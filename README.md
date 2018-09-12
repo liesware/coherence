@@ -37,8 +37,10 @@ Cohenrence is cryptographic server, it provides a TCP server whith an json inter
 
 ## Quickstart (Linux)
 
+Builds are tested on Centos 7.
+
 Install glibc-static.
-Inside bin folder there is a coherence version compile with -static, so you should not have problems to run it, because it does not depend on shared libs. 
+Inside bin folder there is a coherence version compile with -static, so you should not have problems to run it, because it does not depend on shared libs. (Only)
 ```
 git clone https://github.com/liesware/coherence.git
 cd coherence/coherence02/bin/
