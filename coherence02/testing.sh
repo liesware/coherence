@@ -8,4 +8,5 @@ python rsa.py
 python argon2.py
 python ecc.py
 python ntru.py
-#node rand.js
+python qtesla.py
+node rand.js

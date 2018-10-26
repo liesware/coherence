@@ -13,6 +13,8 @@
 #include "cryptopp/ccm.h"
 #include "cryptopp/gcm.h"
 #include "cryptopp/camellia.h"
+#include "cryptopp/speck.h"
+#include "cryptopp/simeck.h"
 
 
 
@@ -306,14 +308,11 @@ int BLOCK_DEC_GCM(string& payload, string& adata, string& result, string& key, s
     return 0;
   }
 
-
-
-
-  //PARSE_BLOCK//////////////////////////////////////////////////////////
-  int parse_block(Document& d, stru_param& req_val, string& answ_js){
-    if(d.HasMember("type") ){
-      if(check_type(d,req_val,answ_js)!=0)
-      return 1;
+//PARSE_BLOCK//////////////////////////////////////////////////////////
+int parse_block(Document& d, stru_param& req_val, string& answ_js){
+  if(d.HasMember("type") ){
+    if(check_type(d,req_val,answ_js)!=0)
+    return 1;
     }
     else{
       req_val.error="Not type tag ";
@@ -331,8 +330,14 @@ int BLOCK_DEC_GCM(string& payload, string& adata, string& result, string& key, s
         return 1;
         if(check_ops(d,req_val,answ_js)!=0)
         return 1;
-        if(check_iv(d,req_val,answ_js)!=0)
-        return 1;
+        if(strncmp(req_val.algorithm.c_str(), "SIMECK64",sizeof("SIMECK64")) == 0){
+          if(check_iv(d,req_val,answ_js,16))
+          return 1;
+        }
+        else{
+          if(check_iv(d,req_val,answ_js)!=0)
+          return 1;
+        }
         if(check_mode_block(d,req_val,answ_js)!=0)
         return 1;
 
@@ -354,8 +359,14 @@ int BLOCK_DEC_GCM(string& payload, string& adata, string& result, string& key, s
         return 1;
         if(check_ops(d,req_val,answ_js)!=0)
         return 1;
-        if(check_iv(d,req_val,answ_js)!=0)
-        return 1;
+        if(strncmp(req_val.algorithm.c_str(), "SIMECK64",sizeof("SIMECK64")) == 0){
+          if(check_iv(d,req_val,answ_js,16))
+          return 1;
+        }
+        else{
+          if(check_iv(d,req_val,answ_js)!=0)
+          return 1;
+        }
         if(check_mode_block(d,req_val,answ_js)!=0)
         return 1;
 
@@ -396,6 +407,12 @@ int BLOCK_DEC_GCM(string& payload, string& adata, string& result, string& key, s
         else if(strncmp(req_val.algorithm.c_str(), "CAMELLIA",sizeof("CAMELLIA")) == 0){
           BLOCK_ENC_CTR<CTR_Mode< Camellia >::Encryption>(req_val.payload, req_val.type, req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error);
         }
+        else if(strncmp(req_val.algorithm.c_str(), "SPECK128",sizeof("SPECK128")) == 0){
+          BLOCK_ENC_CTR<CTR_Mode< SPECK128 >::Encryption>(req_val.payload, req_val.type, req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error);
+        }
+        else if(strncmp(req_val.algorithm.c_str(), "SIMECK64",sizeof("SIMECK64")) == 0){
+          BLOCK_ENC_CTR<CTR_Mode< SIMECK64 >::Encryption>(req_val.payload, req_val.type, req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error);
+        }
         else{
           req_val.error="Bad Block algorithm ";
           answ_error(req_val,answ_js);
@@ -428,6 +445,9 @@ int BLOCK_DEC_GCM(string& payload, string& adata, string& result, string& key, s
         else if(strncmp(req_val.algorithm.c_str(), "CAMELLIA",sizeof("CAMELLIA")) == 0){
           BLOCK_ENC_GCM<GCM< Camellia >::Encryption>(req_val.payload, req_val.adata,  req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error);
         }
+        else if(strncmp(req_val.algorithm.c_str(), "SPECK128",sizeof("SPECK128")) == 0){
+          BLOCK_ENC_GCM<GCM< SPECK128 >::Encryption>(req_val.payload, req_val.adata,  req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error);
+        }
         else{
           req_val.error="Bad Block algorithm ";
           answ_error(req_val,answ_js);
@@ -458,6 +478,12 @@ int BLOCK_DEC_GCM(string& payload, string& adata, string& result, string& key, s
         }
         else if(strncmp(req_val.algorithm.c_str(), "CAMELLIA",sizeof("CAMELLIA")) == 0){
           BLOCK_DEC_CTR<CTR_Mode< Camellia >::Decryption>(req_val.payload, req_val.type, req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error);
+        }
+        else if(strncmp(req_val.algorithm.c_str(), "SPECK128",sizeof("SPECK128")) == 0){
+          BLOCK_DEC_CTR<CTR_Mode< SPECK128 >::Decryption>(req_val.payload, req_val.type, req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error);
+        }
+        else if(strncmp(req_val.algorithm.c_str(), "SIMECK64",sizeof("SIMECK64")) == 0){
+          BLOCK_DEC_CTR<CTR_Mode< SIMECK64 >::Decryption>(req_val.payload, req_val.type, req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error);
         }
         else{
           req_val.error="Bad Block algorithm ";
@@ -490,6 +516,9 @@ int BLOCK_DEC_GCM(string& payload, string& adata, string& result, string& key, s
         }
         else if(strncmp(req_val.algorithm.c_str(), "CAMELLIA",sizeof("CAMELLIA")) == 0){
           BLOCK_DEC_GCM<GCM< Camellia >::Decryption>(req_val.payload, req_val.adata,  req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error);
+        }
+        else if(strncmp(req_val.algorithm.c_str(), "SPECK128",sizeof("SPECK128")) == 0){
+          BLOCK_DEC_GCM<GCM< SPECK128 >::Decryption>(req_val.payload, req_val.adata,  req_val.result, req_val.key , req_val.iv, req_val.hex, req_val.error);
         }
         else{
           req_val.error="Bad Block algorithm ";
