@@ -15,4 +15,4 @@ TARGET = coherence
 all: $(TARGET)
 
 $(TARGET): $(TARGET).c
-	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c  $(SRC) $(INCLUDES) $(LIBS)
+	$(CC) $(CFLAGS) -o ./bin/$(TARGET) $(TARGET).c  $(SRC) $(INCLUDES) $(LIBS)
