@@ -22,11 +22,11 @@ def cipher(data_js, key, iv):
 	data_js_n=sending(json.dumps(req))
 	answ=json.loads(data_js_n)
 	req["plaintext"]=answ["result"]
-	req["file"]=answ["result"]  
+	req["file"]=answ["result"]
 	req["operation"]="dec"
 	data_js_f=sending(json.dumps(req))
 	verify=json.loads(data_js_f)
-	print 'Plain: '+ json.dumps(req) 
+	print 'Plain: '+ json.dumps(req)
 	print 'Encrypt: '+data_js_n
 	print 'Decrypt: '+data_js_f
 	print answ["result"] +' ' +verify["result"] + '\n'
@@ -42,7 +42,7 @@ data_js=['{ "version": 1 , "algorithm":"" , "type":"string", "plaintext": "61626
 
 data_f=['{ "version": 1 , "algorithm":"" , "type":"file", "file": "file_test/AB.mayhem","operation":"enc","key":"","iv":"" }']
 
-blocks=["AES","RC6","MARS","SERPENT","TWOFISH","CAST256", "CAMELLIA"]
+blocks=["AES","RC6","MARS","SERPENT","TWOFISH","CAST256", "CAMELLIA","SPECK128"]
 
 for i in data_js:
 	temp_js=json.loads(i)
@@ -58,8 +58,8 @@ for i in data_js:
 	for j in blocks:
 		temp_js["adata"]=binascii.b2a_hex(os.urandom(24))
 		temp_js["algorithm"]=j
-		cipher(json.dumps(temp_js),32,16)	
-	
+		cipher(json.dumps(temp_js),32,16)
+
 
 for i in data_f:
 	temp_js=json.loads(i)
@@ -70,4 +70,9 @@ for i in data_f:
 	temp_js["mode"]="ctr"
 	for j in blocks:
 		temp_js["algorithm"]=j
-		cipher(json.dumps(temp_js),32,16)	
+		cipher(json.dumps(temp_js),32,16)
+
+temp_js=json.loads(data_js[2])
+temp_js["algorithm"]="SIMECK64"
+temp_js["mode"]="ctr"
+cipher(json.dumps(temp_js),16,8)
