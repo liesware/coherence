@@ -20,7 +20,10 @@
 #include "crypt-rsa.h"
 #include "crypt-ecc.h"
 #include "crypt-ntru.h"
+
+extern "C" {
 #include "crypt-oqs.h"
+}
 
 #include <stdio.h>
 
@@ -170,6 +173,12 @@ int PARSING(string& str_json, string& answ_js ){
   else if(strncmp(req_val.algorithm.c_str(), "CAMELLIA",sizeof("CAMELLIA")) == 0){
     parse_block(d,req_val,answ_js);
   }
+  else if(strncmp(req_val.algorithm.c_str(), "SPECK128",sizeof("SPECK128")) == 0){
+    parse_block(d,req_val,answ_js);
+  }
+  else if(strncmp(req_val.algorithm.c_str(), "SIMECK64",sizeof("SIMECK64")) == 0){
+    parse_block(d,req_val,answ_js);
+  }
   else if(strncmp(req_val.algorithm.c_str(), "RSA",sizeof("RSA")) == 0){
     parse_rsa(d,req_val,answ_js);
   }
@@ -187,6 +196,9 @@ int PARSING(string& str_json, string& answ_js ){
   }
   else if(strncmp(req_val.algorithm.c_str(), "NTRU",sizeof("NTRU")) == 0){
     parse_ntru(d,req_val,answ_js);
+  }
+  else if(strncmp(req_val.algorithm.c_str(), "QTESLA",sizeof("QTESLA")) == 0){
+    parse_qtesla(d,req_val,answ_js);
   }
   else{
     req_val.error="Bad algorithm";

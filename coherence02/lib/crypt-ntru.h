@@ -21,24 +21,6 @@
 using namespace CryptoPP;
 using namespace  std;
 
-
-int check_params(Document& d, stru_param& req_val, string& answ_js){
-  if(d.HasMember("parameter") && d["parameter"].IsString()){
-    req_val.parameter=d["parameter"].GetString();
-    if(Isalphnum(req_val.parameter,req_val.error)!=0){
-      req_val.error+=" parameter no ascii ";
-      req_val.tag="error";
-      Addstr2json(answ_js, req_val.tag, req_val.error);
-      #ifdef DEBUG
-      cerr << req_val.error;
-      #endif
-      return 1;
-    }
-  }
-  return 0;
-}
-
-
 int check_error(int& i, string& error){
   error.clear();
 
@@ -555,4 +537,4 @@ int parse_ntru(Document& d, stru_param& req_val, string& answ_js){
   }
 
   return 0;
-} 
+}

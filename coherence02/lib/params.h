@@ -62,10 +62,11 @@ typedef struct params{
   OID CURVE;
   //NTRU
   string parameter;
+  string paramsq_;
   struct NtruEncParams params_;
   //json
   string tag;
   string value;
   //log
   string error;
-}stru_param; 
+}stru_param;
