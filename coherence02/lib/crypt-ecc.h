@@ -634,6 +634,10 @@ int parse_ecdsa_sign(Document& d, stru_param& req_val, string& answ_js){
       return 1;
       if(check_keys(d,req_val,answ_js)!=0)
       return 1;
+      if(check_field(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_hash_sign(d,req_val,answ_js)!=0)
+      return 1;
 
       req_val.hex=0;
       req_val.payload=req_val.file;
@@ -717,6 +721,8 @@ int parse_ecdsa_v(Document& d, stru_param& req_val, string& answ_js){
       return 1;
       if(check_signs(d,req_val,answ_js)!=0)
       return 1;
+      if(check_hash_sign(d,req_val,answ_js)!=0)
+      return 1;
 
 
       req_val.payload=req_val.plaintext;
@@ -734,6 +740,8 @@ int parse_ecdsa_v(Document& d, stru_param& req_val, string& answ_js){
       if(check_keys(d,req_val,answ_js)!=0)
       return 1;
       if(check_field(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_hash_sign(d,req_val,answ_js)!=0)
       return 1;
 
       req_val.hex=0;
