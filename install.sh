@@ -39,5 +39,5 @@ autoreconf -i
 make clean
 make
 
-cd ..
+ cd ../../
 make -f Makefile.static
