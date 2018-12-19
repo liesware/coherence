@@ -40,4 +40,4 @@ make clean
 make
 
  cd ../../
-make -f Makefile.static
+make
