@@ -39,5 +39,6 @@ autoreconf -i
 make clean
 make
 
- cd ../../
+cd ../../
+mkdir bin
 make
