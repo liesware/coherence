@@ -8,7 +8,7 @@ INCLUDES = -luv -lcryptopp -largon2 -lpthread -lntru -lm -loqs
 
 LIBS = -L./lib/libuv/.libs/ -L./lib/cryptopp/ -L./lib/argon2/ -L./lib/libntru/ -L./lib/liboqs/.libs/
 
-SRC = -I./lib/libuv/include/ -I./lib/liboqs/include/
+SRC = -I./lib/libuv/include/ -I./lib/liboqs/include/ -I./lib/rapidjson/include/
 
 TARGET = coherence
 
