@@ -39,43 +39,6 @@ Be careful qtesla is not an standard yet and is experimental
 
 ## Quickstart (Linux)
 
-Builds are tested on Centos 7.
-
-Install glibc-static.
-Inside bin folder there is a coherence version compile with -static, so you should not have problems to run it, because it does not depend on shared libs. (Only)
-```
-git clone https://github.com/liesware/coherence.git
-cd coherence/coherence02/bin/
-chmod 550 coherence
-./coherence 0.0.0.0 6613  
-```
-In other tab
-```
-cd coherence/coherence02/
-sh testing.sh
-```
-The log file is print in standard output, so you can redirect the standard error and standard out messages to a log file.
-```
-./coherence 0.0.0.0 6613 > coherence.log 2>&1 &
-```
-## Docker image
-
-```
-git clone https://github.com/liesware/coherence.git
-
-docker pull liesware/coherence:07
-
-docker run -p 6613:6613 docker.io/liesware/coherence:07  /coherence/coherence 0.0.0.0 6613  > coherence.log 2>&1 &
-
-cd coherence/coherence02/
-sh testing.sh
-
-```
-https://hub.docker.com/r/liesware/coherence/
-
-On windows you should not have problems , it is almost the same 
-
-## Compile (*nix)
 For Centos 7 dependencies:
 * yum install glibc-static libstdc++-static autoconf automake gcc gcc-c++ make libtool git wget
 
