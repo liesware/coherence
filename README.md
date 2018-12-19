@@ -82,7 +82,7 @@ For Centos 7 dependencies:
 For Debian 9 dependencies:
 * apt-get install autoconf automake gcc g++ make libtool git wget
 
-
+Now compile it:
 * wget https://raw.githubusercontent.com/liesware/coherence/master/install.sh
 * sh install.sh
 
