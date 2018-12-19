@@ -77,10 +77,10 @@ On windows you should not have problems , it is almost the same
 
 ## Compile (*nix)
 For Centos 7 dependencies:
-*yum install glibc-static libstdc++-static autoconf automake gcc gcc-c++ make libtool git wget
+* yum install glibc-static libstdc++-static autoconf automake gcc gcc-c++ make libtool git wget
 
 For Debian 9 dependencies:
-*apt-get install autoconf automake gcc g++ make libtool git wget
+* apt-get install autoconf automake gcc g++ make libtool git wget
 
 
 * wget https://raw.githubusercontent.com/liesware/coherence/master/install.sh
