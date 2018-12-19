@@ -76,6 +76,13 @@ https://hub.docker.com/r/liesware/coherence/
 On windows you should not have problems , it is almost the same 
 
 ## Compile (*nix)
+For Centos 7 dependencies:
+*yum install glibc-static libstdc++-static autoconf automake gcc gcc-c++ make libtool git wget
+
+For Debian 9 dependencies:
+*apt-get install autoconf automake gcc g++ make libtool git wget
+
+
 * wget https://raw.githubusercontent.com/liesware/coherence/master/install.sh
 * sh install.sh
 
@@ -89,10 +96,8 @@ Please see https://github.com/liesware/coherence/wiki
 
 ## Target
 
-* Be cryptoserver (it's like openssl, tcp/json insted of bash)
-* Be an open source kind of alternative to 
-
-* Provide post quantum cryptography algorithms
+* Be cryptoserver (server dedicated for cryptography)
+* Improve security in L7 (Cryptography on L7)
 
 ## Version
 This is the version 0.7, all the versions in github  are even, odd versions are to develop , even versions  are to fix bugs.
