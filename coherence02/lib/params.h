@@ -2,6 +2,34 @@
 #include "cryptopp/oids.h"
 #include "libntru/src/ntru.h"
 
+#define _sha3
+#define _sha2
+#define _whirlpool
+#define _blake2b
+#define _poly1305
+#define _hmac
+#define _cmac
+#define _vmac
+#define _sosemanuk
+#define _salsa20
+#define _argon2
+#define _rand
+#define _dsa
+#define _dh
+#define _aes
+#define _rc6
+#define _mars
+#define _serpent
+#define _twofish
+#define _cast256
+#define _camellia
+#define _speck128
+#define _simeck64
+#define _rsa
+#define _ecc
+#define _ntru
+#define _qtesla
+
 
 using namespace  std;
 using namespace CryptoPP;
