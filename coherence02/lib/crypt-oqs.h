@@ -196,10 +196,10 @@ int QTESLA_GEN(string& paramsq_,string& privkey, string& pubkey,string& error){
   public_key =  static_cast<uint8_t *>(malloc(sig->length_public_key));
   secret_key =  static_cast<uint8_t *>(malloc(sig->length_secret_key));
 
-  //#ifdef DEBUG
+  #ifdef DEBUG
   printf("length_public_key %d\n",sig->length_public_key );
   printf("length_secret_key %d\n",sig->length_secret_key );
-  //#endif
+  #endif
 
   if ((public_key == NULL) || (secret_key == NULL)) {
     error="ERROR: malloc failed";
