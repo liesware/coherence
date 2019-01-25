@@ -80,6 +80,7 @@ int PARSING(string& str_json, string& answ_js ){
   }
 
   //STRING//////////////////////////////////////////////////////////////////
+  #ifdef _sha3
   if(strncmp(req_val.algorithm.c_str(), "SHA3_512",sizeof("SHA3_512")) == 0){
     parse_hash(d,req_val,answ_js);
   }
@@ -92,6 +93,9 @@ int PARSING(string& str_json, string& answ_js ){
   else if(strncmp(req_val.algorithm.c_str(), "SHA3_224",sizeof("SHA3_224")) == 0){
     parse_hash(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _sha2
   else if(strncmp(req_val.algorithm.c_str(), "SHA_512",sizeof("SHA_512")) == 0){
     parse_hash(d,req_val,answ_js);
   }
@@ -107,36 +111,63 @@ int PARSING(string& str_json, string& answ_js ){
   else if(strncmp(req_val.algorithm.c_str(), "SHA_1",sizeof("SHA_1")) == 0){
     parse_hash(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _whirlpool
   else if(strncmp(req_val.algorithm.c_str(), "WHIRLPOOL",sizeof("WHIRLPOOL")) == 0){
     parse_hash(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _blake2b
   else if(strncmp(req_val.algorithm.c_str(), "BLAKE2B",sizeof("BLAKE2B")) == 0){
     parse_hash(d,req_val,answ_js);
   }
-  else if(strncmp(req_val.algorithm.c_str(), "POLY1305",sizeof("POLY1305")) == 0){
-    parse_poly(d,req_val,answ_js);
-  }
+  #endif
+
+  #ifdef _hmac
   else if(strncmp(req_val.algorithm.c_str(), "HMAC",sizeof("HMAC")) == 0){
     parse_hmac(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _cmac
   else if(strncmp(req_val.algorithm.c_str(), "CMAC",sizeof("CMAC")) == 0){
     parse_cmac(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _vmac
   else if(strncmp(req_val.algorithm.c_str(), "VMAC",sizeof("VMAC")) == 0){
     parse_vmac(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _poly1305
   else if(strncmp(req_val.algorithm.c_str(), "POLY1305",sizeof("POLY1305")) == 0){
     parse_poly(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _sosemanuk
   else if(strncmp(req_val.algorithm.c_str(), "SOSEMANUK",sizeof("SOSEMANUK")) == 0){
     parse_stream(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _salsa20
   else if(strncmp(req_val.algorithm.c_str(), "SALSA20",sizeof("SALSA20")) == 0){
     parse_stream(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _argon2
   else if(strncmp(req_val.algorithm.c_str(), "ARGON2",sizeof("ARGON2")) == 0){
     parse_argon2(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _rand
   else if(strncmp(req_val.algorithm.c_str(), "RAND_RP",sizeof("RAND_RP")) == 0){
     parse_rand(d,req_val,answ_js);
   }
@@ -146,42 +177,81 @@ int PARSING(string& str_json, string& answ_js ){
   else if(strncmp(req_val.algorithm.c_str(), "RAND_RDRAND",sizeof("RAND_RDRAND")) == 0){
     parse_rand(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _dsa
   else if(strncmp(req_val.algorithm.c_str(), "DSA",sizeof("DSA")) == 0){
     parse_dsa(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _dh
   else if(strncmp(req_val.algorithm.c_str(), "DH",sizeof("DH")) == 0){
     parse_dh(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _aes
   else if(strncmp(req_val.algorithm.c_str(), "AES",sizeof("AES")) == 0){
     parse_block(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _rc6
   else if(strncmp(req_val.algorithm.c_str(), "RC6",sizeof("RC6")) == 0){
     parse_block(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _mars
   else if(strncmp(req_val.algorithm.c_str(), "MARS",sizeof("MARS")) == 0){
     parse_block(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _serpent
   else if(strncmp(req_val.algorithm.c_str(), "SERPENT",sizeof("SERPENT")) == 0){
     parse_block(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _twofish
   else if(strncmp(req_val.algorithm.c_str(), "TWOFISH",sizeof("TWOFISH")) == 0){
     parse_block(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _cast256
   else if(strncmp(req_val.algorithm.c_str(), "CAST256",sizeof("CAST256")) == 0){
     parse_block(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _camellia
   else if(strncmp(req_val.algorithm.c_str(), "CAMELLIA",sizeof("CAMELLIA")) == 0){
     parse_block(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _speck128
   else if(strncmp(req_val.algorithm.c_str(), "SPECK128",sizeof("SPECK128")) == 0){
     parse_block(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _simeck64
   else if(strncmp(req_val.algorithm.c_str(), "SIMECK64",sizeof("SIMECK64")) == 0){
     parse_block(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _rsa
   else if(strncmp(req_val.algorithm.c_str(), "RSA",sizeof("RSA")) == 0){
     parse_rsa(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _ecc
   else if(strncmp(req_val.algorithm.c_str(), "ECC_GEN",sizeof("ECC_GEN")) == 0){
     parse_ec_gen(d,req_val,answ_js);
   }
@@ -194,12 +264,20 @@ int PARSING(string& str_json, string& answ_js ){
   else if(strncmp(req_val.algorithm.c_str(), "ECDH",sizeof("ECDH")) == 0){
     parse_ecdh(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _ntru
   else if(strncmp(req_val.algorithm.c_str(), "NTRU",sizeof("NTRU")) == 0){
     parse_ntru(d,req_val,answ_js);
   }
+  #endif
+
+  #ifdef _qtesla
   else if(strncmp(req_val.algorithm.c_str(), "QTESLA",sizeof("QTESLA")) == 0){
     parse_qtesla(d,req_val,answ_js);
   }
+  #endif
+
   else{
     req_val.error="Bad algorithm";
     req_val.tag="error";
