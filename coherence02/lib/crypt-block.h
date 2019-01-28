@@ -331,7 +331,7 @@ int parse_block(Document& d, stru_param& req_val, string& answ_js){
         if(check_ops(d,req_val,answ_js)!=0)
         return 1;
         if(strncmp(req_val.algorithm.c_str(), "SIMECK64",sizeof("SIMECK64")) == 0){
-          if(check_iv(d,req_val,answ_js,16))
+          if(check_iv(d,req_val,answ_js,16)!=0)
           return 1;
         }
         else{
@@ -360,7 +360,7 @@ int parse_block(Document& d, stru_param& req_val, string& answ_js){
         if(check_ops(d,req_val,answ_js)!=0)
         return 1;
         if(strncmp(req_val.algorithm.c_str(), "SIMECK64",sizeof("SIMECK64")) == 0){
-          if(check_iv(d,req_val,answ_js,16))
+          if(check_iv(d,req_val,answ_js,16)!=0)
           return 1;
         }
         else{
