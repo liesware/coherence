@@ -180,7 +180,7 @@ int parse_stream(Document& d, stru_param& req_val, string& answ_js){
         return 1;
       }
       else if(strncmp(req_val.algorithm.c_str(), "SALSA20",sizeof("SALSA20")) == 0){
-        if(check_iv(d,req_val,answ_js,16))
+        if(check_iv(d,req_val,answ_js,16)!=0)
         return 1;
       }
       else{
