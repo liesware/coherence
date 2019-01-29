@@ -98,6 +98,8 @@ Terminal 3
 * cd examples/ && sh all.sh
 
 ## Wiki
+[RTFW](https://en.wikipedia.org/wiki/RTFM)
+
 Please see https://github.com/liesware/coherence/wiki
 
 ## Target
