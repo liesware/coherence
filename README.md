@@ -71,6 +71,6 @@ All the versions before 1.0 are called Essence.
 
 liesware 4t liesware d0t com , only concise and well-reasoned feedback are welcome. please be critic with yourself before writing.
 
-## Webáge
+## Webpage
 
 [Link](https://coherence.liesware.com/)
