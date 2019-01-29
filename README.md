@@ -75,13 +75,15 @@ sending(data_js)
 We are getting SHA3-512 for "Hello world!" string.
 
 ## Examples 
+
+_You can use your favorite language, we are using python only for illustrative examples( your language needs to support TCP sockets
+and json format)._
+
 argon2.py  block.py  cmac.py  dh.py  dsa.py  ecc.py  hash.py  hmac.py  ntru.py  poly1305.py  qtesla.py  rand.py  rsa.py  stream.py  
 vmac.py
 
 The code is very simple and with basic programming knowledge you should be able to understand it. You only need to understand python 
 tcp sockets and json format.
-
-* You can use your favorite language, we are using python only for illustrative examples.
 
 ## Test
 on ~/coherence02/
