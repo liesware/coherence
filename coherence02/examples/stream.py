@@ -40,7 +40,7 @@ def common(data_js,key,iv):
 	del stream_js["hex"]
 	del stream_js["plaintext"]
 	stream_js["type"]="file"
-	stream_js["file"]="./bin/../file_test/Mayhem.txt"
+	stream_js["file"]="./../file_test/Mayhem.txt"
 	stream(json.dumps(stream_js))
 
 algorithms=["SOSEMANUK","SALSA20"]

@@ -34,7 +34,7 @@ for i in algorithms :
     hmac_js["family"]=i
     sending(json.dumps(hmac_js))
 
-data_js_f='{"version":1,"algorithm":"HMAC","type":"file","file":"./bin/../file_test/Mayhem.txt","family":"sha3_512"}'
+data_js_f='{"version":1,"algorithm":"HMAC","type":"file","file":"./../file_test/Mayhem.txt","family":"sha3_512"}'
 hmac_js=json.loads(data_js_f)
 hmac_js["key"]=binascii.b2a_hex(os.urandom(16))
 for i in algorithms:

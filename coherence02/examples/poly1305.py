@@ -29,5 +29,5 @@ sending(json.dumps(poly_js))
 del poly_js["hex"]
 del poly_js["plaintext"]
 poly_js["type"]="file"
-poly_js["file"]="./bin/../file_test/Mayhem.txt"
+poly_js["file"]="./../file_test/Mayhem.txt"
 sending(json.dumps(poly_js))

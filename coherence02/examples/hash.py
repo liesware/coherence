@@ -33,7 +33,7 @@ for i in algorithms:
     hash_js["algorithm"]=i
     sending(json.dumps(hash_js))
 
-data_js_f='{"version":1,"algorithm":"SHA3_512","type":"file","file":"./bin/../file_test/Mayhem.txt"}'
+data_js_f='{"version":1,"algorithm":"SHA3_512","type":"file","file":"./../file_test/Mayhem.txt"}'
 hash_js=json.loads(data_js_f)
 for i in algorithms:
     hash_js["algorithm"]=i

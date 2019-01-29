@@ -42,7 +42,7 @@ def common(data_js,key,iv):
 		del block_js["hex"]
 		del block_js["plaintext"]
 		block_js["type"]="file"
-		block_js["file"]="./bin/../file_test/Mayhem.txt"
+		block_js["file"]="./../file_test/Mayhem.txt"
 		block(json.dumps(block_js))
 
 
