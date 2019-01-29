@@ -59,8 +59,10 @@ on ~/coherence02/
 
 Terminal 1
 * watch python ps_mem.py -p $(pidof coherence)
+
 Terminal 2
 * cd bin/ && ./coherence 0.0.0.0 6613
+
 Terminal 3
 * cd examples/ && sh all.sh
 
