@@ -48,8 +48,9 @@ For Debian 9 dependencies:
 Now compile it:
 * wget https://raw.githubusercontent.com/liesware/coherence/master/install.sh
 * sh install.sh
+* Run this code
 
-'''python 
+```python 
 #!/usr/bin/env python
 
 import socket
@@ -70,7 +71,8 @@ def sending(message):
 
 data_js='{"version":1,"algorithm":"SHA3_512","type":"string","plaintext":"Hello world!"}'
 sending(data_js)
-'''
+```
+We are getting SHA3-512 for "Hello world!" string.
 
 ## Examples 
 argon2.py  block.py  cmac.py  dh.py  dsa.py  ecc.py  hash.py  hmac.py  ntru.py  poly1305.py  qtesla.py  rand.py  rsa.py  stream.py  
