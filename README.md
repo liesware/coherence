@@ -72,7 +72,7 @@ Please see https://github.com/liesware/coherence/wiki
 ## Target
 
 * Be cryptoserver (server dedicated for cryptography)
-* Improve security in L7 (Cryptography on L7)
+* Improve security in L7 (Cryptography for webapps)
 
 ## Version
 This is the version 0.7, all the versions in github  are even, odd versions are to develop , even versions  are to fix bugs.
