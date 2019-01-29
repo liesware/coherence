@@ -49,8 +49,32 @@ Now compile it:
 * wget https://raw.githubusercontent.com/liesware/coherence/master/install.sh
 * sh install.sh
 
+'''python 
+#!/usr/bin/env python
+
+import socket
+import json
+import os,binascii
+
+def sending(message):
+	ip = '127.0.0.1'
+	port = 6613
+	BUFFER_SIZE = 65536
+	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	s.connect((ip, port))
+	s.send(message)
+	data = s.recv(BUFFER_SIZE)
+        print data
+	s.close()
+	return data
+
+data_js='{"version":1,"algorithm":"SHA3_512","type":"string","plaintext":"Hello world!"}'
+sending(data_js)
+'''
+
 ## Examples 
-argon2.py  block.py  cmac.py  dh.py  dsa.py  ecc.py  hash.py  hmac.py  ntru.py  poly1305.py  qtesla.py  rand.py  rsa.py  stream.py  vmac.py
+argon2.py  block.py  cmac.py  dh.py  dsa.py  ecc.py  hash.py  hmac.py  ntru.py  poly1305.py  qtesla.py  rand.py  rsa.py  stream.py  
+vmac.py
 
 The code is very simple and with basic programming knowledge you should be able to understand it.
 
