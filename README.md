@@ -73,4 +73,4 @@ liesware 4t liesware d0t com , only concise and well-reasoned feedback are welco
 
 ## Webáge
 
-[Link(]https://coherence.liesware.com/)
+[Link](https://coherence.liesware.com/)
