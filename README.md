@@ -50,7 +50,7 @@ Now compile it:
 * sh install.sh
 
 ## Examples 
-testing.sh exec argon2.py, dh.py, dsa.py, ecc.py, hash.js, mac.js, rand.js, rsa.py, stream.py.
+argon2.py  block.py  cmac.py  dh.py  dsa.py  ecc.py  hash.py  hmac.py  ntru.py  poly1305.py  qtesla.py  rand.py  rsa.py  stream.py  vmac.py
 
 The code is very simple and with basic programming knowledge you should be able to understand it.
 
