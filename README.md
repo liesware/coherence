@@ -54,6 +54,16 @@ argon2.py  block.py  cmac.py  dh.py  dsa.py  ecc.py  hash.py  hmac.py  ntru.py  
 
 The code is very simple and with basic programming knowledge you should be able to understand it.
 
+## Test
+on ~/coherence02/
+
+Terminal 1
+* watch python ps_mem.py -p $(pidof coherence)
+Terminal 2
+* cd bin/ && ./coherence 0.0.0.0 6613
+Terminal 3
+* cd examples/ && sh all.sh
+
 ## Wiki
 Please see https://github.com/liesware/coherence/wiki
 
