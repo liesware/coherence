@@ -70,8 +70,8 @@ int check_poly(Document& d, stru_param& req_val, string& answ_js){
       #endif
       return 1;
     }
-    if(req_val.nonce.size()!=32 && req_val.key.size()!=32){
-      req_val.error+=" nonce/key size not 16 ";
+    if(req_val.nonce.size()!=32 || req_val.key.size()!=64){
+      req_val.error+=" nonce/key size not 16/32 ";
       req_val.tag="error";
       Addstr2json(answ_js, req_val.tag, req_val.error);
       #ifdef DEBUG
