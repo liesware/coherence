@@ -49,10 +49,10 @@ _If you are looking for Post-Quantum Cryptography, no standard features and so o
 ## Quickstart (Linux)
 
 For Centos 7 dependencies:
-* yum install glibc-static libstdc++-static autoconf automake gcc gcc-c++ make libtool git wget
+* yum install glibc-static libstdc++-static autoconf automake gcc gcc-c++ make libtool git wget unzip
 
 For Debian 9 dependencies:
-* apt-get install autoconf automake gcc g++ make libtool git wget
+* apt-get install autoconf automake gcc g++ make libtool git wget unzip
 
 Now compile it:
 * wget https://raw.githubusercontent.com/liesware/coherence/master/install.sh
