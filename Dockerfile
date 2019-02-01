@@ -1,4 +1,4 @@
-FROM stretch:latest
+FROM debian:stretch
 RUN apt-get install -y autoconf automake gcc g++ make libtool git wget unzip libssl-dev
 RUN wget https://raw.githubusercontent.com/liesware/coherence/experimental/install.sh
 RUN sh install.sh
