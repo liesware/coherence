@@ -47,10 +47,12 @@ features. In master branch we include Qtesla as previous feature from this branc
 ## Quickstart (Docker)
 
 * wget https://raw.githubusercontent.com/liesware/coherence/experimental/Dockerfile
-* docker build -t Coherence:latest .
-* docker run -p 6613:6613 -it  Coherence:latest /usr/bin/coherence 0.0.0.0 6613
+* docker build -t coherence:experimental .
+* docker run -p 6613:6613 -it  coherence:experimental /usr/bin/coherence 0.0.0.0 6613
 
 ## Quickstart (Linux)
+
+This version is based on Debian 9
 
 For Debian 9 dependencies:
 * apt-get install autoconf automake gcc g++ make libtool git wget
