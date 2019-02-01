@@ -2,7 +2,7 @@
 
 mkdir  coherence_git
 cd coherence_git
-git clone -branch expeimental https://github.com/liesware/coherence/
+git clone -b experimental https://github.com/liesware/coherence/
 cd coherence/coherence02/lib/
 
 git clone https://github.com/P-H-C/phc-winner-argon2
