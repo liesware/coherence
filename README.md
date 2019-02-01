@@ -39,7 +39,7 @@ Cohenrence is cryptographic server, it provides a TCP server whith an json inter
 
 ## Quickstart (Docker)
 
-* wget https://raw.githubusercontent.com/liesware/coherence/master/Dockerfile
+* wget https://raw.githubusercontent.com/liesware/coherence/experimental/Dockerfile
 * docker build -t Coherence:latest .
 * docker run -p 6613:6613 -it  Coherence:latest /usr/bin/coherence 0.0.0.0 6613
 
