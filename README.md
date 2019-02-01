@@ -19,7 +19,10 @@
 ## Abstract
 Cohenrence is cryptographic server, it provides a TCP server whith an json interface to perfom cryptographic operations. It helps you to create your own cryptographic protocols for modern web apps to protect data, for exmaple: data base encryption, digital signatures, file encryption.
 
+## This branch
 
+In this branch  we are integrating postquatum algorithms and homomorphic encryption, pairing based cryptography , as well as new 
+features. In master branch we include Qtesla as previous feature from this branch.
  
 ## Standard Features
 
