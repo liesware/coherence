@@ -21,7 +21,7 @@ Cohenrence is cryptographic server, it provides a TCP server whith an json inter
 
 
  
-## Features
+## Standard Features
 
 * Hash functions: SHA3, SHA2, SHA1, WHIRLPOOL, Blake2b.
 * Password-hashing function: Argon2
@@ -33,9 +33,11 @@ Cohenrence is cryptographic server, it provides a TCP server whith an json inter
 * DSA: Key generation, digital signature.
 * DH: Key generation, key exchange (rfc and custom parameters).
 * ECC: Key generation, ECIES, ECDSA, ECDH.
-* Post-Quantum Cryptography: NTRU, Qtesla.
+* Post-Quantum Cryptography: NTRU.
 
-**Be careful qtesla is not an standard yet and is experimental**
+## Experimental Features
+
+* Qtesla
 
 ## Quickstart (Docker)
 
@@ -45,14 +47,11 @@ Cohenrence is cryptographic server, it provides a TCP server whith an json inter
 
 ## Quickstart (Linux)
 
-For Centos 7 dependencies:
-* yum install glibc-static libstdc++-static autoconf automake gcc gcc-c++ make libtool git wget
-
 For Debian 9 dependencies:
 * apt-get install autoconf automake gcc g++ make libtool git wget
 
 Now compile it:
-* wget https://raw.githubusercontent.com/liesware/coherence/master/install.sh
+* wget https://raw.githubusercontent.com/liesware/coherence/experimental/install.sh
 * sh install.sh
 * Run this code
 
