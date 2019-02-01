@@ -35,9 +35,9 @@ Cohenrence is cryptographic server, it provides a TCP server whith an json inter
 * ECC: Key generation, ECIES, ECDSA, ECDH.
 * Post-Quantum Cryptography: NTRU, Qtesla.
 
-**Be careful qtesla is not an standard yet and is experimental**
+**Be careful qtesla is not an standard yet and is experimental, We are including Qtesla as previous feature from experimental branch**
 
-_If you are looking for Post-Quantum Cryptography, see experimental branch_
+_If you are looking for Post-Quantum Cryptography, no standard features and so on, please see experimental branch_
 
 ## Quickstart (Docker)
 
