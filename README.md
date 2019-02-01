@@ -37,6 +37,8 @@ Cohenrence is cryptographic server, it provides a TCP server whith an json inter
 
 **Be careful qtesla is not an standard yet and is experimental**
 
+_If you are looking for Post-Quantum Cryptography, see experimental branch_
+
 ## Quickstart (Docker)
 
 * wget https://raw.githubusercontent.com/liesware/coherence/master/Dockerfile
