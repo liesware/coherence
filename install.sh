@@ -34,9 +34,6 @@ git clone https://github.com/Tencent/rapidjson.git
 git clone https://github.com/open-quantum-safe/liboqs.git
 cd liboqs
 git checkout nist-branch
-autoreconf -i
-./configure
-make clean
 make
 
 cd ../../
