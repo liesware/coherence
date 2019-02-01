@@ -36,6 +36,6 @@ cd liboqs
 git checkout nist-branch
 make
 
-cd ../../
-mkdir bin
-make
+#cd ../../
+#mkdir bin
+#make
