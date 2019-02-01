@@ -118,6 +118,11 @@ This is the version 0.7, all the versions in github  are even, odd versions are 
 
 All the versions before 1.0 are called Essence.
 
+## Branches
+
+* Master: Stable and standard algorithms. 
+* Experimental: postquatum algorithms and homomorphic encryption, pairing based cryptography , as well as new features.
+
 ## Contact
 
 liesware 4t liesware d0t com , only concise and well-reasoned feedback are welcome. please be critic with yourself before writing.
