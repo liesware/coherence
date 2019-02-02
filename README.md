@@ -43,6 +43,7 @@ features. In master branch we include Qtesla as previous feature from this branc
 ## Experimental Features
 
 * Qtesla
+* Dilithium
 
 ## Quickstart (Docker)
 
