@@ -17,6 +17,8 @@ struct sockaddr_in addr;
 
 ofstream log_file;
 
+size_t coherence_size=4194304;
+
 ////////////////////////////////////////////////////////////////////////
 void banner(){
   printf("Welcome to Cryptoserver\n");
@@ -51,10 +53,10 @@ int ok_buff(const uv_buf_t *buf){
 }
 
 
-void alloc_buffer(uv_handle_t *handle, size_t suggested_size, uv_buf_t *buf) {
-  buf->base = (char*)malloc(suggested_size);
-  buf->len = suggested_size;
-  memset (buf->base,'\0',suggested_size);
+void alloc_buffer(uv_handle_t *handle, size_t coherence_size, uv_buf_t *buf) {
+  buf->base = (char*)malloc(coherence_size);
+  buf->len = coherence_size;
+  memset (buf->base,'\0',coherence_size);
 }
 
 void on_close(uv_handle_t* handle) {
