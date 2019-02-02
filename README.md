@@ -57,6 +57,7 @@ For Debian 9 dependencies:
 Now compile it:
 * wget https://raw.githubusercontent.com/liesware/coherence/master/install.sh
 * sh install.sh
+* cd coherence_git/coherence/coherence02/bin ; ./coherence 0.0.0.0 6613
 * Run this code
 
 ```python 
