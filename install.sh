@@ -37,5 +37,9 @@ git checkout nist-branch
 make
 
 cd ../../
+sh cp_libs.sh
 mkdir bin
 make
+
+
+
