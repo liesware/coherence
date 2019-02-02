@@ -83,7 +83,7 @@ int Isjson(string &str,string& error_str){
   k=0;
   for(i=0;i<str.size();i++){
     //      if (strchr("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890{}\"/:,_.-",str[i]) ||str[i]==' ')
-    if(strchr(" !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",str[i]) ||str[i]==' ')
+    if(strchr(" !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",str[i]) ||str[i]==' ' ||str[i]=='\n')
     k++;
     else{
       error_str.clear();
