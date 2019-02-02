@@ -57,9 +57,12 @@ This version is based on Debian 9
 For Debian 9 dependencies:
 * apt-get install autoconf automake gcc g++ make libtool git wget unzip xsltproc libssl-dev
 
+_This version is compiled with dynamic libs, so install.sh runs cp_libs.sh to copy the libs to /usr/lib/x86_64-linux-gnu/_
+
 Now compile it:
 * wget https://raw.githubusercontent.com/liesware/coherence/experimental/install.sh
 * sh install.sh
+* cd coherence_git/coherence/coherence02/bin ; ./coherence 0.0.0.0 6613
 * Run this code
 
 ```python 
