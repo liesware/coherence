@@ -29,6 +29,7 @@
 #define _ecc
 #define _ntru
 #define _qtesla
+#define _dilithium
 
 
 using namespace  std;
