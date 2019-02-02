@@ -66,11 +66,13 @@ int QTESLA_V(string& payload,string& pubkey, string& sign, string& verify,int& b
     return 1;
   }
 
-  public_key = static_cast<uint8_t *>(malloc(sig->length_public_key));
-  signature = static_cast<uint8_t *>(malloc(sig->length_signature));
-  message = static_cast<uint8_t *>(malloc(payload_e.size()));
-  size_t message_len = payload_e.size();
-  signature_len=sig->length_signature;
+  public_key = malloc(sig->length_public_key);
+  signature = malloc(payload_e.size()+sig->length_sig_overhead);
+  message = malloc(payload_e.size()+sig->length_sig_overhead);
+  //size_t message_len = payload_e.size();
+  size_t message_len;
+
+  signature_len=payload_e.size()+sig->length_sig_overhead;
 
   if ((signature == NULL) || (public_key == NULL)|| (message == NULL)) {
     error="ERROR: malloc failed";
@@ -83,15 +85,15 @@ int QTESLA_V(string& payload,string& pubkey, string& sign, string& verify,int& b
     return 1;
   }
   StringSource(sign, true, new HexDecoder(new StringSink(sign_bin)));
-  if(sign_bin.size()!=sig->length_signature){
+  if(sign_bin.size()!=payload_e.size()+sig->length_sig_overhead){
     error="Bad sign size";
     return 1;
   }
   memcpy(public_key, pub_bin.data(),sig->length_public_key);
-  memcpy(signature, sign_bin.data(),sig->length_signature);
-  memcpy(message,payload_e.data(),sizeof message );
+  memcpy(signature, sign_bin.data(),payload_e.size()+sig->length_sig_overhead);
+  //memcpy(message,payload_e.data(),sizeof message );
 
-  rc = OQS_SIG_verify(sig, message, message_len, signature, signature_len, public_key);
+  rc = OQS_SIG_sign_open(sig, message, &message_len, signature, signature_len, public_key);
   //rc= OQS_SIG_qTESLA_I_verify(message, message_len, signature, signature_len, public_key);
   if (rc != OQS_SUCCESS) {
     error+="ERROR: OQS_SIG_verify failed";
@@ -137,9 +139,9 @@ int QTESLA_SIGN(string& payload,string& privkey, string& sign, int& binary, stri
     return 1;
   }
 
-  secret_key = static_cast<uint8_t *>(malloc(sig->length_secret_key));
-  signature = static_cast<uint8_t *>(malloc(sig->length_signature));
-  message = static_cast<uint8_t *>(malloc(payload_e.size()));
+  secret_key = malloc(sig->length_secret_key);
+  signature = malloc(payload_e.size()+sig->length_sig_overhead);
+  message = malloc(payload_e.size());
   size_t message_len = payload_e.size();
 
   if ((signature == NULL) || (secret_key == NULL)|| (message == NULL)) {
