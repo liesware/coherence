@@ -44,6 +44,32 @@ int search_oqs_param_(Document& d, stru_param& req_val, string& answ_js){
         return 1;
       }
     }
+    else if(strncmp(req_val.algorithm.c_str(), "PICNIC",sizeof("PICNIC"))== 0){
+
+      if(strncmp(req_val.parameter.c_str(), "picnicl1fs",sizeof("picnicl1fs")) == 0){
+        req_val.paramsq_="picnic_L1_FS";
+      }
+      else if(strncmp(req_val.parameter.c_str(), "picnicl1ur",sizeof("picnicl1ur")) == 0){
+        req_val.paramsq_="picnic_L1_UR";
+      }
+      else if(strncmp(req_val.parameter.c_str(), "picnicl3fs",sizeof("picnicl3fs")) == 0){
+        req_val.paramsq_="picnic_L3_FS";
+      }
+      else if(strncmp(req_val.parameter.c_str(), "picnicl3ur",sizeof("picnicl3ur")) == 0){
+        req_val.paramsq_="picnic_L3_UR";
+      }
+      else if(strncmp(req_val.parameter.c_str(), "picnicl5fs",sizeof("picnicl5fs")) == 0){
+        req_val.paramsq_="picnic_L5_FS";
+      }
+      else if(strncmp(req_val.parameter.c_str(), "picnicl5ur",sizeof("picnicl5ur")) == 0){
+        req_val.paramsq_="picnic_L5_UR";
+      }
+      else{
+        req_val.error="Bad parameter Picnic ";
+        answ_error(req_val,answ_js);
+        return 1;
+      }
+    }
     else{
       req_val.error.clear();
       req_val.error="Bad algorithm";

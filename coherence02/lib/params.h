@@ -30,6 +30,7 @@
 #define _ntru
 #define _qtesla
 #define _dilithium
+#define _picnic
 
 
 using namespace  std;
