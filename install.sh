@@ -35,7 +35,7 @@ git clone https://github.com/open-quantum-safe/liboqs.git
 cd liboqs
 git checkout master
 autoreconf -i
-./configure
+ ./configure --disable-sig-picnic --disable-kem-frodokem --disable-kem-sike --disable-kem-newhope --disable-kem-kyber --disable-sig-picnic
 make clean
 make
 
