@@ -1,6 +1,6 @@
 FROM debian:stretch
 VOLUME ["/coherence_git"]
-RUN apt.get update
+RUN apt.get update -y
 RUN apt-get install -y autoconf automake gcc g++ make libtool git wget unzip libssl-dev
 RUN wget https://raw.githubusercontent.com/liesware/coherence/experimental/install.sh
 RUN sh install.sh
