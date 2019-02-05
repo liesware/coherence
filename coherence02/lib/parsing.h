@@ -280,18 +280,6 @@ int PARSING(string& str_json, string& answ_js ){
   }
   #endif
 
-  #ifdef _dilithium
-  else if(strncmp(req_val.algorithm.c_str(), "DILITHIUM",sizeof("DILITHIUM")) == 0){
-    parse_oqs_sign(d,req_val,answ_js);
-  }
-  #endif
-
-  #ifdef _picnic
-  else if(strncmp(req_val.algorithm.c_str(), "PICNIC",sizeof("PICNIC")) == 0){
-    parse_oqs_sign(d,req_val,answ_js);
-  }
-  #endif
-
   else{
     req_val.error="Bad algorithm";
     req_val.tag="error";
