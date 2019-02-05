@@ -5,43 +5,29 @@
 #include "oqs/oqs.h"
 
 
-int search_oqs_param_(Document& d, stru_param& req_val, string& answ_js){
+int search_qtesla_param_(Document& d, stru_param& req_val, string& answ_js){
   if(d.HasMember("parameter")){
     if(check_params(d,req_val,answ_js)!=0)
     return 1;
 
-    if(strncmp(req_val.algorithm.c_str(), "QTESLA",sizeof("QTESLA"))== 0){
-
-      if(strncmp(req_val.parameter.c_str(), "qteslai",sizeof("qteslai")) == 0){
-        req_val.paramsq_="qTESLA_I";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "qteslaiiisize",sizeof("qteslaiiisize")) == 0){
-        req_val.paramsq_="qTESLA_III_size";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "qteslaiiispeed",sizeof("qteslaiiispeed")) == 0){
-        req_val.paramsq_="qTESLA_III_speed";
-      }
-      else{
-        req_val.error="Bad parameter Qtesla ";
-        answ_error(req_val,answ_js);
-        return 1;
-      }
+    if(strncmp(req_val.parameter.c_str(), "qteslai",sizeof("qteslai")) == 0){
+      req_val.paramsq_="qTESLA_I";
+    }
+    else if(strncmp(req_val.parameter.c_str(), "qteslaiiisize",sizeof("qteslaiiisize")) == 0){
+      req_val.paramsq_="qTESLA_III_size";
+    }
+    else if(strncmp(req_val.parameter.c_str(), "qteslaiiispeed",sizeof("qteslaiiispeed")) == 0){
+      req_val.paramsq_="qTESLA_III_speed";
     }
     else{
-      req_val.error.clear();
-      req_val.error="Bad algorithm";
-      req_val.tag="error";
-      Addstr2json(answ_js, req_val.tag, req_val.error);
-      #ifdef DEBUG
-      cerr << req_val.error;
-      #endif
+      req_val.error="Bad parameter ";
+      answ_error(req_val,answ_js);
       return 1;
     }
-
   }
   else{
     req_val.error.clear();
-    req_val.error="Not parameter for algorithm";
+    req_val.error="Not parameter for QTESLA";
     req_val.tag="error";
     Addstr2json(answ_js, req_val.tag, req_val.error);
     #ifdef DEBUG
@@ -52,7 +38,7 @@ int search_oqs_param_(Document& d, stru_param& req_val, string& answ_js){
   return 0;
 }
 ////////////////////////////////////////////////////////////////////////////////
-int OQS_SIGN_V(string& payload,string& pubkey, string& sign, string& verify,int& binary, string& paramsq_ ,string& error ){
+int QTESLA_V(string& payload,string& pubkey, string& sign, string& verify,int& binary, string& paramsq_ ,string& error ){
   error.clear();
   string pub_bin, payload_e, sign_bin;
   int i=0;
@@ -80,13 +66,11 @@ int OQS_SIGN_V(string& payload,string& pubkey, string& sign, string& verify,int&
     return 1;
   }
 
-  public_key = malloc(sig->length_public_key);
-  signature = malloc(payload_e.size()+sig->length_sig_overhead);
-  message = malloc(payload_e.size()+sig->length_sig_overhead);
-  //size_t message_len = payload_e.size();
-  size_t message_len;
-
-  signature_len=payload_e.size()+sig->length_sig_overhead;
+  public_key = static_cast<uint8_t *>(malloc(sig->length_public_key));
+  signature = static_cast<uint8_t *>(malloc(sig->length_signature));
+  message = static_cast<uint8_t *>(malloc(payload_e.size()));
+  size_t message_len = payload_e.size();
+  signature_len=sig->length_signature;
 
   if ((signature == NULL) || (public_key == NULL)|| (message == NULL)) {
     error="ERROR: malloc failed";
@@ -99,22 +83,22 @@ int OQS_SIGN_V(string& payload,string& pubkey, string& sign, string& verify,int&
     return 1;
   }
   StringSource(sign, true, new HexDecoder(new StringSink(sign_bin)));
-  if(sign_bin.size()!=payload_e.size()+sig->length_sig_overhead){
+  if(sign_bin.size()!=sig->length_signature){
     error="Bad sign size";
     return 1;
   }
   memcpy(public_key, pub_bin.data(),sig->length_public_key);
-  memcpy(signature, sign_bin.data(),payload_e.size()+sig->length_sig_overhead);
-  //memcpy(message,payload_e.data(),sizeof message );
+  memcpy(signature, sign_bin.data(),sig->length_signature);
+  memcpy(message,payload_e.data(),sizeof message );
 
-  rc = OQS_SIG_sign_open(sig, message, &message_len, signature, signature_len, public_key);
+  rc = OQS_SIG_verify(sig, message, message_len, signature, signature_len, public_key);
   //rc= OQS_SIG_qTESLA_I_verify(message, message_len, signature, signature_len, public_key);
   if (rc != OQS_SUCCESS) {
     error+="ERROR: OQS_SIG_verify failed";
     return 1;
   }
   //printf("%s",signature);
-  verify="OQS_OK" ;
+  verify="QTESLA_OK" ;
 
   OQS_MEM_insecure_free(public_key);
   OQS_MEM_insecure_free(message);
@@ -124,7 +108,7 @@ int OQS_SIGN_V(string& payload,string& pubkey, string& sign, string& verify,int&
  return 0;
 }
 
-int OQS_SIGN_SIGN(string& payload,string& privkey, string& sign, int& binary, string& paramsq_ ,string& error ){
+int QTESLA_SIGN(string& payload,string& privkey, string& sign, int& binary, string& paramsq_ ,string& error ){
   error.clear();
   sign.clear();
   string priv_bin, payload_e;
@@ -153,9 +137,9 @@ int OQS_SIGN_SIGN(string& payload,string& privkey, string& sign, int& binary, st
     return 1;
   }
 
-  secret_key = malloc(sig->length_secret_key);
-  signature = malloc(payload_e.size()+sig->length_sig_overhead);
-  message = malloc(payload_e.size());
+  secret_key = static_cast<uint8_t *>(malloc(sig->length_secret_key));
+  signature = static_cast<uint8_t *>(malloc(sig->length_signature));
+  message = static_cast<uint8_t *>(malloc(payload_e.size()));
   size_t message_len = payload_e.size();
 
   if ((signature == NULL) || (secret_key == NULL)|| (message == NULL)) {
@@ -194,7 +178,7 @@ int OQS_SIGN_SIGN(string& payload,string& privkey, string& sign, int& binary, st
 }
 
 
-int OQS_SIGN_GEN(string& paramsq_,string& privkey, string& pubkey,string& error){
+int QTESLA_GEN(string& paramsq_,string& privkey, string& pubkey,string& error){
   privkey.clear();
   pubkey.clear();
   error.clear();
@@ -260,7 +244,7 @@ int OQS_SIGN_GEN(string& paramsq_,string& privkey, string& pubkey,string& error)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-int parse_oqs_sign_v(Document& d, stru_param& req_val, string& answ_js){
+int parse_qtesla_v(Document& d, stru_param& req_val, string& answ_js){
   if(d.HasMember("type") ){
     if(check_type(d,req_val,answ_js)!=0)
     return 1;
@@ -291,7 +275,7 @@ int parse_oqs_sign_v(Document& d, stru_param& req_val, string& answ_js){
     }
   }
   else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
-    req_val.error="OQS file sign not supported ";
+    req_val.error="Qtesla file sign not supported ";
     answ_error(req_val,answ_js);
     return 1;
   }
@@ -301,12 +285,12 @@ int parse_oqs_sign_v(Document& d, stru_param& req_val, string& answ_js){
     return 1;
   }
 
-  OQS_SIGN_V(req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.paramsq_,req_val.error);
+  QTESLA_V(req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.paramsq_,req_val.error);
   verify_anws(req_val,answ_js);
   return 0;
 }
 
-int parse_oqs_sign_sign(Document& d, stru_param& req_val, string& answ_js){
+int parse_qtesla_sign(Document& d, stru_param& req_val, string& answ_js){
   if(d.HasMember("type") ){
     if(check_type(d,req_val,answ_js)!=0)
     return 1;
@@ -335,7 +319,7 @@ int parse_oqs_sign_sign(Document& d, stru_param& req_val, string& answ_js){
     }
   }
   else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
-    req_val.error="OQS file sign not supported ";
+    req_val.error="Qtesla file sign not supported ";
     answ_error(req_val,answ_js);
     return 1;
   }
@@ -345,14 +329,14 @@ int parse_oqs_sign_sign(Document& d, stru_param& req_val, string& answ_js){
     return 1;
   }
 
-  OQS_SIGN_SIGN(req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.paramsq_,req_val.error);
+  QTESLA_SIGN(req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.paramsq_,req_val.error);
   sign_anws(req_val,answ_js);
 
   return 0;
 }
 
-int parse_oqs_sign_gen(Document& d, stru_param& req_val, string& answ_js){
-  OQS_SIGN_GEN(req_val.paramsq_, req_val.privkey, req_val.pubkey, req_val.error);
+int parse_qtesla_gen(Document& d, stru_param& req_val, string& answ_js){
+  QTESLA_GEN(req_val.paramsq_, req_val.privkey, req_val.pubkey, req_val.error);
 
   req_val.tag.clear();
   req_val.tag="algorithm";
@@ -374,9 +358,9 @@ int parse_oqs_sign_gen(Document& d, stru_param& req_val, string& answ_js){
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-int parse_oqs_sign(Document& d, stru_param& req_val, string& answ_js) {
+int parse_qtesla(Document& d, stru_param& req_val, string& answ_js) {
   #ifdef DEBUG
-  printf("Good algorithm OQS SIGN ");
+  printf("Good algorithm QTESLA ");
   #endif
 
   if(d.HasMember("operation")){
@@ -392,7 +376,7 @@ int parse_oqs_sign(Document& d, stru_param& req_val, string& answ_js) {
   if(d.HasMember("parameter")){
     if(check_params(d,req_val,answ_js)!=0)
     return 1;
-    if(search_oqs_param_(d,req_val,answ_js)!=0)
+    if(search_qtesla_param_(d,req_val,answ_js)!=0)
     return 1;
   }
   else{
@@ -409,11 +393,11 @@ int parse_oqs_sign(Document& d, stru_param& req_val, string& answ_js) {
   OQS_randombytes_switch_algorithm(OQS_RAND_alg_system);
 
   if(strncmp(req_val.operation.c_str(), "gen",sizeof("gen")) == 0)
-  parse_oqs_sign_gen(d, req_val,answ_js);
+  parse_qtesla_gen(d, req_val,answ_js);
   else if(strncmp(req_val.operation.c_str(), "sign",sizeof("sign")) == 0)
-  parse_oqs_sign_sign(d, req_val,answ_js);
+  parse_qtesla_sign(d, req_val,answ_js);
   else if(strncmp(req_val.operation.c_str(), "verify",sizeof("verify")) == 0)
-  parse_oqs_sign_v(d, req_val,answ_js);
+  parse_qtesla_v(d, req_val,answ_js);
   else{
     req_val.error="Not ops valid ";
     answ_error(req_val,answ_js);
