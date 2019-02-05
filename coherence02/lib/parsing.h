@@ -41,6 +41,8 @@ int parse_log(stru_info_log& log_info,string& log_js){
   stream<<"{ \"ip\":\""<<log_info.ip<<"\",";
   stream<<"\"timestamp\":"<<log_info.timestamp<<",";
   stream<<"\"exec_time\":"<<log_info.exec_time<<",";
+  stream<<"\"total_read\":"<<log_info.total_read<<",";
+  stream<<"\"total_write\":"<<log_info.total_write<<",";
   stream<<"\"req\":"<<log_info.req<<",";
   stream<<"\"answ\":"<<log_info.answ<<"}";
 
@@ -274,7 +276,19 @@ int PARSING(string& str_json, string& answ_js ){
 
   #ifdef _qtesla
   else if(strncmp(req_val.algorithm.c_str(), "QTESLA",sizeof("QTESLA")) == 0){
-    parse_qtesla(d,req_val,answ_js);
+    parse_oqs_sign(d,req_val,answ_js);
+  }
+  #endif
+
+  #ifdef _dilithium
+  else if(strncmp(req_val.algorithm.c_str(), "DILITHIUM",sizeof("DILITHIUM")) == 0){
+    parse_oqs_sign(d,req_val,answ_js);
+  }
+  #endif
+
+  #ifdef _picnic
+  else if(strncmp(req_val.algorithm.c_str(), "PICNIC",sizeof("PICNIC")) == 0){
+    parse_oqs_sign(d,req_val,answ_js);
   }
   #endif
 

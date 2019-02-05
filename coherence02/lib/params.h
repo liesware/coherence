@@ -29,6 +29,8 @@
 #define _ecc
 #define _ntru
 #define _qtesla
+#define _dilithium
+#define _picnic
 
 
 using namespace  std;
@@ -38,6 +40,8 @@ typedef struct info_log{
   string ip;
   int timestamp;
   float exec_time;
+  int total_read;
+  int total_write;
   string req;
   string answ;
   string error;
