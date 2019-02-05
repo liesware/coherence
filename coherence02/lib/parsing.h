@@ -276,7 +276,7 @@ int PARSING(string& str_json, string& answ_js ){
 
   #ifdef _qtesla
   else if(strncmp(req_val.algorithm.c_str(), "QTESLA",sizeof("QTESLA")) == 0){
-    parse_oqs_sign(d,req_val,answ_js);
+    parse_qtesla(d,req_val,answ_js);
   }
   #endif
 
