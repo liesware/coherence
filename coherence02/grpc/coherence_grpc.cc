@@ -6,6 +6,7 @@
 #include <thread>
 
 #include <time.h>
+#include <arpa/inet.h>
 
 #include <grpcpp/grpcpp.h>
 #include <grpc/support/log.h>
@@ -97,6 +98,7 @@ void coherence_start(string& request, string& answer){
   string log_js="{}";
   parse_log(log_info, log_js);
   cout<<log_js<<endl;
+  log_js.clear();
 
   return;
 }
@@ -108,7 +110,7 @@ class ServerImpl final {
     cq_->Shutdown();
   }
 
-  void Run() {
+  void Run(string addr) {
     std::string key;
     std::string cert;
     std::string root;
@@ -122,7 +124,7 @@ class ServerImpl final {
     sslOps.pem_root_certs = root;
     sslOps.pem_key_cert_pairs.push_back ( keycert );
 
-    std::string server_address("0.0.0.0:6613");
+    std::string server_address(addr.c_str());
 
     ServerBuilder builder;
     builder.AddListeningPort(server_address, grpc::SslServerCredentials( sslOps ));
@@ -198,8 +200,32 @@ class ServerImpl final {
 };
 
 int main(int argc, char** argv) {
+  if(argc!=3){
+    printf(" IP PORT \n");
+    return 1;
+  }
+
+  char str[INET_ADDRSTRLEN];
+  unsigned short str2;
+  struct sockaddr_in sa;
+  inet_pton(AF_INET, argv[1], &(sa.sin_addr));
+  inet_ntop(AF_INET, &(sa.sin_addr), str, INET_ADDRSTRLEN);
+
+  str2=(unsigned short) atoi(argv[2]);
+  string addr,port;
+  if (str2<0 && str2>65535){
+    cout<<"Bad addr IP PORT"<<endl;
+    return 1;
+  }
+
+  port=to_string(str2);
+
+  addr.append(str);
+  addr.append(":");
+  addr.append(port);
+
   ServerImpl server;
-  server.Run();
+  server.Run(addr);
 
   return 0;
 }
