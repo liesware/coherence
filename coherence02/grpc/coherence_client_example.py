@@ -14,7 +14,7 @@ logging.basicConfig()
 def sending(data):
     with open('ca.crt', 'rb') as f:
         creds = grpc.ssl_channel_credentials(f.read())
-        channel = grpc.secure_channel('localhost:6845', creds)
+        channel = grpc.secure_channel('localhost:6613', creds)
         stub = coherence_pb2_grpc.coherence_offloadStub(channel)
         response = stub.coherence_js(coherence_pb2.coherence_req(req=data))
     return response.answ
