@@ -7,4 +7,4 @@ cp lib/liboqs/.libs/liboqs.so.0.0.0 /lib64/liboqs.so.0
 ls -lha /lib64/libuv.so.1
 ls -lha /lib64/libcryptopp.so.8
 ls -lha /lib64/libntru.so
-ls -lha /lib64/liboqs.so
+ls -lha /lib64/liboqs.so.0
