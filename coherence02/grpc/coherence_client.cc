@@ -60,10 +60,6 @@ class CoherenceClient {
 };
 
 int main(int argc, char** argv) {
-  // Instantiate the client. It requires a channel, out of which the actual RPCs
-  // are created. This channel models a connection to an endpoint (in this case,
-  // localhost at port 50051). We indicate that the channel isn't authenticated
-  // (use of InsecureChannelCredentials()).
   //CoherenceClient greeter(grpc::CreateChannel("localhost:6613", grpc::InsecureChannelCredentials()));
 
   std::string key;
