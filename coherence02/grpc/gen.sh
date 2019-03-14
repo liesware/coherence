@@ -16,3 +16,5 @@ openssl rsa  -in server.key -out server.key
 openssl genrsa -out client.key 2048
 openssl req  -new -key client.key -out client.csr -subj  "/C=LI/ST=Liesland/L=Lies/O=Test/OU=Client/CN=localhost"
 openssl x509  -req -days 365 -in client.csr -CA ca.crt -CAkey ca.key -set_serial 01 -out client.crt
+
+python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. coherence.proto
