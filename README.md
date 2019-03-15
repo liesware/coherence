@@ -125,6 +125,10 @@ Current version Essence.
 * Master: Stable and standard algorithms. 
 * Experimental: postquatum algorithms and homomorphic encryption, pairing based cryptography , as well as new features.
 
+## Bugs
+
+Through Github
+
 ## Contact
 
 liesware 4t liesware d0t com , only concise and well-reasoned feedback are welcome. please be critic with yourself before writing.
