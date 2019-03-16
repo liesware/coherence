@@ -19,7 +19,7 @@
 ## Abstract
 Coherence is cryptoserver, operating at layer 4, implemented as TCP non-blocking server with a JSON interface which aims to be adopted inside first but not limited to web apps in order to reduce data breaches. It focus on interoperability, flexibility and  simplicity. The interface is inspired by web APIs, but being HTTP-less. The interface performs and offloads cryptographic operations, for example some of the algorithms implemented are AES and AES candidates, Sosemanuk, SHA* family, HMAC, DH, RSA, DSA, ECC, NTRU.
 
-**Offloading cryptography to protect datahy**
+**Offloading cryptography to protect data**
 
  
 ## Features
