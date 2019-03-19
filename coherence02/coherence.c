@@ -35,6 +35,8 @@ int ok_buff(const uv_buf_t *buf){
   int len_buff=strlen(buf->base);
   char cp_buff[len_buff];
   memcpy( cp_buff, buf->base, len_buff );
+  if((strchr("{",cp_buff[0]) && strchr("}",cp_buff[len_buff-1]))==NULL)
+  return 1;
   int i,k=0;
   for(i=0;i<len_buff;i++){
     if (!(isalnum(cp_buff[i]) || cp_buff[i]==' '|| strchr("!\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~",cp_buff[i]) || cp_buff[i]=='\n')){
@@ -96,7 +98,6 @@ void on_read(uv_stream_t *client, ssize_t nread, const uv_buf_t *buf) {
   //if(global_buf[strlen(global_buf)-1]=='\n' || global_buf[strlen(global_buf)-1]=='}' || nread == UV_EOF ){
     #ifdef DEBUG
     fprintf(stderr, "Procesing client request\n");
-    fprintf(stderr, "Total read:    %d\n", total_read);
     printf("Global_buf %s\n", global_buf);
     #endif
 
