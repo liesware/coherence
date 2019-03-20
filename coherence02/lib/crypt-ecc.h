@@ -18,6 +18,9 @@
 #include "cryptopp/oids.h"
 #include "cryptopp/osrng.h"
 #include "cryptopp/eccrypto.h"
+#include "cryptopp/sha3.h"
+#include "cryptopp/sha.h"
+#include "cryptopp/whrlpool.h"
 
 using namespace CryptoPP;
 using namespace  std;
@@ -668,6 +671,34 @@ int parse_ecdsa_sign(Document& d, stru_param& req_val, string& answ_js){
       ECDSA_SIGN <ECDSA<ECP, SHA3_256>::PrivateKey, ECDSA<ECP,SHA3_256>::Signer>
       (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
     }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha3_224",sizeof("sha3_224")) == 0){
+      ECDSA_SIGN <ECDSA<ECP, SHA3_224>::PrivateKey, ECDSA<ECP,SHA3_224>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_512",sizeof("sha_512")) == 0){
+      ECDSA_SIGN <ECDSA<ECP, SHA512>::PrivateKey, ECDSA<ECP,SHA512>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_384",sizeof("sha_384")) == 0){
+      ECDSA_SIGN <ECDSA<ECP, SHA384>::PrivateKey, ECDSA<ECP,SHA384>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_256",sizeof("sha_256")) == 0){
+      ECDSA_SIGN <ECDSA<ECP, SHA256>::PrivateKey, ECDSA<ECP,SHA256>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_224",sizeof("sha_224")) == 0){
+      ECDSA_SIGN <ECDSA<ECP, SHA224>::PrivateKey, ECDSA<ECP,SHA224>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_1",sizeof("sha_1")) == 0){
+      ECDSA_SIGN <ECDSA<ECP, SHA1>::PrivateKey, ECDSA<ECP,SHA1>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "whirlpool",sizeof("whirlpool")) == 0){
+      ECDSA_SIGN <ECDSA<ECP, Whirlpool>::PrivateKey, ECDSA<ECP,Whirlpool>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
     else{
       req_val.error="Bad hash sign algorithm ";
       answ_error(req_val,answ_js);
@@ -685,6 +716,34 @@ int parse_ecdsa_sign(Document& d, stru_param& req_val, string& answ_js){
     }
     else if(strncmp(req_val.hash_sign.c_str(), "sha3_256",sizeof("sha3_256")) == 0){
       ECDSA_SIGN <ECDSA<EC2N, SHA3_256>::PrivateKey, ECDSA<EC2N,SHA3_256>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha3_224",sizeof("sha3_224")) == 0){
+      ECDSA_SIGN <ECDSA<EC2N, SHA3_224>::PrivateKey, ECDSA<EC2N,SHA3_224>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_512",sizeof("sha_512")) == 0){
+      ECDSA_SIGN <ECDSA<EC2N, SHA512>::PrivateKey, ECDSA<EC2N,SHA512>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_384",sizeof("sha_384")) == 0){
+      ECDSA_SIGN <ECDSA<EC2N, SHA384>::PrivateKey, ECDSA<EC2N,SHA384>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_256",sizeof("sha_256")) == 0){
+      ECDSA_SIGN <ECDSA<EC2N, SHA256>::PrivateKey, ECDSA<EC2N,SHA256>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_224",sizeof("sha_224")) == 0){
+      ECDSA_SIGN <ECDSA<EC2N, SHA224>::PrivateKey, ECDSA<EC2N,SHA224>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_1",sizeof("sha_1")) == 0){
+      ECDSA_SIGN <ECDSA<EC2N, SHA1>::PrivateKey, ECDSA<EC2N,SHA1>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "whirlpool",sizeof("whirlpool")) == 0){
+      ECDSA_SIGN <ECDSA<EC2N, Whirlpool>::PrivateKey, ECDSA<EC2N,Whirlpool>::Signer>
       (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
     }
     else{
@@ -772,6 +831,34 @@ int parse_ecdsa_v(Document& d, stru_param& req_val, string& answ_js){
       ECDSA_V<ECDSA<ECP, SHA3_256>::PublicKey, ECDSA<ECP,SHA3_256>::Verifier>
       (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
     }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha3_224",sizeof("sha3_224")) == 0){
+      ECDSA_V<ECDSA<ECP, SHA3_224>::PublicKey, ECDSA<ECP,SHA3_224>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_512",sizeof("sha_512")) == 0){
+      ECDSA_V<ECDSA<ECP, SHA512>::PublicKey, ECDSA<ECP,SHA512>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_384",sizeof("sha_384")) == 0){
+      ECDSA_V<ECDSA<ECP, SHA384>::PublicKey, ECDSA<ECP,SHA384>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_256",sizeof("sha_256")) == 0){
+      ECDSA_V<ECDSA<ECP, SHA256>::PublicKey, ECDSA<ECP,SHA256>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_224",sizeof("sha_224")) == 0){
+      ECDSA_V<ECDSA<ECP, SHA224>::PublicKey, ECDSA<ECP,SHA224>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_1",sizeof("sha_1")) == 0){
+      ECDSA_V<ECDSA<ECP, SHA1>::PublicKey, ECDSA<ECP,SHA1>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "whirlpool",sizeof("whirlpool")) == 0){
+      ECDSA_V<ECDSA<ECP, Whirlpool>::PublicKey, ECDSA<ECP,Whirlpool>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
     else{
       req_val.error="Bad hash sign algorithm ";
       answ_error(req_val,answ_js);
@@ -790,6 +877,34 @@ int parse_ecdsa_v(Document& d, stru_param& req_val, string& answ_js){
     }
     else if(strncmp(req_val.hash_sign.c_str(), "sha3_256",sizeof("sha3_256")) == 0){
       ECDSA_V<ECDSA<EC2N, SHA3_256>::PublicKey, ECDSA<EC2N,SHA3_256>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha3_224",sizeof("sha3_224")) == 0){
+      ECDSA_V<ECDSA<EC2N, SHA3_224>::PublicKey, ECDSA<EC2N,SHA3_224>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_512",sizeof("sha_512")) == 0){
+      ECDSA_V<ECDSA<EC2N, SHA512>::PublicKey, ECDSA<EC2N,SHA512>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_384",sizeof("sha_384")) == 0){
+      ECDSA_V<ECDSA<EC2N, SHA384>::PublicKey, ECDSA<EC2N,SHA384>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_256",sizeof("sha_256")) == 0){
+      ECDSA_V<ECDSA<EC2N, SHA256>::PublicKey, ECDSA<EC2N,SHA256>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_224",sizeof("sha_224")) == 0){
+      ECDSA_V<ECDSA<EC2N, SHA224>::PublicKey, ECDSA<EC2N,SHA224>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_1",sizeof("sha_1")) == 0){
+      ECDSA_V<ECDSA<EC2N, SHA1>::PublicKey, ECDSA<EC2N,SHA1>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "whirlpool",sizeof("whirlpool")) == 0){
+      ECDSA_V<ECDSA<EC2N, Whirlpool>::PublicKey, ECDSA<EC2N,Whirlpool>::Verifier>
       (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
     }
     else{
