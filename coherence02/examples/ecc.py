@@ -13,7 +13,7 @@ def sending(message):
 	s.close()
 	return data
 
-def ecc_pb(data_js):
+def ecc_pb(data_js,hash_sign):
 	req=json.loads(data_js)
 	curve=req["curve"]
 	data_js_n=sending(json.dumps(req))
@@ -40,6 +40,7 @@ def ecc_pb(data_js):
 	req=json.loads(json_sign)
 	req["privkey"]=answ["privkey"]
 	req["curve"]=curve
+	req["hash_sign"]=hash_sign
 	print "Send sign : \n " + json.dumps(req) +"\n"
 	data_js_n=sending(json.dumps(req))
 	answ_3=json.loads(data_js_n)
@@ -49,6 +50,7 @@ def ecc_pb(data_js):
 	req["pubkey"]=answ["pubkey"]
 	req["sign"]=answ_3["sign"]
 	req["curve"]=curve
+	req["hash_sign"]=hash_sign
 	print "Send verify : \n " + json.dumps(req) +"\n"
 	data_js_n=sending(json.dumps(req))
 	answ_4=json.loads(data_js_n)
@@ -86,12 +88,15 @@ def ecdh(data_js):
 curves_bp=["brainpoolP512r1","secp521r1","brainpoolP384r1","secp384r1","brainpoolP320r1","brainpoolP256r1","secp256k1",
 "sect571r1","sect571k1","sect409r1","sect409k1","sect283r1","sect283k1"]
 
+hash_sign=["sha3_512","sha3_384","sha3_256","sha3_224","sha_512","sha_384","sha_256","sha_224","sha_1","whirlpool"]
+
 
 for i in curves_bp:
 	ecc_gen='{ "version": 1 , "algorithm":"ECC_GEN", "curve":"secp256k1"}'
 	curv=json.loads(ecc_gen)
 	curv["curve"]=i
-	ecc_pb(json.dumps(curv))
+	for j in hash_sign:
+	    ecc_pb(json.dumps(curv),j)
 
 
 for i in curves_bp:
