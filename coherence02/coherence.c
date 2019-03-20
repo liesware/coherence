@@ -35,7 +35,8 @@ int ok_buff(const uv_buf_t *buf){
   int len_buff=strlen(buf->base);
   char cp_buff[len_buff];
   memcpy( cp_buff, buf->base, len_buff );
-  if((strchr("{",cp_buff[0]) && strchr("}",cp_buff[len_buff-1]))==NULL)
+  //if((strchr("{",cp_buff[0]) && strchr("}",cp_buff[len_buff-1]))==NULL)
+  if(strchr("{",cp_buff[0])==NULL || strchr("}",cp_buff[len_buff-1])==NULL)
   return 1;
   int i,k=0;
   for(i=0;i<len_buff;i++){
