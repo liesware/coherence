@@ -287,6 +287,12 @@ int PARSING(string& str_json, string& answ_js ){
   }
   #endif
 
+  #ifdef _ecnr
+  else if(strncmp(req_val.algorithm.c_str(), "ECNR",sizeof("ECNR")) == 0){
+    parse_ecnr(d,req_val,answ_js);
+  }
+  #endif
+
   else{
     req_val.error="Bad algorithm";
     req_val.tag="error";

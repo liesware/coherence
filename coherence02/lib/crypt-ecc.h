@@ -959,6 +959,290 @@ int parse_ecdsa(Document& d, stru_param& req_val, string& answ_js){
 }
 
 ////////////////////////////////////////////////////////////////////////
+int parse_ecnr_sign(Document& d, stru_param& req_val, string& answ_js){
+  if(d.HasMember("type") ){
+    if(check_type(d,req_val,answ_js)!=0)
+    return 1;
+  }
+  else{
+    req_val.error="Not type tag ";
+    answ_error(req_val,answ_js);
+    return 1;
+  }
+
+  if (strncmp(req_val.type.c_str(), "string",sizeof("string")) == 0){
+    if(d.HasMember("plaintext")  && d.HasMember("privkey")){
+      if(check_plain(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_keys(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_bin(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_field(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_hash_sign(d,req_val,answ_js)!=0)
+      return 1;
+
+      req_val.payload=req_val.plaintext;
+    }
+    else{
+      req_val.error="Not plaintext/privkey tag ";
+      answ_error(req_val,answ_js);
+      return 1;
+    }
+  }
+  else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
+    if(d.HasMember("file")  && d.HasMember("privkey")){
+      if(check_file(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_keys(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_field(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_hash_sign(d,req_val,answ_js)!=0)
+      return 1;
+
+      req_val.hex=0;
+      req_val.payload=req_val.file;
+    }
+    else{
+      req_val.error="Not file/privkey tag ";
+      answ_error(req_val,answ_js);
+      return 1;
+    }
+  }
+  else{
+    req_val.error="Bad type ";
+    answ_error(req_val,answ_js);
+    return 1;
+  }
+
+
+  if(strncmp(req_val.field.c_str(), "ecp",sizeof("ecp")) == 0){
+    if(strncmp(req_val.hash_sign.c_str(), "sha3_512",sizeof("sha3_512")) == 0){
+      ECDSA_SIGN <ECNR<ECP, SHA3_512>::PrivateKey, ECNR<ECP,SHA3_512>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha3_384",sizeof("sha3_384")) == 0){
+      ECDSA_SIGN <ECNR<ECP, SHA3_384>::PrivateKey, ECNR<ECP,SHA3_384>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha3_256",sizeof("sha3_256")) == 0){
+      ECDSA_SIGN <ECNR<ECP, SHA3_256>::PrivateKey, ECNR<ECP,SHA3_256>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha3_224",sizeof("sha3_224")) == 0){
+      ECDSA_SIGN <ECNR<ECP, SHA3_224>::PrivateKey, ECNR<ECP,SHA3_224>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_512",sizeof("sha_512")) == 0){
+      ECDSA_SIGN <ECNR<ECP, SHA512>::PrivateKey, ECNR<ECP,SHA512>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_384",sizeof("sha_384")) == 0){
+      ECDSA_SIGN <ECNR<ECP, SHA384>::PrivateKey, ECNR<ECP,SHA384>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_256",sizeof("sha_256")) == 0){
+      ECDSA_SIGN <ECNR<ECP, SHA256>::PrivateKey, ECNR<ECP,SHA256>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_224",sizeof("sha_224")) == 0){
+      ECDSA_SIGN <ECNR<ECP, SHA224>::PrivateKey, ECNR<ECP,SHA224>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_1",sizeof("sha_1")) == 0){
+      ECDSA_SIGN <ECNR<ECP, SHA1>::PrivateKey, ECNR<ECP,SHA1>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "whirlpool",sizeof("whirlpool")) == 0){
+      ECDSA_SIGN <ECNR<ECP, Whirlpool>::PrivateKey, ECNR<ECP,Whirlpool>::Signer>
+      (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.field,req_val.error);
+    }
+    else{
+      req_val.error="Bad hash sign algorithm ";
+      answ_error(req_val,answ_js);
+      return 1;
+    }
+  }
+  else{
+    req_val.error="Bad curve ECP";
+    answ_error(req_val,answ_js);
+    return 1;
+  }
+
+
+  if(req_val.error.size()>0)
+     req_val.error="Fail ECNR sign";
+
+  sign_anws(req_val,answ_js);
+
+  return 0;
+}
+
+int parse_ecnr_v(Document& d, stru_param& req_val, string& answ_js){
+  if(d.HasMember("type") ){
+    if(check_type(d,req_val,answ_js)!=0)
+    return 1;
+  }
+  else{
+    req_val.error="Not type tag ";
+    answ_error(req_val,answ_js);
+    return 1;
+  }
+
+  if (strncmp(req_val.type.c_str(), "string",sizeof("string")) == 0){
+    if(d.HasMember("plaintext")  && d.HasMember("pubkey")&& d.HasMember("sign")){
+      if(check_plain(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_keys(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_bin(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_signs(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_hash_sign(d,req_val,answ_js)!=0)
+      return 1;
+
+
+      req_val.payload=req_val.plaintext;
+    }
+    else{
+      req_val.error="Not plaintext/pubkey/sign tag ";
+      answ_error(req_val,answ_js);
+      return 1;
+    }
+  }
+  else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
+    if(d.HasMember("file")  && d.HasMember("pubkey")){
+      if(check_file(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_keys(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_field(d,req_val,answ_js)!=0)
+      return 1;
+      if(check_hash_sign(d,req_val,answ_js)!=0)
+      return 1;
+
+      req_val.hex=0;
+      req_val.payload=req_val.file;
+    }
+    else{
+      req_val.error="Not file/pubkey tag ";
+      answ_error(req_val,answ_js);
+      return 1;
+    }
+  }
+  else{
+    req_val.error="Bad type ";
+    answ_error(req_val,answ_js);
+    return 1;
+  }
+
+  if(strncmp(req_val.field.c_str(), "ecp",sizeof("ecp")) == 0){
+    if(strncmp(req_val.hash_sign.c_str(), "sha3_512",sizeof("sha3_512")) == 0){
+      ECDSA_V<ECNR<ECP, SHA3_512>::PublicKey, ECNR<ECP,SHA3_512>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha3_384",sizeof("sha3_384")) == 0){
+      ECDSA_V<ECNR<ECP, SHA3_384>::PublicKey, ECNR<ECP,SHA3_384>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha3_256",sizeof("sha3_256")) == 0){
+      ECDSA_V<ECNR<ECP, SHA3_256>::PublicKey, ECNR<ECP,SHA3_256>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha3_224",sizeof("sha3_224")) == 0){
+      ECDSA_V<ECNR<ECP, SHA3_224>::PublicKey, ECNR<ECP,SHA3_224>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_512",sizeof("sha_512")) == 0){
+      ECDSA_V<ECNR<ECP, SHA512>::PublicKey, ECNR<ECP,SHA512>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_384",sizeof("sha_384")) == 0){
+      ECDSA_V<ECNR<ECP, SHA384>::PublicKey, ECNR<ECP,SHA384>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_256",sizeof("sha_256")) == 0){
+      ECDSA_V<ECNR<ECP, SHA256>::PublicKey, ECNR<ECP,SHA256>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_224",sizeof("sha_224")) == 0){
+      ECDSA_V<ECNR<ECP, SHA224>::PublicKey, ECNR<ECP,SHA224>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "sha_1",sizeof("sha_1")) == 0){
+      ECDSA_V<ECNR<ECP, SHA1>::PublicKey, ECNR<ECP,SHA1>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else if(strncmp(req_val.hash_sign.c_str(), "whirlpool",sizeof("whirlpool")) == 0){
+      ECDSA_V<ECNR<ECP, Whirlpool>::PublicKey, ECNR<ECP,Whirlpool>::Verifier>
+      (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex, req_val.field,req_val.error);
+    }
+    else{
+      req_val.error="Bad hash sign algorithm ";
+      answ_error(req_val,answ_js);
+      return 1;
+    }
+
+  }
+  else{
+    req_val.error="Bad curve ECP";
+    answ_error(req_val,answ_js);
+    return 1;
+  }  
+
+  if(req_val.error.size()>0)
+     req_val.error="Fail ECNR verify";
+  else
+    req_val.verify="ENCR_OK";
+
+  verify_anws(req_val,answ_js);
+  return 0;
+
+}
+
+
+int parse_ecnr(Document& d, stru_param& req_val, string& answ_js){
+  if(d.HasMember("operation")){
+    if(check_ops(d,req_val,answ_js)!=0)
+    return 1;
+  }
+  else{
+    req_val.error="Not ops tag ";
+    answ_error(req_val,answ_js);
+    return 1;
+  }
+
+  if(d.HasMember("curve")){
+    if(check_curve(d,req_val,answ_js)!=0)
+    return 1;
+    if(search_field_curve(d, req_val, answ_js)!=0)
+    return 1;
+  }
+  else{
+    req_val.error="Not curve tag ";
+    answ_error(req_val,answ_js);
+    return 1;
+  }
+
+  if(strncmp(req_val.operation.c_str(), "sign",sizeof("sign")) == 0)
+  parse_ecnr_sign(d, req_val,answ_js);
+  else if(strncmp(req_val.operation.c_str(), "verify",sizeof("verify")) == 0)
+  parse_ecnr_v(d, req_val,answ_js);
+  else{
+    req_val.error="Not ops valid ";
+    answ_error(req_val,answ_js);
+    return 1;
+  }
+
+  return 0;
+
+}
+
+
+////////////////////////////////////////////////////////////////////////
 int parse_ecdh_a(Document& d, stru_param& req_val, string& answ_js){
   if(d.HasMember("curve")&&d.HasMember("privkey") && d.HasMember("sharedpub")){
     if(check_curve(d,req_val,answ_js)!=0)
