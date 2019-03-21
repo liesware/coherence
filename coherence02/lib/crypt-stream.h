@@ -65,8 +65,8 @@ int STREAM_ENC(string& payload, string& type, string& result, string& key, strin
       return 1;
     }
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     cerr << "Fail stream " << endl;
@@ -110,8 +110,8 @@ int STREAM_DEC(string& payload, string& type, string& result, string& key, strin
       return 1;
     }
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     cerr << "Fail stream " << endl;

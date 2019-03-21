@@ -51,7 +51,7 @@ int RSA_GEN(string& privkey ,string& pubkey,int& rsalen,string& error ){
 
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail RSA ";
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -103,7 +103,7 @@ int RSA_SIGN(string& type, string& payload,string& privkey, string& sign, int& b
 
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail RSA sign";
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -156,7 +156,7 @@ int RSA_V(string& type, string& payload,string& pubkey, string& sign, string& ve
 
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail RSA verify";
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -200,7 +200,7 @@ int RSA_ENC(string& payload,string& pubkey, string& result, int& binary,string& 
 
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail RSA enc";
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -240,7 +240,7 @@ int RSA_DEC(string& payload,string& privkey, string& result, string& error ){
 
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail RSA load priv";
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif

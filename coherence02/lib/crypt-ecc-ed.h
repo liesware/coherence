@@ -49,7 +49,7 @@ int Ed25519_GEN(string& privkey ,string& pubkey,string& error ){
 
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail Ed25519 ";
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -94,7 +94,7 @@ int Ed25519_SIGN(string& type, string& payload,string& privkey, string& sign, in
     error="Bad type";
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail Ed25519 sign";
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -118,7 +118,7 @@ int Ed25519_V(string& type, string& payload,string& pubkey, string& sign, string
     StringSource(sign,true,new HexDecoder( new StringSink(edsign)));
 
     if(false == verifier.GetPublicKey().Validate(prng, 3)){
-      error="Public key validation failed";
+      error="Public key validation failed ";
       #ifdef DEBUG
       cerr << error << endl;
       #endif
@@ -140,12 +140,12 @@ int Ed25519_V(string& type, string& payload,string& pubkey, string& sign, string
       StringSource(payload_e+edsign, true,new SignatureVerificationFilter(verifier, NULL, SignatureVerificationFilter::THROW_EXCEPTION| SignatureVerificationFilter::SIGNATURE_AT_END));
     }
     else
-    error="Bad type";
+    error="Bad type ";
 
     verify="Ed25519_OK" ;
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail Ed25519 verify";
+    error=e.what();
     #ifdef DEBUG
     cerr << e.what() << endl;
     #endif

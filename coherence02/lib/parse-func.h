@@ -224,7 +224,7 @@ int Parsingjson(Document& d,string& str_json, stru_param& req_val, string& answ_
     ParseResult ok = d.Parse<rapidjson::kParseStopWhenDoneFlag>(str_json.c_str());
     if (!ok) {
       req_val.error.clear();
-      req_val.error="JSON parse error: ";
+      req_val.error="JSON parse error ";
       req_val.tag="error";
       Addstr2json(answ_js, req_val.tag, req_val.error);
       #ifdef DEBUG

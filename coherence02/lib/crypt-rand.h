@@ -62,9 +62,8 @@ int entropy_gen(string& str_entropy, int& device , string& error){
     StringSource(dev_entropy, sizeof(dev_entropy), true, new HexEncoder(new StringSink(str_entropy) ));
 
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
-    error+="Fail OS_GenerateRandomBlock ";
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -103,8 +102,8 @@ int RANDING(string& rand_numbers, int& entropy, int& len,  string& error ){
     prng.GenerateBlock(gen_numbers, gen_numbers.size());
     StringSource(gen_numbers, gen_numbers.size(), true, new HexEncoder(new StringSink(rand_numbers) ));
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     cerr << "Fail rdrand auto " << endl;

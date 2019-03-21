@@ -193,8 +193,8 @@ int EC_GEN(OID& CURVE, string& privkey, string& pubkey, string& error){
     publicKey.Save(pub_s);
     StringSource (pub_e,true, new HexEncoder(new StringSink(pubkey)));
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     cerr << "Fail EC GEN" << endl;
@@ -224,8 +224,7 @@ int ECIES_ENC(string& payload,string& pubkey, string& result, int& binary, strin
     }
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail ECIES enc ";
-    error+=e.what() ;
+    error=e.what() ;
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -251,8 +250,7 @@ int ECIES_DEC(string& payload,string& privkey, string& result, string& field, st
     }
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail ECIES dec";
-    error+=e.what() ;
+    error=e.what() ;
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -304,7 +302,7 @@ int ECDSA_SIGN(string& type, string& payload,string& privkey, string& sign, int&
     error="Bad type";
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail ECDSA sign ";
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -357,7 +355,7 @@ int ECDSA_V(string& type, string& payload,string& pubkey, string& sign, string& 
     verify="ECDSA_OK" ;
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail ECDSA verify";
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -390,8 +388,8 @@ int ECDH_GEN(OID& CURVE, string& privkey, string& pubkey, string&field ,string& 
     pubkey=key;
 
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     cerr << "Fail ECDH GEN" << endl;
@@ -433,8 +431,8 @@ int ECDH_A(OID& CURVE, string& privkey, string& sharedpub, string& sharedkey, st
     //cout << "Private key: " << key << endl;
     sharedkey=key;
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     cerr << "Fail DHAGREE" << endl;
@@ -1191,7 +1189,7 @@ int parse_ecnr_v(Document& d, stru_param& req_val, string& answ_js){
     req_val.error="Bad curve ECP";
     answ_error(req_val,answ_js);
     return 1;
-  }  
+  }
 
   if(req_val.error.size()>0)
      req_val.error="Fail ECNR verify";

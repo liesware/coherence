@@ -59,9 +59,8 @@ int HASHING(string& type ,string& payload, string& digest, int& binary, string& 
     }
 
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
-    error+=" Fail Hash string";
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif

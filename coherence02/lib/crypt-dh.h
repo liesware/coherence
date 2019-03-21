@@ -257,8 +257,8 @@ int DH_GEN_RFC(string& family,string& privkey, string& pubkey ,string& error){
     //StringSource s2(pub_key, sizeof(pub_key), true, new HexEncoder(new StringSink(pubkey)));
 
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     cerr << "Fail DHGEN" << endl;
@@ -323,8 +323,8 @@ int DH_GEN_N_RFC(int& dhlen, string& privkey, string& pubkey, string& P,string& 
   }
 
 
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     cerr << "Fail DHGEN" << endl;
@@ -376,8 +376,8 @@ int DH_A_RFC(string& family, string& privkey, string& sharedpub, string& sharedk
     //cout << "Private key: " << key << endl;
     sharedkey=key;
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     cerr << "Fail DHAGREE" << endl;
@@ -442,8 +442,8 @@ int DH_A_N_RFC_GEN(string& privkey, string& pubkey, string& sharedpub, string& s
     hex.MessageEnd();
     sharedkey=key;
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     cerr << "Fail DHAGREE" << endl;
@@ -500,8 +500,8 @@ int DH_A_N_RFC(string& privkey,string& sharedpub, string& sharedkey ,string& P,s
     hex.MessageEnd();
     sharedkey=key;
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     cerr << "Fail DHAGREE" << endl;

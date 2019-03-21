@@ -114,9 +114,8 @@ int HMACING(string& payload, string& type, string& mac, string& key , int& binar
       return 1;
     }
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
-    error+=" Fail Hmac string";
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -155,9 +154,8 @@ int CMACING(string& payload, string& type, string& mac, string& key , int& binar
       return 1;
     }
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
-    error+=" Fail Cmac";
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -199,9 +197,8 @@ int VMACING(string& payload, string& type, string& mac, string& key, string& iv 
       return 1;
     }
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
-    error+=" Fail Vmac string";
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -242,9 +239,8 @@ int POLY1305_(string& payload, string& type, string& mac, string& key, string& n
     }
 
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
-    error+=" Fail Poly1305 ";
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif

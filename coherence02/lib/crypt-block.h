@@ -112,8 +112,8 @@ int BLOCK_ENC_CTR(string& payload, string& type, string& result, string& key, st
       return 1;
     }
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     cerr << "Fail stream " << endl;
@@ -155,8 +155,8 @@ int BLOCK_DEC_CTR(string& payload, string& type, string& result, string& key, st
       return 1;
     }
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     cerr << "Fail stream " << endl;
@@ -210,8 +210,8 @@ int BLOCK_ENC_GCM(string& payload, string& adata, string& result, string& key, s
     StringSource( result_e, true,new HexEncoder( new StringSink( result )));
 
   }
-  catch(const CryptoPP::Exception& d){
-    error=d.what();
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     cerr << "Fail stream " << endl;
@@ -297,8 +297,8 @@ int BLOCK_DEC_GCM(string& payload, string& adata, string& result, string& key, s
       }
 
     }
-    catch(const CryptoPP::Exception& d){
-      error=d.what();
+    catch(const CryptoPP::Exception& e){
+      error=e.what();
       #ifdef DEBUG
       cerr << error << endl;
       cerr << "Fail Block " << endl;

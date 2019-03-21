@@ -46,7 +46,7 @@ int DSA_GEN(string& privkey ,string& pubkey,int& dsalen,string& error ){
     StringSource(keyp,true, new HexEncoder(new StringSink(pubkey)));
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail DSA ";
+    error=e.what();;
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -95,7 +95,7 @@ int DSA_SIGN(string& type, string& payload,string& privkey, string& sign, int& b
     error="Bad type";
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail DSA sign";
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif
@@ -146,7 +146,7 @@ int DSA_V(string& type, string& payload,string& pubkey, string& sign, string& ve
 
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail DSA verify";
+    error=e.what();
     #ifdef DEBUG
     cerr << error << endl;
     #endif
