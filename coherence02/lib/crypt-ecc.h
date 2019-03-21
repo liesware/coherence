@@ -176,9 +176,11 @@ int EC_GEN(OID& CURVE, string& privkey, string& pubkey, string& error){
 
     if (false == privateKey.Validate (rng, 3)){
       error="Private key validation failed";
+      return 1;
     }
     if (false == publicKey.Validate (rng, 3)){
       error="Public key validation failed";
+      return 1;
     }
 
     string priv_e;

@@ -29,7 +29,7 @@
 #define _ecc
 #define _ntru
 #define _qtesla
-
+#define _ed25519
 
 using namespace  std;
 using namespace CryptoPP;

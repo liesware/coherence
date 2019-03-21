@@ -95,7 +95,7 @@ int DSA_SIGN(string& type, string& payload,string& privkey, string& sign, int& b
     error="Bad type";
   }
   catch(const CryptoPP::Exception& e){
-    error="Fail DSA save priv";
+    error="Fail DSA sign";
     #ifdef DEBUG
     cerr << error << endl;
     #endif

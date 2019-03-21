@@ -10,10 +10,11 @@
 #include "cryptopp/files.h"
 #include "cryptopp/cryptlib.h"
 #include "cryptopp/osrng.h"
-#include "cryptopp/sha.h"
 #include "cryptopp/rsa.h"
 #include "cryptopp/pssr.h"
+#include "cryptopp/sha3.h"
 #include "cryptopp/sha.h"
+#include "cryptopp/whrlpool.h"
 
 using namespace CryptoPP;
 using namespace  std;
@@ -339,6 +340,34 @@ int parse_rsa_sign(Document& d, stru_param& req_val, string& answ_js){
     RSA_SIGN<RSASS<PSS, SHA3_256>::Signer >
     (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.error);
   }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha3_224",sizeof("sha3_224")) == 0){
+    RSA_SIGN<RSASS<PSS, SHA3_224>::Signer >
+    (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha_512",sizeof("sha_512")) == 0){
+    RSA_SIGN<RSASS<PSS, SHA512>::Signer >
+    (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha_384",sizeof("sha_384")) == 0){
+    RSA_SIGN<RSASS<PSS, SHA384>::Signer >
+    (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha_256",sizeof("sha_256")) == 0){
+    RSA_SIGN<RSASS<PSS, SHA256>::Signer >
+    (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha_224",sizeof("sha_224")) == 0){
+    RSA_SIGN<RSASS<PSS, SHA224>::Signer >
+    (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha_1",sizeof("sha_1")) == 0){
+    RSA_SIGN<RSASS<PSS, SHA1>::Signer >
+    (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "whirlpool",sizeof("whirlpool")) == 0){
+    RSA_SIGN<RSASS<PSS, Whirlpool>::Signer >
+    (req_val.type, req_val.payload, req_val.privkey, req_val.sign, req_val.hex, req_val.error);
+  }
   else{
     req_val.error="Bad hash sign algorithm ";
     answ_error(req_val,answ_js);
@@ -418,6 +447,34 @@ int parse_rsa_v(Document& d, stru_param& req_val, string& answ_js){
   }
   else if(strncmp(req_val.hash_sign.c_str(), "sha3_256",sizeof("sha3_256")) == 0){
     RSA_V<RSASS<PSS, SHA3_256>::Verifier>
+    (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex,req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha3_224",sizeof("sha3_224")) == 0){
+    RSA_V<RSASS<PSS, SHA3_224>::Verifier>
+    (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex,req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha_512",sizeof("sha_512")) == 0){
+    RSA_V<RSASS<PSS, SHA512>::Verifier>
+    (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex,req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha_384",sizeof("sha_384")) == 0){
+    RSA_V<RSASS<PSS, SHA384>::Verifier>
+    (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex,req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha_256",sizeof("sha_256")) == 0){
+    RSA_V<RSASS<PSS, SHA256>::Verifier>
+    (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex,req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha_224",sizeof("sha_224")) == 0){
+    RSA_V<RSASS<PSS, SHA224>::Verifier>
+    (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex,req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "sha_1",sizeof("sha_1")) == 0){
+    RSA_V<RSASS<PSS, SHA1>::Verifier>
+    (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex,req_val.error);
+  }
+  else if(strncmp(req_val.hash_sign.c_str(), "whirlpool",sizeof("whirlpool")) == 0){
+    RSA_V<RSASS<PSS, Whirlpool>::Verifier>
     (req_val.type, req_val.payload, req_val.pubkey, req_val.sign,req_val.verify, req_val.hex,req_val.error);
   }
   else{
