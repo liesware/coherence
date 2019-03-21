@@ -55,25 +55,26 @@ def ecc_pb(data_js,hash_sign):
 	data_js_n=sending(json.dumps(req))
 	answ_4=json.loads(data_js_n)
 	print "Recived  verify done: \n"+(json.dumps(answ_4)) +"\n\n\n"
-	json_sign='{ "version": 1 , "algorithm":"ECNR", "type":"string","plaintext": "Hello world!", "hex":0,"privkey": "" ,"operation":"sign"}'
-	req=json.loads(json_sign)
-	req["privkey"]=answ["privkey"]
-	req["curve"]=curve
-	req["hash_sign"]=hash_sign
-	print "Send sign : \n " + json.dumps(req) +"\n"
-	data_js_n=sending(json.dumps(req))
-	answ_3=json.loads(data_js_n)
-	print "Recived  sign done: \n"+(json.dumps(answ_3)) +"\n"
-	json_verify='{ "version": 1 , "algorithm":"ECNR", "type":"string","plaintext": "Hello world!", "hex":0,"pubkey": "", "operation":"verify","sign":""}'
-	req=json.loads(json_verify)
-	req["pubkey"]=answ["pubkey"]
-	req["sign"]=answ_3["sign"]
-	req["curve"]=curve
-	req["hash_sign"]=hash_sign
-	print "Send verify : \n " + json.dumps(req) +"\n"
-	data_js_n=sending(json.dumps(req))
-	answ_4=json.loads(data_js_n)
-	print "Recived  verify done: \n"+(json.dumps(answ_4)) +"\n\n\n"
+	if curve in ["brainpoolP512r1","secp521r1","brainpoolP384r1","secp384r1","brainpoolP320r1","brainpoolP256r1","secp256k1"]:
+		json_sign='{ "version": 1 , "algorithm":"ECNR", "type":"string","plaintext": "Hello world!", "hex":0,"privkey": "" ,"operation":"sign"}'
+		req=json.loads(json_sign)
+		req["privkey"]=answ["privkey"]
+		req["curve"]=curve
+		req["hash_sign"]=hash_sign
+		print "Send sign : \n " + json.dumps(req) +"\n"
+		data_js_n=sending(json.dumps(req))
+		answ_3=json.loads(data_js_n)
+		print "Recived  sign done: \n"+(json.dumps(answ_3)) +"\n"
+		json_verify='{ "version": 1 , "algorithm":"ECNR", "type":"string","plaintext": "Hello world!", "hex":0,"pubkey": "", "operation":"verify","sign":""}'
+		req=json.loads(json_verify)
+		req["pubkey"]=answ["pubkey"]
+		req["sign"]=answ_3["sign"]
+		req["curve"]=curve
+		req["hash_sign"]=hash_sign
+		print "Send verify : \n " + json.dumps(req) +"\n"
+		data_js_n=sending(json.dumps(req))
+		answ_4=json.loads(data_js_n)
+		print "Recived  verify done: \n"+(json.dumps(answ_4)) +"\n\n\n"
 
 
 def ecdh(data_js):
