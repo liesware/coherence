@@ -1,8 +1,8 @@
 CC = g++
 
-#CFLAGS = -static -Werror -D DEBUG -g
+CFLAGS = -static -D DEBUG -g
 
-CFLAGS= -static
+#CFLAGS= -static
 
 INCLUDES = -luv -lcryptopp -largon2 -lpthread -lntru -lm -loqs
 
