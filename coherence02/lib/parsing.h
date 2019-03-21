@@ -20,6 +20,7 @@
 #include "crypt-rsa.h"
 #include "crypt-ecc.h"
 #include "crypt-ntru.h"
+#include "crypt-ecc-ed.h"
 
 extern "C" {
 #include "crypt-oqs.h"
@@ -277,6 +278,12 @@ int PARSING(string& str_json, string& answ_js ){
   #ifdef _qtesla
   else if(strncmp(req_val.algorithm.c_str(), "QTESLA",sizeof("QTESLA")) == 0){
     parse_qtesla(d,req_val,answ_js);
+  }
+  #endif
+
+  #ifdef _ed25519
+  else if(strncmp(req_val.algorithm.c_str(), "ED25519",sizeof("ED25519")) == 0){
+    parse_ed25519(d,req_val,answ_js);
   }
   #endif
 
