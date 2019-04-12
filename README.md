@@ -18,6 +18,7 @@
 
 ## Abstract
 The future of data breaches is not encouraging,  on 2017 less than 4% of data breaches the cryptography became the data stolen into data useless, with enterprise options as well as open source options to perform cryptography even so year in year out data breaches grow.
+
 Coherence presents a new alternative to perform and offload cryptography operations with a focus on interoperability, flexibility and  simplicity. Coherence gives an interface for modern cryptographic algorithms which is inspired by web APIs, but being HTTP-less, it is  implemented as a TCP non-blocking server with a JSON interface in order to be used by many languages as possible as well as modern applications. Some of the algorithms offered by Coherence are AES and AES candidates, Sosemanuk, SHA* family, HMAC, DH, RSA, DSA, ECC, NTRU.
 
 
