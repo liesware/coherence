@@ -17,7 +17,9 @@
 
 
 ## Abstract
-Coherence is cryptoserver, operating at layer 4, implemented as TCP non-blocking server with a JSON interface which aims to be adopted inside first but not limited to web apps in order to reduce data breaches. It focus on interoperability, flexibility and  simplicity. The interface is inspired by web APIs, but being HTTP-less. The interface performs and offloads cryptographic operations, for example some of the algorithms implemented are AES and AES candidates, Sosemanuk, SHA* family, HMAC, DH, RSA, DSA, ECC, NTRU.
+The future of data breaches is not encouraging,  on 2017 less than 4% of data breaches the cryptography became the data stolen into data useless, with enterprise options as well as open source options to perform cryptography even so year in year out data breaches grow.
+Coherence presents a new alternative to perform and offload cryptography operations with a focus on interoperability, flexibility and  simplicity. Coherence gives an interface for modern cryptographic algorithms which is inspired by web APIs, but being HTTP-less, it is  implemented as a TCP non-blocking server with a JSON interface in order to be used by many languages as possible as well as modern applications. Some of the algorithms offered by Coherence are AES and AES candidates, Sosemanuk, SHA* family, HMAC, DH, RSA, DSA, ECC, NTRU.
+
 
 **Becoming data breaches into data useless**
 
