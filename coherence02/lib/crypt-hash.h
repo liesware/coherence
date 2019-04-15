@@ -9,6 +9,7 @@
 #include "cryptopp/sha.h"
 #include "cryptopp/whrlpool.h"
 #include "cryptopp/blake2.h"
+#include "cryptopp/siphash.h"
 #include "cryptopp/filters.h"
 #include "cryptopp/hex.h"
 #include "cryptopp/files.h"
@@ -33,6 +34,42 @@ int hash_anws(stru_param& req_val, string& answ_js){
 }
 
 ////////////////////////////////////////////////////////////////////////
+
+//Poly1305//////////////////////////////////////////////////////////////
+int SIPHASH_(string& type ,string& payload, string& digest, int& binary, string& error){
+  error.clear();
+  digest.clear();
+  try{
+    SipHash<2,4,true> hash;
+    if (strncmp(type.c_str(), "string",sizeof("string")) == 0){
+      if(binary==0)
+      StringSource(payload, true, new HashFilter(hash,new HexEncoder(new StringSink(digest))));
+      else if(binary==1)
+      StringSource(payload, true, new HexDecoder( new HashFilter(hash,new HexEncoder(new StringSink(digest)))));
+      else{
+        error+="Bad binary bool ";
+        return 1;
+      }
+    }
+    else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
+      error="Bad type file not supported";
+    }
+    else{
+      error="Bad type";
+      return 1;
+    }
+
+  }
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
+    #ifdef DEBUG
+    cerr << error << endl;
+    #endif
+    return 1;
+  }
+  return 0;
+}
+
 //HASHING///////////////////////////////////////////////////////////////
 template <typename T>
 int HASHING(string& type ,string& payload, string& digest, int& binary, string& error){
@@ -150,6 +187,9 @@ int parse_hash(Document& d, stru_param& req_val, string& answ_js){
   }
   else if(strncmp(req_val.algorithm.c_str(), "BLAKE2B",sizeof("BLAKE2B")) == 0){
     HASHING<BLAKE2b>(req_val.type, req_val.payload, req_val.hash, req_val.hex,req_val.error);
+  }
+  else if(strncmp(req_val.algorithm.c_str(), "SIPHASH",sizeof("SIPHASH")) == 0){
+    SIPHASH_(req_val.type, req_val.payload, req_val.hash, req_val.hex,req_val.error);
   }
   else{
     req_val.error="Bad Hash algorithm ";

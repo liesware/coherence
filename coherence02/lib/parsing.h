@@ -128,6 +128,12 @@ int PARSING(string& str_json, string& answ_js ){
   }
   #endif
 
+  #ifdef _siphash
+  else if(strncmp(req_val.algorithm.c_str(), "SIPHASH",sizeof("SIPHASH")) == 0){
+    parse_hash(d,req_val,answ_js);
+  }
+  #endif
+
   #ifdef _hmac
   else if(strncmp(req_val.algorithm.c_str(), "HMAC",sizeof("HMAC")) == 0){
     parse_hmac(d,req_val,answ_js);

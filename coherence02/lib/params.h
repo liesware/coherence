@@ -6,6 +6,7 @@
 #define _sha2
 #define _whirlpool
 #define _blake2b
+#define _siphash
 #define _poly1305
 #define _hmac
 #define _cmac
