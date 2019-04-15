@@ -27,7 +27,7 @@ Coherence presents a new alternative to perform and offload cryptography operati
  
 ## Features
 
-* Hash functions: SHA3, SHA2, SHA1, WHIRLPOOL, Blake2b.
+* Hash functions: SHA3, SHA2, SHA1, WHIRLPOOL, Blake2b, SipHash.
 * Password-hashing function: Argon2
 * Stream ciphers: Sosemanuk, Salsa20/20.
 * Block ciphers: AES, RC6, MARS, Twofish, Serpent, CAST-256, Camellia, SPECK, SIMECK.
