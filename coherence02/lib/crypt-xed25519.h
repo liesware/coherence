@@ -283,3 +283,153 @@ int parse_ed25519(Document& d, stru_param& req_val, string& answ_js){
   return 0;
 
 }
+
+///////////////////////////////////////////////////////////////////////////////
+int X25519_A(string& privkey, string& sharedpub, string& sharedkey,string& error){
+  AutoSeededRandomPool rnd;
+
+  try{
+    x25519 keys;
+
+    SecByteBlock priv_key(keys.PrivateKeyLength());
+    SecByteBlock pub_shared(keys.PublicKeyLength());
+    SecByteBlock shared(keys.AgreedValueLength());
+
+    string priv,spub;
+
+    StringSource k(privkey, true, new HexDecoder(new StringSink(priv)));
+    memcpy( priv_key, priv.data(),priv_key.size());
+    StringSource k1(sharedpub, true, new HexDecoder(new StringSink(spub)));
+    memcpy( pub_shared, spub.data(),pub_shared.size());
+
+    if(!keys.Agree(shared, priv_key, pub_shared)){
+      error="Failed to reach shared secret";
+      return 1;
+    }
+
+    string key;
+    HexEncoder hex(new StringSink(key));
+    key = "";
+    hex.Put(shared.BytePtr(), shared.SizeInBytes());
+    hex.MessageEnd();
+    //cout << "Private key: " << key << endl;
+    sharedkey=key;
+  }
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
+    #ifdef DEBUG
+    cerr << error << endl;
+    cerr << "Fail AGREE" << endl;
+    #endif
+    return 1;
+  }
+
+  return 0;
+}
+
+
+
+int X25519_GEN(string& privkey ,string& pubkey,string& error ){
+  error.clear();
+  privkey.clear();
+  pubkey.clear();
+  string key,keyp;
+
+  try{
+    AutoSeededRandomPool rng;
+
+    x25519 keys;
+    SecByteBlock priv(keys.PrivateKeyLength()), pub(keys.PublicKeyLength());
+    keys.GenerateKeyPair(rng, priv, pub);
+
+
+    string key;
+    HexEncoder hex(new StringSink(key));
+    key = "";
+    hex.Put(priv.BytePtr(), priv.SizeInBytes());
+    hex.MessageEnd();
+    privkey=key;
+
+    key = "";
+    hex.Put(pub.BytePtr(), pub.SizeInBytes());
+    hex.MessageEnd();
+    pubkey=key;
+
+
+  }
+  catch(const CryptoPP::Exception& e){
+    error=e.what();
+    #ifdef DEBUG
+    cerr << error << endl;
+    cerr << "Fail ECDH GEN" << endl;
+    #endif
+    return 1;
+  }
+
+  return 0;
+}
+
+
+int parse_x25519_agree(Document& d, stru_param& req_val, string& answ_js){
+  if(d.HasMember("privkey") && d.HasMember("sharedpub")){
+    if(check_a_keys(d,req_val,answ_js)!=0)
+    return 1;
+
+    X25519_A(req_val.privkey, req_val.sharedpub, req_val.sharedkey, req_val.error);
+
+    req_val.tag.clear();
+    req_val.tag="algorithm";
+    Addstr2json(answ_js, req_val.tag, req_val.algorithm);
+    req_val.tag.clear();
+    req_val.tag="sharedkey";
+    Addstr2json(answ_js, req_val.tag, req_val.sharedkey);
+    req_val.tag.clear();
+    req_val.tag="error";
+    Addstr2json(answ_js, req_val.tag, req_val.error);
+
+  }
+  else{
+    req_val.error.clear();
+    req_val.error="Not privkey/sharedpub tag ";
+    req_val.tag="error";
+    Addstr2json(answ_js, req_val.tag, req_val.error);
+    #ifdef DEBUG
+    cerr << req_val.error;
+    #endif
+    return 1;
+  }
+  return 0;
+}
+
+int parse_x25519_gen(Document& d, stru_param& req_val, string& answ_js){
+  X25519_GEN(req_val.privkey, req_val.pubkey, req_val.error);
+  keys_anws(req_val,answ_js);
+
+  return 0;
+}
+
+
+int parse_x25519(Document& d, stru_param& req_val, string& answ_js){
+  if(d.HasMember("operation")){
+    if(check_ops(d,req_val,answ_js)!=0)
+    return 1;
+  }
+  else{
+    req_val.error="Not ops tag ";
+    answ_error(req_val,answ_js);
+    return 1;
+  }
+
+  if(strncmp(req_val.operation.c_str(), "gen",sizeof("gen")) == 0)
+  parse_x25519_gen(d, req_val,answ_js);
+  else if(strncmp(req_val.operation.c_str(), "agree",sizeof("agree")) == 0)
+  parse_x25519_agree(d, req_val,answ_js);
+  else{
+    req_val.error="Not ops valid ";
+    answ_error(req_val,answ_js);
+    return 1;
+  }
+
+  return 0;
+
+}
