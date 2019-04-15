@@ -36,7 +36,7 @@ Coherence presents a new alternative to perform and offload cryptography operati
 * RSA: Key generation, digital signature, encryption.
 * DSA: Key generation, digital signature.
 * DH: Key generation, key exchange (rfc and custom parameters).
-* ECC: Key generation, ECIES, ECDSA, ECDH, Ed25519, ECNR.
+* ECC: Key generation, ECIES, ECDSA, ECDH, Curve25519, ECNR.
 * Post-Quantum Cryptography: NTRU, Qtesla.
 
 **Be careful qtesla is not an standard yet and is experimental, We are including Qtesla as previous feature from experimental branch**
