@@ -17,4 +17,5 @@ cd ..
 sh cp_libs.sh
 cd grpc/
 make
+sh install_py.sh 
 sh gen.sh
