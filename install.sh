@@ -11,8 +11,11 @@ cd argon2
 make
 
 cd ..
-git clone https://github.com/weidai11/cryptopp
+#git clone https://github.com/weidai11/cryptopp
+mkdir cryptopp
 cd cryptopp
+wget https://www.cryptopp.com/cryptopp820.zip
+unzip cryptopp820.zip
 make libcryptopp.a libcryptopp.so cryptest.exe
 
 cd ..
