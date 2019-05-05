@@ -133,9 +133,9 @@ Current version Essence.
 Through Github
 
 ## Contact
+We will be so happy to listent to you, only concise and well-reasoned feedback are welcome. please be critic with yourself before 
+writing. 
 
-liesware 4t liesware d0t com , only concise and well-reasoned feedback are welcome. please be critic with yourself before writing.
-
-## Webpage
+_coherence 4t liesware d0t com_ 
 
 [Link](https://coherence.liesware.com/)
