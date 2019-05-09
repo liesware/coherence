@@ -21,6 +21,7 @@
 #include "crypt-ecc.h"
 #include "crypt-ntru.h"
 #include "crypt-xed25519.h"
+#include "monit.h"
 
 extern "C" {
 #include "crypt-oqs.h"
@@ -82,9 +83,13 @@ int PARSING(string& str_json, string& answ_js ){
     return 1;
   }
 
+  if(strncmp(req_val.algorithm.c_str(), "MONIT",sizeof("MONIT")) == 0){
+    parse_monit(d,req_val,answ_js);
+  }
+
   //STRING//////////////////////////////////////////////////////////////////
   #ifdef _sha3
-  if(strncmp(req_val.algorithm.c_str(), "SHA3_512",sizeof("SHA3_512")) == 0){
+  else if(strncmp(req_val.algorithm.c_str(), "SHA3_512",sizeof("SHA3_512")) == 0){
     parse_hash(d,req_val,answ_js);
   }
   else if(strncmp(req_val.algorithm.c_str(), "SHA3_384",sizeof("SHA3_384")) == 0){
