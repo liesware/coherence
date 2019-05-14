@@ -48,7 +48,7 @@ _If you are looking for Post-Quantum Cryptography, no standard features and so o
 * docker pull liesware/coherence:master
 * docker run -p 6613:6613 -it liesware/coherence:master /usr/bin/coherence 0.0.0.0 6613
 
-## Quickstar (Docker )
+## Quickstar (Dockerfile)
 
 * wget https://raw.githubusercontent.com/liesware/coherence/master/Dockerfile
 * docker build -t coherence:master .
