@@ -11,7 +11,7 @@
 - http://www.coderfreedom.org/
 - https://pastebin.com/t6B6fhcv
 
-# Coherence
+# Coherence (ko.eˈɾen.s)
 
 "Suitable connection or dependence, consistency" (in narrative or argument), also more literally "act or state of sticking or cleaving of one thing to another". 
 
