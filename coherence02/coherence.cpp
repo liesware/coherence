@@ -30,7 +30,9 @@ public:
       : httpEndpoint(std::make_shared<Http::Endpoint>(addr)) {}
 
   void init(size_t thr = 2) {
-    auto opts = Http::Endpoint::options().threads(thr);
+    auto opts = Http::Endpoint::options();
+    opts.threads(thr);
+    opts.maxPayload(65536);
     httpEndpoint->init(opts);
     setupRoutes();
   }
