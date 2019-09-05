@@ -1,5 +1,6 @@
-FROM centos:7
-RUN yum install -y glibc-static libstdc++-static autoconf automake gcc gcc-c++ make libtool git wget unzip
+FROM debian:stretch
+RUN apt-get update -y
+RUN apt-get install -y autoconf automake gcc g++ make libtool git wget unzip xsltproc libssl-dev bzip2 valgrind doxygen graphviz python3 python3-pip && pip3 install pytest
 RUN wget https://raw.githubusercontent.com/liesware/coherence/master/install.sh
 RUN sh install.sh
 RUN cp /coherence_git/coherence/coherence02/bin/coherence /usr/bin/
