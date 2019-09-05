@@ -52,5 +52,6 @@ make -j
 make install
 
 cd ../../../
+sh cp_libs.sh
 mkdir bin
 make
