@@ -11,7 +11,6 @@ cd argon2
 make
 
 cd ..
-#git clone https://github.com/weidai11/cryptopp
 mkdir cryptopp
 cd cryptopp
 wget https://www.cryptopp.com/cryptopp820.zip
@@ -25,13 +24,6 @@ make
 make static-lib
 
 cd ..
-git clone https://github.com/libuv/libuv.git
-cd libuv
-sh autogen.sh
-./configure
-make
-
-cd ..
 git clone https://github.com/Tencent/rapidjson.git
 
 git clone https://github.com/open-quantum-safe/liboqs.git
@@ -42,7 +34,16 @@ autoreconf -i
 make clean
 make
 
+cd ..
+git clone https://github.com/oktal/pistache.git
+cd pistache
+git submodule update --init
+mkdir -p {build,prefix}
+cd build
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
+make
+make install
+
 cd ../../
-sh cp_libs.sh
 mkdir bin
 make
