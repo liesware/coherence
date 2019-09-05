@@ -1,22 +1,11 @@
-#!/usr/bin/env python
-
-import socket
+import requests
 import json
 import os,binascii
 
 def sending(message):
-	ip = '127.0.0.1'
-	port = 6613
-	BUFFER_SIZE = 65536
-	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.connect((ip, port))
-	s.send(message)
-	print "Sending Json: \n" + message
-	data = s.recv(BUFFER_SIZE)
-	print  "Receiving Json: \n" + data+"\n\n"
-	s.close()
-	return data
-
+	url = 'http://127.0.0.1:6613/'
+	response=requests.post(url, data=message)
+	return response.content
 
 algorithms=["sha3_512", "sha3_384", "sha3_256", "sha3_224", "sha_512", "sha_384", "sha_256", "sha_224", "sha_1" ,"whirlpool"]
 

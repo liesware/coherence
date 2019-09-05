@@ -1,18 +1,11 @@
-import socket
+import requests
 import json
 import os,binascii
-import random
 
 def sending(message):
-	ip = '127.0.0.1'
-	port = 6613
-	BUFFER_SIZE = 65536
-	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.connect((ip, port))
-	s.send(message)
-	data = s.recv(BUFFER_SIZE)
-	s.close()
-	return data
+	url = 'http://127.0.0.1:6613/'
+	response=requests.post(url, data=message)
+	return response.content
 
 qtesla_pam=["qteslai","qteslaiiisize","qteslaiiispeed"]
 message="Hello world !"
@@ -22,7 +15,7 @@ qtesla_v='{"version":1,"algorithm":"QTESLA", "operation":"verify", "type":"strin
 
 for i in qtesla_pam:
     answ=json.loads(qesla_gen)
-    answ["parameter"]=i    
+    answ["parameter"]=i
     data_js_n=sending(json.dumps(answ))
     answ=json.loads(data_js_n)
     print "Recived: \n" + data_js_n +"\n"
