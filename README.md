@@ -57,7 +57,7 @@ _If you are looking for Post-Quantum Cryptography, no standard features and so o
 ## Quickstart (Linux)
 
 For Debian 9 dependencies:
-* apt-get autoconf automake gcc g++ make libtool git wget unzip xsltproc libssl-dev bzip2 valgrind doxygen graphviz python3 python3-pip && pip3 install pytest
+* apt-get autoconf automake gcc g++ make libtool git wget unzip xsltproc libssl-dev bzip2 valgrind doxygen graphviz python3 python3-pip cmake libcurl4-openssl-dev  && pip3 install pytest
 
 Now compile it:
 * wget https://raw.githubusercontent.com/liesware/coherence/master/install.sh
