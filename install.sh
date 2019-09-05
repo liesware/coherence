@@ -38,7 +38,7 @@ cd ..
 git clone https://github.com/oktal/pistache.git
 cd pistache
 git submodule update --init
-mkdir -p {build,prefix}
+mkdir build prefix
 cd build
 cmake -G "Unix Makefiles" \
         -DCMAKE_BUILD_TYPE=Release \
