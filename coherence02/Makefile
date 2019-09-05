@@ -2,7 +2,7 @@ CC = g++
 
 #CFLAGS = -static -D DEBUG -g
 
-CFLAGS= -static
+CFLAGS=
 
 INCLUDES = -luv -lcryptopp -largon2 -lpthread -lntru -lm -loqs
 
