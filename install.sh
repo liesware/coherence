@@ -15,7 +15,7 @@ mkdir cryptopp
 cd cryptopp
 wget https://www.cryptopp.com/cryptopp820.zip
 unzip cryptopp820.zip
-make libcryptopp.a libcryptopp.so cryptest.exe
+make libcryptopp.a libcryptopp.so
 
 cd ..
 git clone https://github.com/tbuktu/libntru.git
