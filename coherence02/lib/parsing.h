@@ -40,11 +40,12 @@ int parse_log(stru_info_log& log_info,string& log_js){
   Clear2json(log_info.answ);
 
   stringstream stream;
-  stream<<"{ \"ip\":\""<<log_info.ip<<"\",";
+  stream<<"{";
+  // stream<<"{ \"ip\":\""<<log_info.ip<<"\",";
   stream<<"\"timestamp\":"<<log_info.timestamp<<",";
   stream<<"\"exec_time\":"<<log_info.exec_time<<",";
-  stream<<"\"total_read\":"<<log_info.total_read<<",";
-  stream<<"\"total_write\":"<<log_info.total_write<<",";
+  // stream<<"\"total_read\":"<<log_info.total_read<<",";
+  // stream<<"\"total_write\":"<<log_info.total_write<<",";
   stream<<"\"req\":"<<log_info.req<<",";
   stream<<"\"answ\":"<<log_info.answ<<"}";
 

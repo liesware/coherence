@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+*.pyc
+
+# Libs
+coherence02/lib/*
+coherence02/bin/*

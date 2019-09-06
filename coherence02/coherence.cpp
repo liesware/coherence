@@ -43,6 +43,7 @@ public:
   }
 
   void stop() {
+    cout<< "ending";
     httpEndpoint->shutdown();
   }
 
@@ -53,13 +54,22 @@ private:
   }
 
   void res(const Rest::Request &request, Http::ResponseWriter response) {
+    clock_t t;
+    t = clock();
     string answer, crypt_ops;
+    string log_js="{}";
+    stru_info_log log_info;
     crypt_ops=request.body();
     PARSING(crypt_ops, answer);
 
     response.send(Pistache::Http::Code::Ok, answer);
-    cout << request.body() << endl;
-    cout << answer << endl;
+    t = clock()-t;
+    log_info.exec_time=(float)t/CLOCKS_PER_SEC;
+    log_info.answ=answer;
+    log_info.timestamp=(int)time(NULL);
+    log_info.req=request.body();
+    parse_log(log_info, log_js);
+    cout<<log_js<<endl;
   };
 
   std::shared_ptr<Http::Endpoint> httpEndpoint;
@@ -68,12 +78,13 @@ private:
 
 int main(int argc, char *argv[]) {
   sigset_t signals;
-  if (sigemptyset(&signals) != 0 || sigaddset(&signals, SIGTERM) != 0 ||
-      sigaddset(&signals, SIGINT) != 0 || sigaddset(&signals, SIGHUP) != 0 ||
-      pthread_sigmask(SIG_BLOCK, &signals, nullptr) != 0) {
-    perror("install signal handler failed");
-    return 1;
-  }
+  if (sigemptyset(&signals)        != 0
+    ||  sigaddset(&signals, SIGTERM) != 0
+    ||  sigaddset(&signals, SIGINT)  != 0
+    ||  sigaddset(&signals, SIGQUIT) != 0
+    ||  sigaddset(&signals, SIGPIPE) != 0
+    ||  sigaddset(&signals, SIGALRM) != 0
+    ||  pthread_sigmask(SIG_BLOCK, &signals, nullptr) != 0) return false;
 
   banner();
   Port port(6613);
@@ -93,13 +104,24 @@ int main(int argc, char *argv[]) {
 
   stats.init(thr);
   stats.start();
-  int signal = 0;
-  int status = sigwait(&signals, &signal);
-  if (status == 0) {
-    std::cout << "received signal " << signal << std::endl;
-  } else {
-    std::cerr << "sigwait returns " << status << std::endl;
-  }
-  stats.stop();
 
+  bool terminate = false;
+  while (!terminate) {
+    int number = 0;
+    int status = sigwait(&signals, &number);
+    if (status != 0) {
+        break;
+    }
+
+    switch (number) {
+        case SIGINT : terminate = true; break;
+        case SIGTERM: terminate = true; break;
+        case SIGQUIT: terminate = true; break;
+        case SIGPIPE: break;
+        case SIGALRM: break;
+        default     : break;
+    }
+  }
+
+  stats.stop();
 }
