@@ -33,6 +33,7 @@
 #define _ed25519
 #define _x25519
 #define _ecnr
+#define _dilithium
 
 using namespace  std;
 using namespace CryptoPP;
