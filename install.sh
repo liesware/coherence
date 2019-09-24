@@ -35,6 +35,10 @@ make clean
 make
 
 cd ..
+git clone https://github.com/open-quantum-safe/liboqs-cpp
+cd liboqs-cpp
+
+cd ..
 git clone https://github.com/oktal/pistache.git
 cd pistache
 git submodule update --init
