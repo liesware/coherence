@@ -33,6 +33,7 @@
 *.pyc
 
 core*
+*.enc*
 
 # Libs
 coherence02/lib/argon2/
