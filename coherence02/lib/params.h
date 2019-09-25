@@ -36,6 +36,12 @@
 #define _dilithium
 #define _mqdss
 #define _sphincs
+#define _kyber
+#define _newhope
+#define _saber
+#define _ntrukem
+#define _sidh
+#define _sike
 
 using namespace  std;
 using namespace CryptoPP;
@@ -88,6 +94,7 @@ typedef struct params{
   string sharedkey;
   string sharedpub;
   string hash_sign;
+  string sharedtext;
   //DH
   string p;
   string g;

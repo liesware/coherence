@@ -24,6 +24,7 @@
 #include "monit.h"
 
 #include "crypt-oqs2.h"
+#include "crypt-oqs2-kem.h"
 
 #include <stdio.h>
 
@@ -324,6 +325,42 @@ int PARSING(string& str_json, string& answ_js ){
   #ifdef _sphincs
   else if(strncmp(req_val.algorithm.c_str(), "SPHINCS+",sizeof("SPHINCS+")) == 0){
     parse_oqs(d,req_val,answ_js);
+  }
+  #endif
+
+  #ifdef _kyber
+  else if(strncmp(req_val.algorithm.c_str(), "KYBER",sizeof("KYBER")) == 0){
+    parse_oqs_kem(d,req_val,answ_js);
+  }
+  #endif
+
+  #ifdef _newhope
+  else if(strncmp(req_val.algorithm.c_str(), "NEWHOPE",sizeof("NEWHOPE")) == 0){
+    parse_oqs_kem(d,req_val,answ_js);
+  }
+  #endif
+
+  #ifdef _saber
+  else if(strncmp(req_val.algorithm.c_str(), "SABER",sizeof("SABER")) == 0){
+    parse_oqs_kem(d,req_val,answ_js);
+  }
+  #endif
+
+  #ifdef _ntrukem
+  else if(strncmp(req_val.algorithm.c_str(), "NTRU_KEM",sizeof("NTRU_KEM")) == 0){
+    parse_oqs_kem(d,req_val,answ_js);
+  }
+  #endif
+
+  #ifdef _sidh
+  else if(strncmp(req_val.algorithm.c_str(), "SIDH",sizeof("SIDH")) == 0){
+    parse_oqs_kem(d,req_val,answ_js);
+  }
+  #endif
+
+  #ifdef _sidh
+  else if(strncmp(req_val.algorithm.c_str(), "SIKE",sizeof("SIKE")) == 0){
+    parse_oqs_kem(d,req_val,answ_js);
   }
   #endif
 

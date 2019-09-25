@@ -187,6 +187,9 @@ int Clear2json(string& json){
   if(d.HasMember("sharedpub")){
     d["sharedpub"]="";
   }
+  if(d.HasMember("sharedtext")){
+    d["sharedtext"]="";
+  }
   if(d.HasMember("p")){
     d["p"]="";
   }
@@ -427,6 +430,7 @@ int check_ops(Document& d, stru_param& req_val, string& answ_js){
     if(strncmp(req_val.operation.c_str(), "enc",sizeof("enc")) !=0 && strncmp(req_val.operation.c_str(), "dec",sizeof("dec"))!=0
     &&strncmp(req_val.operation.c_str(), "sign",sizeof("sign")) !=0 && strncmp(req_val.operation.c_str(), "verify",sizeof("verify"))!=0
     &&strncmp(req_val.operation.c_str(), "gen",sizeof("gen")) !=0 && strncmp(req_val.operation.c_str(), "agree",sizeof("agree")) !=0
+    &&strncmp(req_val.operation.c_str(), "encap",sizeof("encap")) !=0 && strncmp(req_val.operation.c_str(), "decap",sizeof("decap")) !=0
     &&strncmp(req_val.operation.c_str(), "hash",sizeof("hash")) !=0 &&strncmp(req_val.operation.c_str(), "gen_pub",sizeof("gen_pub")) !=0){
       req_val.error.clear();
       req_val.error="Bad operation enc/dec/sign/very ";
@@ -495,6 +499,18 @@ int check_keys(Document& d, stru_param& req_val, string& answ_js){
     req_val.pubkey=d["pubkey"].GetString();
     if(Isb16(req_val.pubkey,req_val.error)!=0){
       req_val.error+=" Key no hex  ";
+      req_val.tag="error";
+      Addstr2json(answ_js, req_val.tag, req_val.error);
+      #ifdef DEBUG
+      cerr << req_val.error;
+      #endif
+      return 1;
+    }
+  }
+  if(d.HasMember("sharedtext") && d["sharedtext"].IsString()){
+    req_val.sharedtext=d["sharedtext"].GetString();
+    if(Isb16(req_val.sharedtext,req_val.error)!=0){
+      req_val.error+=" Sharedtext no hex  ";
       req_val.tag="error";
       Addstr2json(answ_js, req_val.tag, req_val.error);
       #ifdef DEBUG
