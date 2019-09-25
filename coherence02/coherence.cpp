@@ -77,17 +77,6 @@ private:
 };
 
 int main(int argc, char *argv[]) {
-  sigset_t signals;
-  if (sigemptyset(&signals)        != 0
-    ||  sigaddset(&signals, SIGTERM) != 0
-    ||  sigaddset(&signals, SIGINT)  != 0
-    ||  sigaddset(&signals, SIGQUIT) != 0
-    ||  sigaddset(&signals, SIGPIPE) != 0
-    ||  sigaddset(&signals, SIGALRM) != 0
-    ||  pthread_sigmask(SIG_BLOCK, &signals, nullptr) != 0){
-      return false;
-  }
-
   banner();
   Port port(6613);
   int thr = 2;
@@ -107,22 +96,33 @@ int main(int argc, char *argv[]) {
   stats.init(thr);
   stats.start();
 
+  sigset_t signals;
+  if (sigemptyset(&signals)        != 0
+    ||  sigaddset(&signals, SIGTERM) != 0
+    ||  sigaddset(&signals, SIGINT)  != 0
+    ||  sigaddset(&signals, SIGQUIT) != 0
+    ||  sigaddset(&signals, SIGPIPE) != 0
+    ||  sigaddset(&signals, SIGALRM) != 0
+    ||  pthread_sigmask(SIG_BLOCK, &signals, nullptr) != 0){
+      return false;
+  }
+
   bool terminate = false;
   while (!terminate) {
     int number = 0;
     int status = sigwait(&signals, &number);
+    stats.stop();
     if (status != 0) {
         break;
     }
 
-    switch (number) {
-        case SIGINT : terminate = true; break;
-        case SIGTERM: terminate = true; break;
-        case SIGQUIT: terminate = true; break;
-        case SIGPIPE: break;
-        case SIGALRM: break;
-        default     : break;
-    }
+    // switch (number) {
+    //     case SIGINT : terminate = true; stats.stop(); break;
+    //     case SIGTERM: terminate = true; stats.stop(); break;
+    //     case SIGQUIT: terminate = true; stats.stop(); break;
+    //     case SIGPIPE: break;
+    //     case SIGALRM: break;
+    //     default     : break;
+    // }
   }
-  stats.stop();
 }
