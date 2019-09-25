@@ -37,6 +37,35 @@ int search_oqs_param_(Document& d, stru_param& req_val, string& answ_js){
         return 1;
       }
     }
+    else if(strncmp(req_val.algorithm.c_str(), "MQDSS",sizeof("MQDSS"))== 0){
+      if(strncmp(req_val.parameter.c_str(), "mqdss3148",sizeof("mqdss3148")) == 0){
+        req_val.paramsq_="MQDSS-31-48";
+      }
+      else if(strncmp(req_val.parameter.c_str(), "mqdss3164",sizeof("mqdss3164")) == 0){
+        req_val.paramsq_="MQDSS-31-64";
+      }
+      else{
+        req_val.error="Bad parameter MQDSS ";
+        answ_error(req_val,answ_js);
+        return 1;
+      }
+    }
+    else if(strncmp(req_val.algorithm.c_str(), "SPHINCS+",sizeof("SPHINCS+"))== 0){
+      if(strncmp(req_val.parameter.c_str(), "haraka128f",sizeof("haraka128f")) == 0){
+        req_val.paramsq_="SPHINCS+-Haraka-128f-simple";
+      }
+      else if(strncmp(req_val.parameter.c_str(), "haraka192f",sizeof("haraka192f")) == 0){
+        req_val.paramsq_="SPHINCS+-Haraka-192f-simple";
+      }
+      else if(strncmp(req_val.parameter.c_str(), "haraka256f",sizeof("haraka256f")) == 0){
+        req_val.paramsq_="SPHINCS+-Haraka-256f-simple";
+      }
+      else{
+        req_val.error="Bad parameter SPHINCS+ ";
+        answ_error(req_val,answ_js);
+        return 1;
+      }
+    }
     else{
       req_val.error="Bad parameter ";
       answ_error(req_val,answ_js);

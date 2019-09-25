@@ -315,6 +315,18 @@ int PARSING(string& str_json, string& answ_js ){
   }
   #endif
 
+  #ifdef _mqdss
+  else if(strncmp(req_val.algorithm.c_str(), "MQDSS",sizeof("MQDSS")) == 0){
+    parse_oqs(d,req_val,answ_js);
+  }
+  #endif
+
+  #ifdef _sphincs
+  else if(strncmp(req_val.algorithm.c_str(), "SPHINCS+",sizeof("SPHINCS+")) == 0){
+    parse_oqs(d,req_val,answ_js);
+  }
+  #endif
+
   else{
     req_val.error="Bad algorithm";
     req_val.tag="error";

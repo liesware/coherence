@@ -34,6 +34,8 @@
 #define _x25519
 #define _ecnr
 #define _dilithium
+#define _mqdss
+#define _sphincs
 
 using namespace  std;
 using namespace CryptoPP;
