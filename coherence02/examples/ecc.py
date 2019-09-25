@@ -101,11 +101,12 @@ def ecdh(data_js):
 
 curves_bp=["brainpoolP512r1","secp521r1","brainpoolP384r1","secp384r1","brainpoolP320r1","brainpoolP256r1","secp256k1",
 "sect571r1","sect571k1","sect409r1","sect409k1","sect283r1","sect283k1"]
+curves_b=["brainpoolP512r1","secp521r1","brainpoolP384r1","secp384r1","brainpoolP320r1","brainpoolP256r1","secp256k1"]
 
 hash_sign=["sha3_512","sha3_384","sha3_256","sha3_224","sha_512","sha_384","sha_256","sha_224","sha_1","whirlpool"]
 
 
-for i in curves_bp:
+for i in curves_b:
 	ecc_gen='{ "version": 1 , "algorithm":"ECC_GEN", "curve":"secp256k1"}'
 	curv=json.loads(ecc_gen)
 	curv["curve"]=i
@@ -113,7 +114,7 @@ for i in curves_bp:
 	    ecc_pb(json.dumps(curv),j)
 
 
-for i in curves_bp:
+for i in curves_b:
 	ecdh_gen='{ "version": 1 , "algorithm":"ECDH", "curve":"secp256k1", "operation":"gen"}'
 	curv=json.loads(ecdh_gen)
 	curv["curve"]=i

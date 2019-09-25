@@ -12,7 +12,7 @@ python hmac.py
 python ntru.py  
 python poly1305.py  
 python oqs_sign.py
-python rand.py  
+#python rand.py  
 python rsa.py  
 python stream.py  
 python vmac.py
