@@ -1,6 +1,6 @@
 CC = g++
 
-#CFLAGS = -static -D DEBUG -g
+#CFLAGS = -fpermissive -D DEBUG -g
 
 CFLAGS = -fpermissive
 

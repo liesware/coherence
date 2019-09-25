@@ -32,6 +32,8 @@
 *.app
 *.pyc
 
+core*
+
 # Libs
 coherence02/lib/argon2/
 coherence02/lib/cryptopp/

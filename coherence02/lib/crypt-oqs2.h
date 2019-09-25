@@ -8,26 +8,35 @@ int search_oqs_param_(Document& d, stru_param& req_val, string& answ_js){
     if(check_params(d,req_val,answ_js)!=0)
     return 1;
 
-    if(strncmp(req_val.parameter.c_str(), "qteslai",sizeof("qteslai")) == 0){
-      req_val.paramsq_="qTESLA_I";
+    if(strncmp(req_val.algorithm.c_str(), "QTESLA",sizeof("QTESLA"))== 0){
+      if(strncmp(req_val.parameter.c_str(), "qtesla1",sizeof("qtesla1")) == 0){
+        req_val.paramsq_="qTesla-p-I";
+      }
+      else if(strncmp(req_val.parameter.c_str(), "qtesla3",sizeof("qtesla3")) == 0){
+        req_val.paramsq_="qTesla-p-III";
+      }
+      else{
+        req_val.error="Bad parameter Qtesla ";
+        answ_error(req_val,answ_js);
+        return 1;
+      }
     }
-    else if(strncmp(req_val.parameter.c_str(), "qteslaiiisize",sizeof("qteslaiiisize")) == 0){
-      req_val.paramsq_="qTESLA_III_size";
+    else if(strncmp(req_val.algorithm.c_str(), "DILITHIUM",sizeof("DILITHIUM"))== 0){
+      if(strncmp(req_val.parameter.c_str(), "dilithium2",sizeof("dilithium2")) == 0){
+        req_val.paramsq_="DILITHIUM_2";
+      }
+      else if(strncmp(req_val.parameter.c_str(), "dilithium3",sizeof("dilithium3")) == 0){
+        req_val.paramsq_="DILITHIUM_3";
+      }
+      else if(strncmp(req_val.parameter.c_str(), "dilithium4",sizeof("dilithium4")) == 0){
+        req_val.paramsq_="DILITHIUM_4";
+      }
+      else{
+        req_val.error="Bad parameter Dilithium ";
+        answ_error(req_val,answ_js);
+        return 1;
+      }
     }
-    else if(strncmp(req_val.parameter.c_str(), "qteslaiiispeed",sizeof("qteslaiiispeed")) == 0){
-      req_val.paramsq_="qTESLA_III_speed";
-    }
-
-    else if(strncmp(req_val.parameter.c_str(), "dilithium2",sizeof("dilithium2")) == 0){
-      req_val.paramsq_="DILITHIUM_2";
-    }
-    else if(strncmp(req_val.parameter.c_str(), "dilithium3",sizeof("dilithium3")) == 0){
-      req_val.paramsq_="DILITHIUM_3";
-    }
-    else if(strncmp(req_val.parameter.c_str(), "dilithium4",sizeof("dilithium4")) == 0){
-      req_val.paramsq_="DILITHIUM_4";
-    }
-
     else{
       req_val.error="Bad parameter ";
       answ_error(req_val,answ_js);
