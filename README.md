@@ -22,7 +22,7 @@ The future of data breaches is not encouraging,  on 2017 less than 4% of data br
 Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a focus on interoperability, flexibility and  simplicity. Coherence gives an interface for modern cryptographic algorithms which is inspired by Openssl, it is a REST API in order to be used by any language, in other words Coherence minimizes development time and code complexity. Some of the algorithms offered by Coherence are AES and AES candidates, Sosemanuk, SHA* family, HMAC, DH, RSA, DSA, ECC, NTRU.
 
 
-**Becoming data breaches into data useless**
+**Closing the gap between web developers and cryptography**
 
  
 ## Features
