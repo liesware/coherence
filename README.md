@@ -19,7 +19,7 @@
 ## Abstract
 The future of data breaches is not encouraging,  on 2017 less than 4% of data breaches the cryptography became the data stolen into data useless, with enterprise options as well as open source options to perform cryptography even so year in year out data breaches grow.
 
-Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a focus on interoperability, flexibility and  simplicity. Coherence gives an interface for modern cryptographic algorithms which is inspired by web APIs, but being HTTP-less, it is  implemented as a TCP non-blocking server with a JSON interface in order to be used by any language, in other words Coherence minimizes development time and code complexity. Some of the algorithms offered by Coherence are AES and AES candidates, Sosemanuk, SHA* family, HMAC, DH, RSA, DSA, ECC, NTRU.
+Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a focus on interoperability, flexibility and  simplicity. Coherence gives an interface for modern cryptographic algorithms which is inspired by Openssl, it is a REST API in order to be used by any language, in other words Coherence minimizes development time and code complexity. Some of the algorithms offered by Coherence are AES and AES candidates, Sosemanuk, SHA* family, HMAC, DH, RSA, DSA, ECC, NTRU.
 
 
 **Becoming data breaches into data useless**
@@ -37,16 +37,15 @@ Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a fo
 * DSA: Key generation, digital signature.
 * DH: Key generation, key exchange (rfc and custom parameters).
 * ECC: Key generation, ECIES, ECDSA, ECDH, Curve25519, ECNR.
-* Post-Quantum Cryptography: NTRU, Qtesla.
+* Post-Quantum Cryptography sign: Qtesla, Dilithium, MQDSS, SPHINCS+.
+* Post-Quantum Cryptography kem: NTRU, Kyber, Newhope, Saber, SIDH, Sike. 
 
-**Be careful qtesla is not an standard yet and is experimental, We are including Qtesla as previous feature from experimental branch**
-
-_If you are looking for Post-Quantum Cryptography, no standard features and so on, please see experimental branch_
+**Be careful Post-Quantum Cryptography is not an standard yet and is experimental.**
 
 ## Quickstart (Docker image)
 
-* docker pull liesware/coherence:master
-* docker run -p 6613:6613 -it liesware/coherence:master /usr/bin/coherence 0.0.0.0 6613
+* docker pull liesware/coherence:latest
+* docker run -p 6613:6613 -it liesware/coherence:latest /usr/bin/coherence 0.0.0.0 6613
 
 ## Quickstar (Dockerfile)
 
@@ -68,21 +67,14 @@ Now compile it:
 ```python 
 #!/usr/bin/env python
 
-import socket
+import requests
 import json
 import os,binascii
 
 def sending(message):
-	ip = '127.0.0.1'
-	port = 6613
-	BUFFER_SIZE = 65536
-	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	s.connect((ip, port))
-	s.send(message)
-	data = s.recv(BUFFER_SIZE)
-        print data
-	s.close()
-	return data
+	url = 'http://127.0.0.1:6613/'
+	response=requests.post(url, data=message)
+	print response.content
 
 data_js='{"version":1,"algorithm":"SHA3_512","type":"string","plaintext":"Hello world!"}'
 sending(data_js)
@@ -91,14 +83,12 @@ We are getting SHA3-512 for "Hello world!" string.
 
 ## Examples 
 
-_You can use your favorite language, we are using python only for illustrative examples( your language needs to support TCP sockets
-and json format)._
+_You can use your favorite language, we are using python only for illustrative examples_
 
 argon2.py  block.py  cmac.py  dh.py  dsa.py  ecc.py  hash.py  hmac.py  ntru.py  poly1305.py  qtesla.py  rand.py  rsa.py  stream.py  
 vmac.py
 
-The code is very simple and with basic programming knowledge you should be able to understand it. You only need to understand python 
-tcp sockets and json format.
+The code is very simple and with basic programming knowledge you should be able to understand it. You only need to understand python and REST API
 
 ## Test
 on ~/coherence02/
@@ -127,8 +117,7 @@ Current version Essence.
 
 ## Branches
 
-* Master: Stable and standard algorithms. 
-* Experimental: postquatum algorithms and homomorphic encryption, pairing based cryptography , as well as new features.
+* Master: Stable, standard and experimental algorithms. 
 
 ## Bugs
 
