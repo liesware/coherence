@@ -2,10 +2,7 @@ import requests
 import json
 import os,binascii
 
-def sending(message):
-	url = 'http://127.0.0.1:6613/'
-	response=requests.post(url, data=message)
-	return response.content
+from sending import sending
 
 def dh(data_js, bits):
 	print "DH Agree with no RFC  parameters"

@@ -2,10 +2,7 @@ import requests
 import json
 import os,binascii
 
-def sending(message):
-	url = 'http://127.0.0.1:6613/'
-	response=requests.post(url, data=message)
-	return response.content
+from sending import sending
 
 ntru_gen=json.loads('{ "version": 1 , "algorithm":"NTRU", "parameter": "EES1499EP1", "operation":"gen"}')
 ntru_pam=["EES449EP1", "EES613EP1","EES761EP1","EES677EP1","EES887EP1","EES1087EP1","EES1087EP2","EES1171EP1","EES1499EP1"]

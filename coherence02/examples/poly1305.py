@@ -2,10 +2,7 @@ import requests
 import json
 import os,binascii
 
-def sending(message):
-	url = 'http://127.0.0.1:6613/'
-	response=requests.post(url, data=message)
-	return response.content
+from sending import sending
 
 data_js='{"version":1,"algorithm":"POLY1305","type":"string","plaintext":"Hello world!","hex":0,\
 "key":"","nonce":""}'

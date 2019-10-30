@@ -2,10 +2,7 @@ import requests
 import json
 import os,binascii
 
-def sending(message):
-	url = 'http://127.0.0.1:6613/'
-	response=requests.post(url, data=message)
-	return response.content
+from sending import sending
 
 algorithms=["SHA3_512", "SHA3_384", "SHA3_256", "SHA3_224",
 "SHA_512", "SHA_384", "SHA_256", "SHA_224" , "SHA_1" ,

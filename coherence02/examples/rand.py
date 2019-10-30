@@ -2,10 +2,7 @@ import requests
 import json
 import os,binascii
 
-def sending(message):
-	url = 'http://127.0.0.1:6613/'
-	response=requests.post(url, data=message)
-	return response.content
+from sending import sending
 
 algorithms=["RAND_RP", "RAND_AUTO", "RAND_RDRAND"]
 entropy=[0,1,2]

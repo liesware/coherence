@@ -2,11 +2,7 @@ import requests
 import json
 import os,binascii
 
-def sending(message):
-	url = 'http://127.0.0.1:6613/'
-	response=requests.post(url, data=message)
-	return response.content
-
+from sending import sending
 
 oqs_gen='{"version":1,"algorithm":"","operation":"gen", "parameter":""}'
 oqs_encap='{"version":1,"algorithm":"", "operation":"encap", "sharedtext":"", "pubkey":"" ,"parameter":""}'
