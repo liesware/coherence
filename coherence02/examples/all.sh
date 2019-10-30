@@ -8,7 +8,7 @@ python dsa.py
 python ecc.py
 python xed25519.py
 python hash.py
-python hmac.py
+python mac.py
 python ntru.py
 python poly1305.py
 python oqs_sign.py
