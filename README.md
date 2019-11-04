@@ -45,13 +45,13 @@ Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a fo
 ## Quickstart (Docker image)
 
 * docker pull liesware/coherence:latest
-* docker run -p 6613:6613 -it liesware/coherence:latest /usr/bin/coherence 0.0.0.0 6613
+* docker run -p 6613:6613 -it liesware/coherence:latest /usr/bin/coherence
 
 ## Quickstar (Dockerfile)
 
 * wget https://raw.githubusercontent.com/liesware/coherence/master/Dockerfile
 * docker build -t coherence:master .
-* docker run -p 6613:6613 -it  coherence:master /usr/bin/coherence 0.0.0.0 6613
+* docker run -p 6613:6613 -it  coherence:master /usr/bin/coherence
 
 ## Quickstart (Linux)
 
