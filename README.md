@@ -90,6 +90,8 @@ vmac.py
 
 The code is very simple and with basic programming knowledge you should be able to understand it. You only need to understand python and REST API
 
+[use cases](https://github.com/liesware/coherence-poc)
+
 ## Test
 on ~/coherence02/
 
