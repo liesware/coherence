@@ -1,9 +1,10 @@
 #!/bin/bash
 
-mkdir  coherence_git
-cd coherence_git
+# apt-get update
+# apt-get install -y autoconf automake gcc g++ make libtool git wget unzip xsltproc libssl-dev bzip2 valgrind doxygen graphviz python3 python3-pip cmake libcurl4-openssl-dev cmake gcc ninja-build libssl-dev python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz git wget libargon2-dev
+
 git clone https://github.com/liesware/coherence
-cd coherence/coherence02/lib/
+cd coherence/core/lib/
 
 git clone https://github.com/P-H-C/phc-winner-argon2
 mv phc-winner-argon2/ argon2
@@ -28,17 +29,13 @@ git clone https://github.com/Tencent/rapidjson.git
 
 git clone https://github.com/open-quantum-safe/liboqs.git
 cd liboqs
-git checkout master
-autoreconf -i
- ./configure
-make clean
-make
+mkdir build && cd build
+cmake -DBUILD_SHARED_LIBS=ON -DOQS_USE_OPENSSL=ON -GNinja ..
+ninja
 
-cd ..
+cd ../../
 git clone https://github.com/open-quantum-safe/liboqs-cpp
-cd liboqs-cpp
 
-cd ..
 git clone https://github.com/oktal/pistache.git
 cd pistache
 git submodule update --init
