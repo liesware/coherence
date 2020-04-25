@@ -44,14 +44,13 @@ Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a fo
 
 ## Quickstart (Docker image)
 
-* docker pull liesware/coherence:latest
-* docker run -p 6613:6613 -it liesware/coherence:latest /usr/bin/coherence
+* docker run -d liesware/coherence:stable /usr/bin/coherence
 
 ## Quickstar (Dockerfile)
 
 * wget https://raw.githubusercontent.com/liesware/coherence/master/Dockerfile
 * docker build -t coherence:master .
-* docker run -p 6613:6613 -it  coherence:master /usr/bin/coherence
+* docker run -p 6613:6613 -d  coherence:master /usr/bin/coherence
 
 ## Quickstart (Linux)
 
@@ -61,8 +60,9 @@ For Debian 9 dependencies:
 Now compile it:
 * wget https://raw.githubusercontent.com/liesware/coherence/master/install.sh
 * sh install.sh
-* cd coherence_git/coherence/coherence02/bin ; ./coherence 0.0.0.0 6613
-* Run this code
+* ./bin/coherence 0.0.0.0 6613
+
+Run this code
 
 ```python 
 #!/usr/bin/env python
@@ -72,7 +72,7 @@ import json
 import os,binascii
 
 def sending(message):
-	url = 'http://127.0.0.1:6613/'
+	url = 'http://localhost:6613/'
 	response=requests.post(url, data=message)
 	print response.content
 
@@ -89,8 +89,6 @@ argon2.py  block.py  cmac.py  dh.py  dsa.py  ecc.py  hash.py  hmac.py  ntru.py  
 vmac.py
 
 The code is very simple and with basic programming knowledge you should be able to understand it. You only need to understand python and REST API
-
-[use cases](https://github.com/liesware/coherence-poc)
 
 ## Test
 on ~/coherence02/
