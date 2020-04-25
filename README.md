@@ -44,26 +44,10 @@ Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a fo
 
 ## Quickstart (Docker image)
 
-* docker run -d liesware/coherence:stable /usr/bin/coherence
-
-## Quickstar (Dockerfile)
-
-* wget https://raw.githubusercontent.com/liesware/coherence/master/Dockerfile
-* docker build -t coherence:master .
-* docker run -p 6613:6613 -d  coherence:master /usr/bin/coherence
-
-## Quickstart (Linux)
-
-For Debian 9 dependencies:
-* apt-get install autoconf automake gcc g++ make libtool git wget unzip xsltproc libssl-dev bzip2 valgrind doxygen graphviz python3 python3-pip cmake libcurl4-openssl-dev  && pip3 install pytest
-
-Now compile it:
-* wget https://raw.githubusercontent.com/liesware/coherence/master/install.sh
-* sh install.sh
-* ./bin/coherence 0.0.0.0 6613
-
-Run this code
-
+```bash
+docker run -d liesware/coherence:stable /usr/bin/coherence
+```
+Test:
 ```python 
 #!/usr/bin/env python
 
