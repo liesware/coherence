@@ -17,10 +17,10 @@ for i in algorithms :
 
 data_js_f='{"version":1,"algorithm":"HMAC","type":"file","file":"./../file_test/Mayhem.txt","family":"sha3_512"}'
 
-hmac_js=json.loads(data_js_f)
-hmac_js["key"]=binascii.b2a_hex(os.urandom(16))
-for i in algorithms :
-    hmac_js["family"]=i
-    data_js_n=sending(json.dumps(hmac_js))
-    answ=json.loads(data_js_n)
-    print "Recived Argon2 hash: \n" + (json.dumps(answ)) +"\n"
+# hmac_js=json.loads(data_js_f)
+# hmac_js["key"]=binascii.b2a_hex(os.urandom(16))
+# for i in algorithms :
+#     hmac_js["family"]=i
+#     data_js_n=sending(json.dumps(hmac_js))
+#     answ=json.loads(data_js_n)
+#     print "Recived Argon2 hash: \n" + (json.dumps(answ)) +"\n"

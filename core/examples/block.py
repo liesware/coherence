@@ -13,8 +13,8 @@ def block(data_js):
 	req["operation"]="dec"
 	if req["type"]=="string":
 		req["plaintext"]=answ["result"]
-	if req["type"]=="file":
-		req["file"]=answ["result"]
+	# if req["type"]=="file":
+	# 	req["file"]=answ["result"]
 	print "Send dec \n " + json.dumps(req)
 	data_js_n=sending(json.dumps(req))
 	answ2=json.loads(data_js_n)
@@ -28,12 +28,12 @@ def common(data_js,key,iv):
 	block_js["hex"]=1
 	block_js["plaintext"]=block_js["plaintext"].encode("hex")
 	block(json.dumps(block_js))
-	if block_js["mode"]=="ctr":
-		del block_js["hex"]
-		del block_js["plaintext"]
-		block_js["type"]="file"
-		block_js["file"]="./../file_test/Mayhem.txt"
-		block(json.dumps(block_js))
+	# if block_js["mode"]=="ctr":
+	# 	del block_js["hex"]
+	# 	del block_js["plaintext"]
+	# 	block_js["type"]="file"
+	# 	block_js["file"]="./../file_test/Mayhem.txt"
+	# 	block(json.dumps(block_js))
 
 
 algorithms=["AES","RC6","MARS","SERPENT","TWOFISH", "CAMELLIA","CAST256","SPECK128"]

@@ -87,9 +87,9 @@ int HASHING(string& type ,string& payload, string& digest, int& binary, string& 
         return 1;
       }
     }
-    else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
-      FileSource source_file(payload.c_str(), true, new HashFilter(hash,new HexEncoder(new StringSink(digest))));
-    }
+    // else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
+    //   FileSource source_file(payload.c_str(), true, new HashFilter(hash,new HexEncoder(new StringSink(digest))));
+    // }
     else{
       error="Bad type";
       return 1;
@@ -135,20 +135,20 @@ int parse_hash(Document& d, stru_param& req_val, string& answ_js){
       return 1;
     }
   }
-  else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
-    if(d.HasMember("file") ){
-      if(check_file(d,req_val,answ_js)!=0)
-      return 1;
-
-      req_val.hex=0;
-      req_val.payload=req_val.file;
-    }
-    else{
-      req_val.error="Not file tag ";
-      answ_error(req_val,answ_js);
-      return 1;
-    }
-  }
+  // else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
+  //   if(d.HasMember("file") ){
+  //     if(check_file(d,req_val,answ_js)!=0)
+  //     return 1;
+  //
+  //     req_val.hex=0;
+  //     req_val.payload=req_val.file;
+  //   }
+  //   else{
+  //     req_val.error="Not file tag ";
+  //     answ_error(req_val,answ_js);
+  //     return 1;
+  //   }
+  // }
   else{
     req_val.error="Bad tye ";
     answ_error(req_val,answ_js);

@@ -13,8 +13,8 @@ def stream(data_js):
 	req["operation"]="dec"
 	if req["type"]=="string":
 		req["plaintext"]=answ["result"]
-	if req["type"]=="file":
-		req["file"]=answ["result"]
+	# if req["type"]=="file":
+	# 	req["file"]=answ["result"]
 	print "Send dec \n " + json.dumps(req)
 	data_js_n=sending(json.dumps(req))
 	answ2=json.loads(data_js_n)
@@ -28,11 +28,11 @@ def common(data_js,key,iv):
 	stream_js["hex"]=1
 	stream_js["plaintext"]=stream_js["plaintext"].encode("hex")
 	stream(json.dumps(stream_js))
-	del stream_js["hex"]
-	del stream_js["plaintext"]
-	stream_js["type"]="file"
-	stream_js["file"]="./../file_test/Mayhem.txt"
-	stream(json.dumps(stream_js))
+	# del stream_js["hex"]
+	# del stream_js["plaintext"]
+	# stream_js["type"]="file"
+	# stream_js["file"]="./../file_test/Mayhem.txt"
+	# stream(json.dumps(stream_js))
 
 algorithms=["SOSEMANUK","SALSA20"]
 

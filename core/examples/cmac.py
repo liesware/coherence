@@ -20,9 +20,9 @@ for i in algorithms :
     cmac_js["family"]=i
     sending(json.dumps(cmac_js))
 
-data_js_f='{"version":1,"algorithm":"CMAC","type":"file","file":"./../file_test/Mayhem.txt","family":"aes"}'
-cmac_js=json.loads(data_js_f)
-cmac_js["key"]=binascii.b2a_hex(os.urandom(16))
-for i in algorithms:
-    cmac_js["family"]=i
-    sending(json.dumps(cmac_js))
+# data_js_f='{"version":1,"algorithm":"CMAC","type":"file","file":"./../file_test/Mayhem.txt","family":"aes"}'
+# cmac_js=json.loads(data_js_f)
+# cmac_js["key"]=binascii.b2a_hex(os.urandom(16))
+# for i in algorithms:
+#     cmac_js["family"]=i
+#     sending(json.dumps(cmac_js))

@@ -86,11 +86,11 @@ int DSA_SIGN(string& type, string& payload,string& privkey, string& sign, int& b
         return 1;
       }
     }
-    else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
-      FileSource( payload.c_str(), true, new SignerFilter( prng, signer,new HexEncoder(new StringSink(sign))));
-      payload+=".sign";
-      StringSource(sign, true, new HexDecoder(new FileSink(payload.c_str())));
-    }
+    // else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
+    //   FileSource( payload.c_str(), true, new SignerFilter( prng, signer,new HexEncoder(new StringSink(sign))));
+    //   payload+=".sign";
+    //   StringSource(sign, true, new HexDecoder(new FileSink(payload.c_str())));
+    // }
     else
     error="Bad type";
   }
@@ -139,9 +139,9 @@ int DSA_V(string& type, string& payload,string& pubkey, string& sign, string& ve
 
     if (strncmp(type.c_str(), "string",sizeof("string")) == 0)
     StringSource( payload_e+dsasign, true,new SignatureVerificationFilter(verifier, NULL , SignatureVerificationFilter::THROW_EXCEPTION| SignatureVerificationFilter::SIGNATURE_AT_END ));
-    else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
-      FileSource( payload.c_str(), true,new SignatureVerificationFilter(verifier, NULL, SignatureVerificationFilter::THROW_EXCEPTION | SignatureVerificationFilter::SIGNATURE_AT_END ));
-    }
+    // else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
+    //   FileSource( payload.c_str(), true,new SignatureVerificationFilter(verifier, NULL, SignatureVerificationFilter::THROW_EXCEPTION | SignatureVerificationFilter::SIGNATURE_AT_END ));
+    // }
     verify="DSA_OK" ;
 
   }
@@ -207,22 +207,22 @@ int parse_dsa_sign(Document& d, stru_param& req_val, string& answ_js){
       return 1;
     }
   }
-  else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
-    if(d.HasMember("file")  && d.HasMember("privkey")){
-      if(check_file(d,req_val,answ_js)!=0)
-      return 1;
-      if(check_keys(d,req_val,answ_js)!=0)
-      return 1;
-
-      req_val.hex=0;
-      req_val.payload=req_val.file;
-    }
-    else{
-      req_val.error="Not file/privkey tag ";
-      answ_error(req_val,answ_js);
-      return 1;
-    }
-  }
+  // else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
+  //   if(d.HasMember("file")  && d.HasMember("privkey")){
+  //     if(check_file(d,req_val,answ_js)!=0)
+  //     return 1;
+  //     if(check_keys(d,req_val,answ_js)!=0)
+  //     return 1;
+  //
+  //     req_val.hex=0;
+  //     req_val.payload=req_val.file;
+  //   }
+  //   else{
+  //     req_val.error="Not file/privkey tag ";
+  //     answ_error(req_val,answ_js);
+  //     return 1;
+  //   }
+  // }
   else{
     req_val.error="Bad tye ";
     answ_error(req_val,answ_js);
@@ -266,22 +266,22 @@ int parse_dsa_v(Document& d, stru_param& req_val, string& answ_js){
       return 1;
     }
   }
-  else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
-    if(d.HasMember("file")  && d.HasMember("pubkey")){
-      if(check_file(d,req_val,answ_js)!=0)
-      return 1;
-      if(check_keys(d,req_val,answ_js)!=0)
-      return 1;
-
-      req_val.hex=0;
-      req_val.payload=req_val.file;
-    }
-    else{
-      req_val.error="Not file/pubkey tag ";
-      answ_error(req_val,answ_js);
-      return 1;
-    }
-  }
+  // else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
+  //   if(d.HasMember("file")  && d.HasMember("pubkey")){
+  //     if(check_file(d,req_val,answ_js)!=0)
+  //     return 1;
+  //     if(check_keys(d,req_val,answ_js)!=0)
+  //     return 1;
+  //
+  //     req_val.hex=0;
+  //     req_val.payload=req_val.file;
+  //   }
+  //   else{
+  //     req_val.error="Not file/pubkey tag ";
+  //     answ_error(req_val,answ_js);
+  //     return 1;
+  //   }
+  // }
   else{
     req_val.error="Bad tye ";
     answ_error(req_val,answ_js);
