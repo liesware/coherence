@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
 
   grpc::SslCredentialsOptions opts ={root,key,cert};
   auto channel_creds = grpc::SslCredentials(grpc::SslCredentialsOptions(opts));
-  auto channel = grpc::CreateChannel("localhost:6613", channel_creds);
+  auto channel = grpc::CreateChannel("127.0.0.1:6613", grpc::InsecureChannelCredentials());
 
   CoherenceClient greeter(channel);
 

@@ -32,14 +32,22 @@
 *.app
 *.pyc
 
-core*
 *.enc*
 
 # Libs
-coherence02/lib/argon2/
-coherence02/lib/cryptopp/
-coherence02/lib/libntru/
-coherence02/lib/liboqs*
-coherence02/lib/pistache/
-coherence02/lib/rapidjson/
-coherence02/bin/*
+core/lib/argon2/
+core/lib/cryptopp/
+core/lib/libntru/
+core/lib/liboqs*
+core/lib/pistache/
+core/lib/rapidjson/
+core/bin/*
+core/grpc/grpc/
+core/grpc/ca*
+core/grpc/server*
+core/grpc/client*
+core/grpc/coherence.grpc*
+core/grpc/coherence.pb*
+core/grpc/coherence_pb2*
+core/grpc/coherence_client
+core/grpc/coherence_grpc

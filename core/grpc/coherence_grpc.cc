@@ -129,7 +129,7 @@ class ServerImpl final {
     std::string server_address(addr.c_str());
 
     ServerBuilder builder;
-    builder.AddListeningPort(server_address, grpc::SslServerCredentials( sslOps ));
+    builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
     builder.RegisterService(&service_);
     cq_ = builder.AddCompletionQueue();
     server_ = builder.BuildAndStart();

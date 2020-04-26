@@ -15,7 +15,7 @@ def run():
     ed25519_v='{ "version": 1 , "algorithm":"ED25519", "type":"string","plaintext": "Hello world!", "hex":0,"pubkey": "" ,"sign":"","operation":"verify"}'
     with open('ca.crt', 'rb') as f:
         creds = grpc.ssl_channel_credentials(f.read())
-        channel = grpc.secure_channel('172.17.0.2:6613', creds)
+        channel = grpc.insecure_channel('localhost:6613')
         stub = coherence_pb2_grpc.coherence_offloadStub(channel)
         response = stub.coherence_js(coherence_pb2.coherence_req(req=ed25519_gen))
         print(response.answ)
