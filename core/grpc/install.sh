@@ -1,19 +1,13 @@
 #!/bin/bash
 
-git clone https://github.com/grpc/grpc
+git clone --recurse-submodules -b v1.28.1 https://github.com/grpc/grpc
 cd grpc
-git submodule update --init
-make
-make install
-cd third_party/protobuf
+mkdir -p cmake/build
+cd cmake/build
+cmake ../..
 make
 make install
 cd ../../../
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-export LD_LIBRARY_PATH=/usr/local/lib
+make
 cd ..
 sh cp_libs.sh
-cd grpc/
-make
-sh install_py.sh
-sh gen.sh
