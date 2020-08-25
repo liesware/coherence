@@ -19,10 +19,10 @@ using namespace CryptoPP;
 using namespace  std;
 
 int check_argon2(Document& d, stru_param& req_val, string& answ_js){
-  if(d.HasMember("t_cost") && d["t_cost"].IsNumber() &&
-  d.HasMember("m_cost") && d["m_cost"].IsNumber() &&
-  d.HasMember("parallelism") && d["parallelism"].IsNumber() &&
-  d.HasMember("hashlen") && d["hashlen"].IsNumber()&&
+  if(d.HasMember("t_cost") && d["t_cost"].IsUint() &&
+  d.HasMember("m_cost") && d["m_cost"].IsUint() &&
+  d.HasMember("parallelism") && d["parallelism"].IsUint() &&
+  d.HasMember("hashlen") && d["hashlen"].IsUint()&&
   d.HasMember("salt") && d["salt"].IsString()){
 
     if(Isb16(req_val.salt,req_val.error)!=0){
@@ -35,10 +35,10 @@ int check_argon2(Document& d, stru_param& req_val, string& answ_js){
       return 1;
     }
 
-    req_val.t_cost=d["t_cost"].GetInt();
-    req_val.m_cost=d["m_cost"].GetInt();
-    req_val.parallelism=d["parallelism"].GetInt();
-    req_val.hashlen=d["hashlen"].GetInt();
+    req_val.t_cost=d["t_cost"].GetUint();
+    req_val.m_cost=d["m_cost"].GetUint();
+    req_val.parallelism=d["parallelism"].GetUint();
+    req_val.hashlen=d["hashlen"].GetUint();
     req_val.salt=d["salt"].GetString();
 
     #ifdef DEBUG

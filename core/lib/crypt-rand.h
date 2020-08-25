@@ -34,8 +34,8 @@ int rand_anws(stru_param& req_val, string& answ_js){
 }
 
 int check_entropy(Document& d, stru_param& req_val, string& answ_js){
-  if(d.HasMember("entropy")&&(d["entropy"].GetInt()==0 || d["entropy"].GetInt()==1 ||d["entropy"].GetInt()==2)){
-    req_val.entropy=d["entropy"].GetInt();
+  if(d.HasMember("entropy")&& d["entropy"].IsUint()&&(d["entropy"].GetUint()==0 || d["entropy"].GetUint()==1 ||d["entropy"].GetUint()==2)){
+    req_val.entropy=d["entropy"].GetUint();
   }
   else
   req_val.entropy=0;

@@ -241,7 +241,7 @@ int Parsingjson(Document& d,string& str_json, stru_param& req_val, string& answ_
 
 //Version///////////////////////////////////////////////////////////////
 int check_ver(Document& d, stru_param& req_val, string& answ_js){
-  if(d.HasMember("version") && d["version"].IsNumber() && d["version"].GetInt()==1){
+  if(d.HasMember("version") && d["version"].IsUint() && d["version"].GetUint()==1){
     #ifdef DEBUG
     cout<< "Good  Version and Number ";
     #endif
@@ -369,8 +369,8 @@ int check_iv(Document& d, stru_param& req_val, string& answ_js, int vec_size=32)
 //Hex///////////////////////////////////////////////////////////////
 int check_hex(Document& d, stru_param& req_val, string& answ_js){
   if(d.HasMember("hex")){
-    if(d["hex"].IsNumber()&&(d["hex"].GetInt()==1||d["hex"].GetInt()==0)){
-      req_val.hex=d["hex"].GetInt();
+    if(d["hex"].IsUint()&&(d["hex"].GetUint()==1||d["hex"].GetUint()==0)){
+      req_val.hex=d["hex"].GetUint();
       #ifdef DEBUG
       cout<< "Hex bool ok ";
       #endif
@@ -597,8 +597,8 @@ int check_a_keys(Document& d, stru_param& req_val, string& answ_js){
 
 int check_length(Document& d, stru_param& req_val, string& answ_js, int length){
   if(d.HasMember("length")){
-    if(d["length"].IsNumber() && d["length"].GetInt()<=length){
-      req_val.length=d["length"].GetInt();
+    if(d["length"].IsUint() && d["length"].GetUint()<=length){
+      req_val.length=d["length"].GetUint();
       #ifdef DEBUG
       cout<< "Good length ";
       #endif
