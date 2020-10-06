@@ -1,9 +1,15 @@
 #!/bin/bash
 
+# docker run -it -v  ~/prog/coherence_rd/:/rd/ --name coherence_rd ubuntu:latest /bin/bash
 # apt-get update
-# apt-get install -y autoconf automake gcc g++ make libtool git wget unzip xsltproc libssl-dev bzip2 valgrind doxygen graphviz python3 python3-pip cmake libcurl4-openssl-dev cmake gcc ninja-build libssl-dev python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz git wget libargon2-dev
+# apt-get install -y libssl-dev
+# docker rmi liesware/coherence:dev
+# docker commit
 
-git clone https://github.com/liesware/coherence
+apt-get update
+DEBIAN_FRONTEND="noninteractive" apt-get install -y autoconf automake gcc g++ make libtool git wget unzip xsltproc libssl-dev bzip2 valgrind doxygen graphviz python3 python3-pip cmake libcurl4-openssl-dev cmake gcc ninja-build libssl-dev python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz git wget libargon2-dev pkg-config
+
+git clone -b dev https://github.com/liesware/coherence
 cd coherence/core/lib/
 
 git clone https://github.com/P-H-C/phc-winner-argon2
@@ -27,7 +33,7 @@ make static-lib
 cd ..
 git clone https://github.com/Tencent/rapidjson.git
 
-git clone https://github.com/open-quantum-safe/liboqs.git
+git clone -b master https://github.com/open-quantum-safe/liboqs.git
 cd liboqs
 mkdir build && cd build
 cmake -DBUILD_SHARED_LIBS=ON -DOQS_USE_OPENSSL=ON -GNinja ..
@@ -53,6 +59,30 @@ make -j
 make install
 
 cd ../../../
-sh cp_libs.sh
+
 mkdir bin
 make
+
+cd grpc
+git clone --recurse-submodules -b v1.32.0 https://github.com/grpc/grpc
+cd grpc
+mkdir -p cmake/build
+cd cmake/build
+cmake ../..
+make
+make install
+cd ../../../
+make
+cd ..
+
+cp lib/pistache/prefix/lib/libpistache*so.0* /lib/x86_64-linux-gnu/libpistache.so.0
+cp lib/cryptopp/libcryptopp.so.8.2.0 /lib/x86_64-linux-gnu/libcryptopp.so.8
+cp lib/libntru/libntru.so /lib/x86_64-linux-gnu/
+cp lib/liboqs/build/lib/liboqs.so.0.4.0 /lib/x86_64-linux-gnu/liboqs.so.0
+cp lib/argon2/libargon2.so.1 /lib/x86_64-linux-gnu/
+ls -lha /lib/x86_64-linux-gnu/libpistache.so.0
+ls -lha /lib/x86_64-linux-gnu/libcryptopp.so.8
+ls -lha /lib/x86_64-linux-gnu/libntru.so
+ls -lha /lib/x86_64-linux-gnu/liboqs.so.0
+ls -lha /lib/x86_64-linux-gnu/libargon2.so.1
+ls -lha /lib/x86_64-linux-gnu/libpistache.so.0

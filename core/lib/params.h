@@ -34,7 +34,7 @@
 #define _ecnr
 #define _dilithium
 #define _sphincs
-#define _falcon
+// #define _falcon
 #define _rainbow
 #define _kyber
 #define _saber

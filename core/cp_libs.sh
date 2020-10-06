@@ -12,3 +12,6 @@ ls -lha /lib/x86_64-linux-gnu/libntru.so
 ls -lha /lib/x86_64-linux-gnu/liboqs.so.0
 ls -lha /lib/x86_64-linux-gnu/libargon2.so.1
 ls -lha /lib/x86_64-linux-gnu/libpistache.so.0
+
+cp bin/coherence /usr/bin/
+cp grpc/coherence_grpc /usr/bin/
