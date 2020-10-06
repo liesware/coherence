@@ -39,14 +39,14 @@ def oqs_sig (algorithm, params):
         answ2=json.loads(data_js_n)
         print "Recived: \n" + data_js_n +"\n"
 
-oqs_alg=["QTESLA","DILITHIUM","MQDSS","SPHINCS+"]
+oqs_alg=["DILITHIUM","FALCON","RAINBOW","SPHINCS+"]
 
-qtesla_param=["qtesla1","qtesla3"]
 dilithium_param=["dilithium2","dilithium3","dilithium4"]
-mqdss_param=["mqdss3148","mqdss3164"]
-sphincs_param=["haraka128f","haraka192f","haraka256f"]
+falcon_param=["falcon512","falcon1024"]
+rainbow_param=["iacyclic"]
+sphincs_param=["haraka128s","haraka192s","haraka256s"]
 
-oqs_sig(oqs_alg[0],qtesla_param)
-oqs_sig(oqs_alg[1],dilithium_param)
-oqs_sig(oqs_alg[2],mqdss_param)
+# oqs_sig(oqs_alg[0],dilithium_param)
+# # oqs_sig(oqs_alg[1],falcon_param)
+# oqs_sig(oqs_alg[2],rainbow_param)
 oqs_sig(oqs_alg[3],sphincs_param)

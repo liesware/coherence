@@ -24,20 +24,6 @@ int search_oqs_param_k(Document& d, stru_param& req_val, string& answ_js){
         return 1;
       }
     }
-    else if(strncmp(req_val.algorithm.c_str(), "NEWHOPE",sizeof("NEWHOPE"))== 0){
-
-      if(strncmp(req_val.parameter.c_str(), "newhope512",sizeof("newhope512")) == 0){
-        req_val.paramsq_="NewHope-512-CCA";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "newhope1024",sizeof("newhope1024")) == 0){
-        req_val.paramsq_="NewHope-1024-CCA";
-      }
-      else{
-        req_val.error="Bad parameter Newhope ";
-        answ_error(req_val,answ_js);
-        return 1;
-      }
-    }
     else if(strncmp(req_val.algorithm.c_str(), "SABER",sizeof("SABER"))== 0){
 
       if(strncmp(req_val.parameter.c_str(), "light",sizeof("light")) == 0){
@@ -71,46 +57,6 @@ int search_oqs_param_k(Document& d, stru_param& req_val, string& answ_js){
       }
       else{
         req_val.error="Bad parameter Newhope ";
-        answ_error(req_val,answ_js);
-        return 1;
-      }
-    }
-    else if(strncmp(req_val.algorithm.c_str(), "SIDH",sizeof("SIDH"))== 0){
-
-      if(strncmp(req_val.parameter.c_str(), "sidh434",sizeof("sidh434")) == 0){
-        req_val.paramsq_="SIDH-p434";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "sidh503",sizeof("sidh503")) == 0){
-        req_val.paramsq_="SIDH-p503";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "sidh610",sizeof("sidh610")) == 0){
-        req_val.paramsq_="SIDH-p610";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "sidh751",sizeof("sidh751")) == 0){
-        req_val.paramsq_="SIDH-p751";
-      }
-      else{
-        req_val.error="Bad parameter SIDH ";
-        answ_error(req_val,answ_js);
-        return 1;
-      }
-    }
-    else if(strncmp(req_val.algorithm.c_str(), "SIKE",sizeof("SIKE"))== 0){
-
-      if(strncmp(req_val.parameter.c_str(), "sike434",sizeof("sike434")) == 0){
-        req_val.paramsq_="SIKE-p434";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "sike503",sizeof("sike503")) == 0){
-        req_val.paramsq_="SIKE-p503";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "sike610",sizeof("sike610")) == 0){
-        req_val.paramsq_="SIKE-p610";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "sike751",sizeof("sike751")) == 0){
-        req_val.paramsq_="SIKE-p751";
-      }
-      else{
-        req_val.error="Bad parameter SIDH ";
         answ_error(req_val,answ_js);
         return 1;
       }

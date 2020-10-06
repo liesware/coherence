@@ -29,19 +29,16 @@
 #define _rsa
 #define _ecc
 #define _ntru
-#define _qtesla
 #define _ed25519
 #define _x25519
 #define _ecnr
 #define _dilithium
-#define _mqdss
 #define _sphincs
+#define _falcon
+#define _rainbow
 #define _kyber
-#define _newhope
 #define _saber
 #define _ntrukem
-#define _sidh
-#define _sike
 
 using namespace  std;
 using namespace CryptoPP;
