@@ -46,17 +46,11 @@ def oqs_kem (algorithm, params):
 
 
 
-kem_alg=["KYBER","NEWHOPE","SABER","NTRU_KEM","SIDH","SIKE"]
+kem_alg=["KYBER","SABER","NTRU_KEM"]
 kyber_prm=["kyber512","kyber768","kyber1024"]
-newhope_prm=["newhope512","newhope1024"]
 saber_prm=["light","saber","fire"]
 ntru_prm=["ntru509","ntru677","ntru821","ntru701"]
-sidh_prm=["sidh434","sidh503","sidh610","sidh751"]
-sike_prm=["sike434","sike503","sike610","sike751"]
 
 oqs_kem(kem_alg[0],kyber_prm)
-oqs_kem(kem_alg[1],newhope_prm)
-oqs_kem(kem_alg[2],saber_prm)
-oqs_kem(kem_alg[3],ntru_prm)
-oqs_kem(kem_alg[4],sidh_prm)
-oqs_kem(kem_alg[5],sike_prm)
+oqs_kem(kem_alg[1],saber_prm)
+oqs_kem(kem_alg[2],ntru_prm)

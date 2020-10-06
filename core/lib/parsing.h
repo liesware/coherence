@@ -286,12 +286,6 @@ int PARSING(string& str_json, string& answ_js ){
   }
   #endif
 
-  #ifdef _qtesla
-  else if(strncmp(req_val.algorithm.c_str(), "QTESLA",sizeof("QTESLA")) == 0){
-    parse_oqs(d,req_val,answ_js);
-  }
-  #endif
-
   #ifdef _ed25519
   else if(strncmp(req_val.algorithm.c_str(), "ED25519",sizeof("ED25519")) == 0){
     parse_ed25519(d,req_val,answ_js);
@@ -316,26 +310,26 @@ int PARSING(string& str_json, string& answ_js ){
   }
   #endif
 
-  #ifdef _mqdss
-  else if(strncmp(req_val.algorithm.c_str(), "MQDSS",sizeof("MQDSS")) == 0){
-    parse_oqs(d,req_val,answ_js);
-  }
-  #endif
-
   #ifdef _sphincs
   else if(strncmp(req_val.algorithm.c_str(), "SPHINCS+",sizeof("SPHINCS+")) == 0){
     parse_oqs(d,req_val,answ_js);
   }
   #endif
 
-  #ifdef _kyber
-  else if(strncmp(req_val.algorithm.c_str(), "KYBER",sizeof("KYBER")) == 0){
-    parse_oqs_kem(d,req_val,answ_js);
+  #ifdef _falcon
+  else if(strncmp(req_val.algorithm.c_str(), "FALCON",sizeof("FALCON")) == 0){
+    parse_oqs(d,req_val,answ_js);
   }
   #endif
 
-  #ifdef _newhope
-  else if(strncmp(req_val.algorithm.c_str(), "NEWHOPE",sizeof("NEWHOPE")) == 0){
+  #ifdef _rainbow
+  else if(strncmp(req_val.algorithm.c_str(), "RAINBOW",sizeof("RAINBOW")) == 0){
+    parse_oqs(d,req_val,answ_js);
+  }
+  #endif
+
+  #ifdef _kyber
+  else if(strncmp(req_val.algorithm.c_str(), "KYBER",sizeof("KYBER")) == 0){
     parse_oqs_kem(d,req_val,answ_js);
   }
   #endif
@@ -348,18 +342,6 @@ int PARSING(string& str_json, string& answ_js ){
 
   #ifdef _ntrukem
   else if(strncmp(req_val.algorithm.c_str(), "NTRU_KEM",sizeof("NTRU_KEM")) == 0){
-    parse_oqs_kem(d,req_val,answ_js);
-  }
-  #endif
-
-  #ifdef _sidh
-  else if(strncmp(req_val.algorithm.c_str(), "SIDH",sizeof("SIDH")) == 0){
-    parse_oqs_kem(d,req_val,answ_js);
-  }
-  #endif
-
-  #ifdef _sidh
-  else if(strncmp(req_val.algorithm.c_str(), "SIKE",sizeof("SIKE")) == 0){
     parse_oqs_kem(d,req_val,answ_js);
   }
   #endif

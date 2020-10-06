@@ -8,20 +8,7 @@ int search_oqs_param_(Document& d, stru_param& req_val, string& answ_js){
     if(check_params(d,req_val,answ_js)!=0)
     return 1;
 
-    if(strncmp(req_val.algorithm.c_str(), "QTESLA",sizeof("QTESLA"))== 0){
-      if(strncmp(req_val.parameter.c_str(), "qtesla1",sizeof("qtesla1")) == 0){
-        req_val.paramsq_="qTesla-p-I";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "qtesla3",sizeof("qtesla3")) == 0){
-        req_val.paramsq_="qTesla-p-III";
-      }
-      else{
-        req_val.error="Bad parameter Qtesla ";
-        answ_error(req_val,answ_js);
-        return 1;
-      }
-    }
-    else if(strncmp(req_val.algorithm.c_str(), "DILITHIUM",sizeof("DILITHIUM"))== 0){
+    if(strncmp(req_val.algorithm.c_str(), "DILITHIUM",sizeof("DILITHIUM"))== 0){
       if(strncmp(req_val.parameter.c_str(), "dilithium2",sizeof("dilithium2")) == 0){
         req_val.paramsq_="DILITHIUM_2";
       }
@@ -37,28 +24,41 @@ int search_oqs_param_(Document& d, stru_param& req_val, string& answ_js){
         return 1;
       }
     }
-    else if(strncmp(req_val.algorithm.c_str(), "MQDSS",sizeof("MQDSS"))== 0){
-      if(strncmp(req_val.parameter.c_str(), "mqdss3148",sizeof("mqdss3148")) == 0){
-        req_val.paramsq_="MQDSS-31-48";
+
+    else if(strncmp(req_val.algorithm.c_str(), "FALCON",sizeof("FALCON"))== 0){
+      if(strncmp(req_val.parameter.c_str(), "falcon512",sizeof("falcon512")) == 0){
+        req_val.paramsq_="Falcon-512";
       }
-      else if(strncmp(req_val.parameter.c_str(), "mqdss3164",sizeof("mqdss3164")) == 0){
-        req_val.paramsq_="MQDSS-31-64";
+      else if(strncmp(req_val.parameter.c_str(), "falcon1024",sizeof("falcon1024")) == 0){
+        req_val.paramsq_="Falcon-1024";
       }
       else{
-        req_val.error="Bad parameter MQDSS ";
+        req_val.error="Bad parameter Falcon";
         answ_error(req_val,answ_js);
         return 1;
       }
     }
+
+    else if(strncmp(req_val.algorithm.c_str(), "RAINBOW",sizeof("RAINBOW"))== 0){
+      if(strncmp(req_val.parameter.c_str(), "iacyclic",sizeof("iacyclic")) == 0){
+        req_val.paramsq_="Rainbow-Ia-Cyclic-Compressed";
+      }
+      else{
+        req_val.error="Bad parameter Rainbow";
+        answ_error(req_val,answ_js);
+        return 1;
+      }
+    }
+
     else if(strncmp(req_val.algorithm.c_str(), "SPHINCS+",sizeof("SPHINCS+"))== 0){
-      if(strncmp(req_val.parameter.c_str(), "haraka128f",sizeof("haraka128f")) == 0){
-        req_val.paramsq_="SPHINCS+-Haraka-128f-simple";
+      if(strncmp(req_val.parameter.c_str(), "haraka128s",sizeof("haraka128s")) == 0){
+        req_val.paramsq_="SPHINCS+-Haraka-128s-simple";
       }
-      else if(strncmp(req_val.parameter.c_str(), "haraka192f",sizeof("haraka192f")) == 0){
-        req_val.paramsq_="SPHINCS+-Haraka-192f-simple";
+      else if(strncmp(req_val.parameter.c_str(), "haraka192s",sizeof("haraka192s")) == 0){
+        req_val.paramsq_="SPHINCS+-Haraka-192s-simple";
       }
-      else if(strncmp(req_val.parameter.c_str(), "haraka256f",sizeof("haraka256f")) == 0){
-        req_val.paramsq_="SPHINCS+-Haraka-256f-simple";
+      else if(strncmp(req_val.parameter.c_str(), "haraka256s",sizeof("haraka256s")) == 0){
+        req_val.paramsq_="SPHINCS+-Haraka-256s-simple";
       }
       else{
         req_val.error="Bad parameter SPHINCS+ ";
@@ -66,6 +66,7 @@ int search_oqs_param_(Document& d, stru_param& req_val, string& answ_js){
         return 1;
       }
     }
+
     else{
       req_val.error="Bad parameter ";
       answ_error(req_val,answ_js);
