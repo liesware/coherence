@@ -46,7 +46,7 @@ falcon_param=["falcon512","falcon1024"]
 rainbow_param=["iacyclic"]
 sphincs_param=["haraka128s","haraka192s","haraka256s"]
 
-# oqs_sig(oqs_alg[0],dilithium_param)
-# # oqs_sig(oqs_alg[1],falcon_param)
-# oqs_sig(oqs_alg[2],rainbow_param)
+oqs_sig(oqs_alg[0],dilithium_param)
+# oqs_sig(oqs_alg[1],falcon_param)
+oqs_sig(oqs_alg[2],rainbow_param)
 oqs_sig(oqs_alg[3],sphincs_param)
