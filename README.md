@@ -45,7 +45,7 @@ Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a fo
 ## Quickstart (Docker image)
 
 ```bash
-docker run -d liesware/coherence:stable /usr/bin/coherence
+docker run -d liesware/coherence:dev /usr/bin/coherence
 ```
 Test:
 ```python
@@ -72,6 +72,16 @@ _You can use your favorite language, we are using python only for illustrative e
 argon2.py  block.py  cmac.py  dh.py  dsa.py  ecc.py  hash.py  hmac.py  ntru.py  poly1305.py  qtesla.py  rand.py  rsa.py  stream.py  vmac.py
 
 The code is very simple and with basic programming knowledge you should be able to understand it. You only need to understand python and REST API
+
+## GRPC
+
+```bash
+docker run -d liesware/coherence:dev /usr/bin/coherence_grpc 0.0.0.0 6613
+```
+
+The protocol buffer is on grpc/grpc/coherence.proto
+
+HTTP and GRPC have the same API, but on GRPC you need to send as JSON.stringify()
 
 ## Test
 on ~/coherence02/
