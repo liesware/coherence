@@ -11,9 +11,9 @@
 - http://www.coderfreedom.org/
 - https://pastebin.com/t6B6fhcv
 
-# Coherence 
+# Coherence
 
-"Suitable connection or dependence, consistency" (in narrative or argument), also more literally "act or state of sticking or cleaving of one thing to another". 
+"Suitable connection or dependence, consistency" (in narrative or argument), also more literally "act or state of sticking or cleaving of one thing to another".
 
 
 ## Abstract
@@ -24,7 +24,7 @@ Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a fo
 
 **Closing the gap between web developers and cryptography**
 
- 
+
 ## Features
 
 * Hash functions: SHA3, SHA2, SHA1, WHIRLPOOL, Blake2b, SipHash.
@@ -37,8 +37,8 @@ Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a fo
 * DSA: Key generation, digital signature.
 * DH: Key generation, key exchange (rfc and custom parameters).
 * ECC: Key generation, ECIES, ECDSA, ECDH, Curve25519, ECNR.
-* Post-Quantum Cryptography sign: Qtesla, Dilithium, MQDSS, SPHINCS+.
-* Post-Quantum Cryptography kem: NTRU, Kyber, Newhope, Saber, SIDH, Sike. 
+* Post-Quantum Cryptography sign: Dilithium, SPHINCS+, Rainbow.
+* Post-Quantum Cryptography kem: NTRU, Kyber, Saber.
 
 **Be careful Post-Quantum Cryptography is not an standard yet and is experimental.**
 
@@ -48,7 +48,7 @@ Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a fo
 docker run -d liesware/coherence:stable /usr/bin/coherence
 ```
 Test:
-```python 
+```python
 #!/usr/bin/env python
 
 import requests
@@ -65,7 +65,7 @@ sending(data_js)
 ```
 We are getting SHA3-512 for "Hello world!" string.
 
-## Examples 
+## Examples
 
 _You can use your favorite language, we are using python only for illustrative examples_
 
@@ -101,17 +101,17 @@ Current version Essence.
 
 ## Branches
 
-* Master: Stable, standard and experimental algorithms. 
+* Master: Stable, standard and experimental algorithms.
 
 ## Bugs
 
 Through Github
 
 ## Contact
-We will be so happy to listent to you, only concise and well-reasoned feedback are welcome. please be critic with yourself before 
-writing. 
+We will be so happy to listent to you, only concise and well-reasoned feedback are welcome. please be critic with yourself before
+writing.
 
-_coherence 4t 3vidence d0t com_ 
+_coherence 4t 3vidence d0t com_
 
 ## Webpage
 
