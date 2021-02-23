@@ -69,8 +69,7 @@ We are getting SHA3-512 for "Hello world!" string.
 
 _You can use your favorite language, we are using python only for illustrative examples_
 
-argon2.py  block.py  cmac.py  dh.py  dsa.py  ecc.py  hash.py  hmac.py  ntru.py  poly1305.py  qtesla.py  rand.py  rsa.py  stream.py  
-vmac.py
+argon2.py  block.py  cmac.py  dh.py  dsa.py  ecc.py  hash.py  hmac.py  ntru.py  poly1305.py  qtesla.py  rand.py  rsa.py  stream.py  vmac.py
 
 The code is very simple and with basic programming knowledge you should be able to understand it. You only need to understand python and REST API
 
@@ -115,4 +114,4 @@ _coherence 4t 3vidence d0t com_
 
 ## Webpage
 
-[Link](https://3vidence.dev/)
+[Link](https://www.3vidence.com/)
