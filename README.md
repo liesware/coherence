@@ -96,7 +96,7 @@ Terminal 3
 ## Wiki
 [RTFW](https://en.wikipedia.org/wiki/RTFM)
 
-Please see https://liesware.gitbook.io/coherence/
+Please see https://coherence.3vidence.com/
 
 ## Target
 
