@@ -17,12 +17,10 @@
 
 
 ## Abstract
-The future of data breaches is not encouraging,  on 2017 less than 4% of data breaches the cryptography became the data stolen into data useless, with enterprise options as well as open source options to perform cryptography even so year in year out data breaches grow.
-
 Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a focus on interoperability, flexibility and  simplicity. Coherence gives an interface for modern cryptographic algorithms which is inspired by Openssl, it is a REST API in order to be used by any language, in other words Coherence minimizes development time and code complexity. Some of the algorithms offered by Coherence are AES and AES candidates, Sosemanuk, SHA* family, HMAC, DH, RSA, DSA, ECC, NTRU.
 
 
-**Closing the gap between web developers and cryptography**
+**This technology helps us to bring modern cryptography (included post-quantum cryptography) to modern web apps.**
 
 
 ## Features
@@ -98,7 +96,7 @@ Terminal 3
 ## Wiki
 [RTFW](https://en.wikipedia.org/wiki/RTFM)
 
-Please see https://github.com/liesware/coherence/wiki
+Please see https://liesware.gitbook.io/coherence/
 
 ## Target
 
