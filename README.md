@@ -20,7 +20,7 @@
 Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a focus on interoperability, flexibility and  simplicity. Coherence gives an interface for modern cryptographic algorithms which is inspired by Openssl, it is a REST API in order to be used by any language, in other words Coherence minimizes development time and code complexity. Some of the algorithms offered by Coherence are AES and AES candidates, Sosemanuk, SHA* family, HMAC, DH, RSA, DSA, ECC, NTRU.
 
 
-**This technology helps us to bring modern cryptography (included post-quantum cryptography) to modern web apps.**
+**This technology helps us to bring post-quantum cryptography to modern web apps.**
 
 
 ## Features
