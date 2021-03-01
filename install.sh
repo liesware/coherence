@@ -33,7 +33,7 @@ make static-lib
 cd ..
 git clone https://github.com/Tencent/rapidjson.git
 
-git clone -b master https://github.com/open-quantum-safe/liboqs.git
+git clone -b main https://github.com/open-quantum-safe/liboqs.git
 cd liboqs
 mkdir build && cd build
 cmake -DBUILD_SHARED_LIBS=ON -DOQS_USE_OPENSSL=ON -GNinja ..
