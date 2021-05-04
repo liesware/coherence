@@ -46,8 +46,8 @@ for i in algorithms:
         for k in modes:
             block_js["algorithm"]=i
             block_js["mode"]=k
-            if k=="gcm":
-                block_js["adata"]="ABCDEF"
+            # if k=="gcm":
+            #     block_js["adata"]="ABCDEF"
             common(json.dumps(block_js),j,16)
 
 

@@ -10,13 +10,13 @@ int search_oqs_param_(Document& d, stru_param& req_val, string& answ_js){
 
     if(strncmp(req_val.algorithm.c_str(), "DILITHIUM",sizeof("DILITHIUM"))== 0){
       if(strncmp(req_val.parameter.c_str(), "dilithium2",sizeof("dilithium2")) == 0){
-        req_val.paramsq_="DILITHIUM_2";
+        req_val.paramsq_="DILITHIUM2";
       }
       else if(strncmp(req_val.parameter.c_str(), "dilithium3",sizeof("dilithium3")) == 0){
-        req_val.paramsq_="DILITHIUM_3";
+        req_val.paramsq_="DILITHIUM3";
       }
-      else if(strncmp(req_val.parameter.c_str(), "dilithium4",sizeof("dilithium4")) == 0){
-        req_val.paramsq_="DILITHIUM_4";
+      else if(strncmp(req_val.parameter.c_str(), "dilithium5",sizeof("dilithium5")) == 0){
+        req_val.paramsq_="DILITHIUM5";
       }
       else{
         req_val.error="Bad parameter Dilithium ";
@@ -40,9 +40,15 @@ int search_oqs_param_(Document& d, stru_param& req_val, string& answ_js){
     }
 
     else if(strncmp(req_val.algorithm.c_str(), "RAINBOW",sizeof("RAINBOW"))== 0){
-      if(strncmp(req_val.parameter.c_str(), "iacyclic",sizeof("iacyclic")) == 0){
-        req_val.paramsq_="Rainbow-Ia-Cyclic-Compressed";
+      if(strncmp(req_val.parameter.c_str(), "icompressed",sizeof("icompressed")) == 0){
+        req_val.paramsq_="Rainbow-I-Compressed";
       }
+      else if(strncmp(req_val.parameter.c_str(), "iiicompressed",sizeof("iiicompressed")) == 0){
+        req_val.paramsq_="Rainbow-III-Compressed";
+      }
+      // else if(strncmp(req_val.parameter.c_str(), "vcompressed",sizeof("vcompressed")) == 0){
+      //   req_val.paramsq_="Rainbow-V-Compressed";
+      // }
       else{
         req_val.error="Bad parameter Rainbow";
         answ_error(req_val,answ_js);
