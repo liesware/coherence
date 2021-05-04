@@ -106,9 +106,6 @@ int HMACING(string& payload, string& type, string& mac, string& key , int& binar
         return 1;
       }
     }
-    // else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
-    //   FileSource(payload.c_str(), true, new HashFilter(hmac,new HexEncoder(new StringSink(mac))));
-    // }
     else{
       error="Bad type";
       return 1;
@@ -146,9 +143,6 @@ int CMACING(string& payload, string& type, string& mac, string& key , int& binar
         return 1;
       }
     }
-    // else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
-    //   FileSource(payload.c_str(), true, new HashFilter(cmac,new HexEncoder(new StringSink(mac))));
-    // }
     else{
       error="Bad type";
       return 1;
@@ -189,9 +183,6 @@ int VMACING(string& payload, string& type, string& mac, string& key, string& iv 
         return 1;
       }
     }
-    // else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
-    //   FileSource(payload.c_str(), true, new HashFilter(vmac,new HexEncoder(new StringSink(mac))));
-    // }
     else{
       error="Bad type";
       return 1;
@@ -230,9 +221,6 @@ int POLY1305_(string& payload, string& type, string& mac, string& key, string& n
         return 1;
       }
     }
-    // else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
-    //   FileSource(payload.c_str(), true, new HashFilter(poly,new HexEncoder(new StringSink(mac))));
-    // }
     else{
       error="Bad type";
       return 1;
@@ -288,22 +276,6 @@ int parse_hmac(Document& d, stru_param& req_val, string& answ_js){
       return 1;
     }
   }
-  // else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
-  //   if(d.HasMember("file")&&d.HasMember("key") ){
-  //     if(check_file(d,req_val,answ_js)!=0)
-  //     return 1;
-  //     if(check_key(d,req_val,answ_js)!=0)
-  //     return 1;
-  //
-  //     req_val.hex=0;
-  //     req_val.payload=req_val.file;
-  //   }
-  //   else{
-  //     req_val.error="Not file/key tag ";
-  //     answ_error(req_val,answ_js);
-  //     return 1;
-  //   }
-  // }
   else{
     req_val.error="Bad tye ";
     answ_error(req_val,answ_js);
@@ -394,22 +366,6 @@ int parse_cmac(Document& d, stru_param& req_val, string& answ_js){
       return 1;
     }
   }
-  // else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
-  //   if(d.HasMember("file")&&d.HasMember("key") ){
-  //     if(check_file(d,req_val,answ_js)!=0)
-  //     return 1;
-  //     if(check_key(d,req_val,answ_js)!=0)
-  //     return 1;
-  //
-  //     req_val.hex=0;
-  //     req_val.payload=req_val.file;
-  //   }
-  //   else{
-  //     req_val.error="Not file/key tag ";
-  //     answ_error(req_val,answ_js);
-  //     return 1;
-  //   }
-  // }
   else{
     req_val.error="Bad tye ";
     answ_error(req_val,answ_js);
@@ -490,24 +446,6 @@ int parse_vmac(Document& d, stru_param& req_val, string& answ_js){
       return 1;
     }
   }
-  // else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
-  //   if(d.HasMember("file")&&d.HasMember("key")&&d.HasMember("iv") ){
-  //     if(check_file(d,req_val,answ_js)!=0)
-  //     return 1;
-  //     if(check_key(d,req_val,answ_js)!=0)
-  //     return 1;
-  //     if(check_iv(d,req_val,answ_js)!=0)
-  //     return 1;
-  //
-  //     req_val.hex=0;
-  //     req_val.payload=req_val.file;
-  //   }
-  //   else{
-  //     req_val.error="Not file/key/iv tag ";
-  //     answ_error(req_val,answ_js);
-  //     return 1;
-  //   }
-  // }
   else{
     req_val.error="Bad tye ";
     answ_error(req_val,answ_js);
@@ -577,22 +515,6 @@ int parse_poly(Document& d, stru_param& req_val, string& answ_js){
       return 1;
     }
   }
-  // else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
-  //   if(d.HasMember("file") && d.HasMember("key")&&d.HasMember("nonce") ){
-  //     if(check_file(d,req_val,answ_js)!=0)
-  //     return 1;
-  //     if(check_poly(d,req_val,answ_js)!=0)
-  //     return 1;
-  //
-  //     req_val.hex=0;
-  //     req_val.payload=req_val.file;
-  //   }
-  //   else{
-  //     req_val.error="Not file tag ";
-  //     answ_error(req_val,answ_js);
-  //     return 1;
-  //   }
-  // }
   else{
     req_val.error="Bad tye ";
     answ_error(req_val,answ_js);

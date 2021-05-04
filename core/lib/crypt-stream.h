@@ -55,11 +55,6 @@ int STREAM_ENC(string& payload, string& type, string& result, string& key, strin
         return 1;
       }
     }
-    // else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
-    //   result=payload;
-    //   result+=".enc";
-    //   FileSource(payload.c_str(), true, new StreamTransformationFilter(stream,new FileSink(result.c_str())));
-    // }
     else{
       error="Bad type";
       return 1;
@@ -100,11 +95,6 @@ int STREAM_DEC(string& payload, string& type, string& result, string& key, strin
         StringSource(payload, true, new StreamTransformationFilter(stream,new HexEncoder(new StringSink(result))));
       }
     }
-    // else if (strncmp(type.c_str(), "file",sizeof("file")) == 0){
-    //   result=payload;
-    //   result+=".dec";
-    //   FileSource(payload.c_str(), true, new StreamTransformationFilter(stream,new FileSink(result.c_str())));
-    // }
     else{
       error="Bad type";
       return 1;
@@ -167,37 +157,6 @@ int parse_stream(Document& d, stru_param& req_val, string& answ_js){
       return 1;
     }
   }
-  // else if (strncmp(req_val.type.c_str(), "file",sizeof("file")) == 0){
-  //   if(d.HasMember("file")&&d.HasMember("key")&&d.HasMember("iv") &&d.HasMember("operation")){
-  //     if(check_file(d,req_val,answ_js)!=0)
-  //     return 1;
-  //     if(check_key(d,req_val,answ_js)!=0)
-  //     return 1;
-  //     if(check_ops(d,req_val,answ_js)!=0)
-  //     return 1;
-  //     if(strncmp(req_val.algorithm.c_str(), "SOSEMANUK",sizeof("SOSEMANUK")) == 0){
-  //       if(check_iv(d,req_val,answ_js)!=0)
-  //       return 1;
-  //     }
-  //     else if(strncmp(req_val.algorithm.c_str(), "SALSA20",sizeof("SALSA20")) == 0){
-  //       if(check_iv(d,req_val,answ_js,16)!=0)
-  //       return 1;
-  //     }
-  //     else{
-  //       req_val.error="Bad Stream algorithm ";
-  //       answ_error(req_val,answ_js);
-  //       return 1;
-  //     }
-  //
-  //     req_val.hex=0;
-  //     req_val.payload=req_val.file;
-  //   }
-  //   else{
-  //     req_val.error="Not file/key/iv/ops tag ";
-  //     answ_error(req_val,answ_js);
-  //     return 1;
-  //   }
-  // }
   else{
     req_val.error="Bad type ";
     answ_error(req_val,answ_js);
