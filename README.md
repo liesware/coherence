@@ -43,7 +43,7 @@ Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a fo
 ## Quickstart (Docker image)
 
 ```bash
-docker run -d liesware/coherence:dev /usr/bin/coherence
+docker run -d liesware/coherence:latest /usr/bin/coherence
 ```
 Test:
 ```python
@@ -74,7 +74,7 @@ The code is very simple and with basic programming knowledge you should be able 
 ## GRPC
 
 ```bash
-docker run -d liesware/coherence:dev /usr/bin/coherence_grpc 0.0.0.0 6613
+docker run -d liesware/coherence:latest /usr/bin/coherence_grpc 0.0.0.0 6613
 ```
 
 The protocol buffer is on grpc/grpc/coherence.proto
