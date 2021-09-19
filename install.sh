@@ -74,6 +74,7 @@ mkdir -p cmake/build
 cd cmake/build
 cmake -DgRPC_BUILD_TESTS=OFF ../..
 make -j
+make install
 cd ../../../
 make
 cd ..
