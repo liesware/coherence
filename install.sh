@@ -9,7 +9,7 @@
 apt-get update
 DEBIAN_FRONTEND="noninteractive" apt-get install -y autoconf automake gcc g++ make libtool git wget unzip xsltproc libssl-dev bzip2 valgrind doxygen graphviz python3 python3-pip cmake libcurl4-openssl-dev cmake gcc ninja-build libssl-dev python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz git wget libargon2-dev pkg-config
 
-git clone -b master https://github.com/liesware/coherence
+git clone -b development https://github.com/liesware/coherence
 cd coherence/core/lib/
 
 git clone https://github.com/P-H-C/phc-winner-argon2
@@ -33,11 +33,10 @@ make static-lib
 cd ..
 git clone https://github.com/Tencent/rapidjson.git
 
-# git clone -b master https://github.com/open-quantum-safe/liboqs.git
-wget https://github.com/open-quantum-safe/liboqs/archive/refs/tags/0.5.0.zip
-unzip 0.5.0.zip
+wget https://github.com/open-quantum-safe/liboqs/archive/refs/tags/0.7.0.zip
+unzip 0.*.zip
 mv liboqs-* liboqs
-mv 0.5.0.zip liboqs
+rm -f 0.*.0.zip
 cd liboqs
 mkdir build && cd build
 cmake -DBUILD_SHARED_LIBS=ON -DOQS_USE_OPENSSL=ON -GNinja ..
@@ -69,20 +68,20 @@ make
 
 cd grpc
 git clone --recurse-submodules -b v1.32.0 https://github.com/grpc/grpc
+# git clone --recurse-submodules -b v1.38.0 https://github.com/grpc/grpc
 cd grpc
 mkdir -p cmake/build
 cd cmake/build
-cmake ../..
-make
-make install
+cmake -DgRPC_BUILD_TESTS=OFF ../..
+make -j
 cd ../../../
 make
 cd ..
 
 cp lib/pistache/prefix/lib/libpistache*so.0* /lib/x86_64-linux-gnu/libpistache.so.0
-cp lib/cryptopp/libcryptopp.so.8.5.0 /lib/x86_64-linux-gnu/libcryptopp.so.8
+cp lib/cryptopp/libcryptopp.so.8.*.0 /lib/x86_64-linux-gnu/libcryptopp.so.8
 cp lib/libntru/libntru.so /lib/x86_64-linux-gnu/
-cp lib/liboqs/build/lib/liboqs.so.0.5.0 /lib/x86_64-linux-gnu/liboqs.so.0
+cp lib/liboqs/build/lib/liboqs.so.0.*.0 /lib/x86_64-linux-gnu/liboqs.so.0
 cp lib/argon2/libargon2.so.1 /lib/x86_64-linux-gnu/
 ls -lha /lib/x86_64-linux-gnu/libpistache.so.0
 ls -lha /lib/x86_64-linux-gnu/libcryptopp.so.8
