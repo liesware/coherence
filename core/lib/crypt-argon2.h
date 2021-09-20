@@ -5,7 +5,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "argon2/include/argon2.h"
+#include <argon2.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

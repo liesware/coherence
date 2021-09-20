@@ -15,12 +15,6 @@ DEBIAN_FRONTEND="noninteractive" apt-get install -y autoconf automake gcc g++ ma
 git clone -b development https://github.com/liesware/coherence
 cd coherence/core/lib/
 
-git clone https://github.com/P-H-C/phc-winner-argon2
-mv phc-winner-argon2/ argon2
-cd argon2
-make
-
-cd ..
 mkdir cryptopp
 cd cryptopp
 wget https://www.cryptopp.com/cryptopp850.zip
