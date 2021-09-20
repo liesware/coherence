@@ -12,7 +12,7 @@
 apt-get update
 DEBIAN_FRONTEND="noninteractive" apt-get install -y autoconf automake gcc g++ make libtool git wget unzip xsltproc libssl-dev bzip2 valgrind doxygen graphviz python3 python3-pip cmake libcurl4-openssl-dev cmake gcc ninja-build libssl-dev python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz git wget libargon2-dev pkg-config
 
-git clone -b development https://github.com/liesware/coherence
+git clone -b rd https://github.com/liesware/coherence
 cd coherence/core/lib/
 
 mkdir cryptopp
