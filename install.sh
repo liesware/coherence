@@ -2,7 +2,7 @@
 
 # docker run -it -v  "$(pwd)"/release2/:/release --name coherence_rd ubuntu:latest /bin/bash
 #   apt-get update
-#   apt-get install -y libssl-dev
+#   apt-get install -y libssl-dev libargon2-dev
 #   cp libs & bin
 # docker rmi liesware/coherence:rd
 # docker commit coherence_rd liesware/coherence:rd
