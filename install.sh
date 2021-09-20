@@ -1,10 +1,13 @@
 #!/bin/bash
 
-# docker run -it -v  ~/prog/coherence_rd/:/rd/ --name coherence_rd ubuntu:latest /bin/bash
-# apt-get update
-# apt-get install -y libssl-dev
-# docker rmi liesware/coherence:dev
-# docker commit
+# docker run -it -v  "$(pwd)"/release2/:/release --name coherence_rd ubuntu:latest /bin/bash
+#   apt-get update
+#   apt-get install -y libssl-dev
+#   cp libs & bin
+# docker rmi liesware/coherence:rd
+# docker commit coherence_rd liesware/coherence:rd
+# docker login
+# docker push liesware/coherence:rd
 
 apt-get update
 DEBIAN_FRONTEND="noninteractive" apt-get install -y autoconf automake gcc g++ make libtool git wget unzip xsltproc libssl-dev bzip2 valgrind doxygen graphviz python3 python3-pip cmake libcurl4-openssl-dev cmake gcc ninja-build libssl-dev python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz git wget libargon2-dev pkg-config
