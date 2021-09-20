@@ -12,7 +12,7 @@
 apt-get update
 DEBIAN_FRONTEND="noninteractive" apt-get install -y autoconf automake gcc g++ make libtool git wget unzip xsltproc libssl-dev bzip2 valgrind doxygen graphviz python3 python3-pip cmake libcurl4-openssl-dev cmake gcc ninja-build libssl-dev python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz git wget libargon2-dev pkg-config
 
-git clone -b development https://github.com/liesware/coherence
+git clone -b master https://github.com/liesware/coherence
 cd coherence/core/lib/
 
 git clone https://github.com/P-H-C/phc-winner-argon2
@@ -85,6 +85,7 @@ cp lib/pistache/prefix/lib/libpistache*so.0* /lib/x86_64-linux-gnu/libpistache.s
 cp lib/cryptopp/libcryptopp.so.8.*.0 /lib/x86_64-linux-gnu/libcryptopp.so.8
 cp lib/libntru/libntru.so /lib/x86_64-linux-gnu/
 cp lib/liboqs/build/lib/liboqs.so.0.*.0 /lib/x86_64-linux-gnu/liboqs.so.0
+# cp lib/argon2/libargon2.so.1 /lib/x86_64-linux-gnu/
 ls -lha /lib/x86_64-linux-gnu/libpistache.so.0
 ls -lha /lib/x86_64-linux-gnu/libcryptopp.so.8
 ls -lha /lib/x86_64-linux-gnu/libntru.so
