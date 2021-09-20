@@ -64,20 +64,14 @@ mkdir bin
 make
 
 cd grpc
-git clone --recurse-submodules -b v1.38.0 https://github.com/grpc/grpc
+git clone --recurse-submodules -b v1.32.0 https://github.com/grpc/grpc
 cd grpc
 mkdir -p cmake/build
 cd cmake/build
 cmake -DgRPC_BUILD_TESTS=OFF ../..
 make -j
 make install
-cd ../../third_party/abseil-cpp
-mkdir -p cmake/build
-cd cmake/build
-cmake -DCMAKE_POSITION_INDEPENDENT_CODE=TRUE ../..
-make -j
-make install
-cd ../../../../../
+cd ../../../
 make
 cd ..
 
