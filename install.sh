@@ -45,6 +45,7 @@ ninja
 
 cd ../../
 git clone https://github.com/open-quantum-safe/liboqs-cpp
+sed -i '40 i std::string OQS_CPP_VERSION="0.7.2";' liboqs-cpp/include/common.h
 
 git clone https://github.com/pistacheio/pistache.git
 cd pistache
@@ -52,7 +53,8 @@ meson setup build
 meson compile -C build
 
 cd ../../
-mmake
+mkdir bin
+make
 
 cp lib/pistache/build/src/libpistache.so.0.1.1 /lib/x86_64-linux-gnu/libpistache.so.0
 cp lib/cryptopp/libcryptopp.so.8.7.0 /lib/x86_64-linux-gnu/libcryptopp.so.8
