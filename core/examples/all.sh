@@ -1,19 +1,19 @@
 #!/bin/bash
 
-python argon2.py
-python block.py
-python cmac.py
-python dh.py
-python dsa.py
-python ecc.py
-python xed25519.py
-python hash.py
-python mac.py
-python ntru.py
-python poly1305.py
-python oqs_sign.py
-python oqs_kem.py
+python2 argon2.py
+python2 block.py
+python2 cmac.py
+python2 dh.py
+python2 dsa.py
+python2 ecc.py
+python2 xed25519.py
+python2 hash.py
+python2 mac.py
+python2 ntru.py
+python2 poly1305.py
+python2 oqs_sign.py
+python2 oqs_kem.py
 #python rand.py
-python rsa.py
-python stream.py
-python vmac.py
+python2 rsa.py
+python2 stream.py
+python2 vmac.py

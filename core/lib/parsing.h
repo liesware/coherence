@@ -19,7 +19,6 @@
 #include "crypt-block.h"
 #include "crypt-rsa.h"
 #include "crypt-ecc.h"
-#include "crypt-ntru.h"
 #include "crypt-xed25519.h"
 #include "monit.h"
 
@@ -280,12 +279,6 @@ int PARSING(string& str_json, string& answ_js ){
   }
   #endif
 
-  #ifdef _ntru
-  else if(strncmp(req_val.algorithm.c_str(), "NTRU",sizeof("NTRU")) == 0){
-    parse_ntru(d,req_val,answ_js);
-  }
-  #endif
-
   #ifdef _ed25519
   else if(strncmp(req_val.algorithm.c_str(), "ED25519",sizeof("ED25519")) == 0){
     parse_ed25519(d,req_val,answ_js);
@@ -310,32 +303,8 @@ int PARSING(string& str_json, string& answ_js ){
   }
   #endif
 
-  #ifdef _sphincs
-  else if(strncmp(req_val.algorithm.c_str(), "SPHINCS+",sizeof("SPHINCS+")) == 0){
-    parse_oqs(d,req_val,answ_js);
-  }
-  #endif
-
-  #ifdef _falcon
-  else if(strncmp(req_val.algorithm.c_str(), "FALCON",sizeof("FALCON")) == 0){
-    parse_oqs(d,req_val,answ_js);
-  }
-  #endif
-
-  #ifdef _rainbow
-  else if(strncmp(req_val.algorithm.c_str(), "RAINBOW",sizeof("RAINBOW")) == 0){
-    parse_oqs(d,req_val,answ_js);
-  }
-  #endif
-
   #ifdef _kyber
   else if(strncmp(req_val.algorithm.c_str(), "KYBER",sizeof("KYBER")) == 0){
-    parse_oqs_kem(d,req_val,answ_js);
-  }
-  #endif
-
-  #ifdef _saber
-  else if(strncmp(req_val.algorithm.c_str(), "SABER",sizeof("SABER")) == 0){
     parse_oqs_kem(d,req_val,answ_js);
   }
   #endif

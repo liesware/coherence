@@ -39,23 +39,6 @@ int search_oqs_param_(Document& d, stru_param& req_val, string& answ_js){
       }
     }
 
-    else if(strncmp(req_val.algorithm.c_str(), "RAINBOW",sizeof("RAINBOW"))== 0){
-      if(strncmp(req_val.parameter.c_str(), "icompressed",sizeof("icompressed")) == 0){
-        req_val.paramsq_="Rainbow-I-Compressed";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "iiicompressed",sizeof("iiicompressed")) == 0){
-        req_val.paramsq_="Rainbow-III-Compressed";
-      }
-      // else if(strncmp(req_val.parameter.c_str(), "vcompressed",sizeof("vcompressed")) == 0){
-      //   req_val.paramsq_="Rainbow-V-Compressed";
-      // }
-      else{
-        req_val.error="Bad parameter Rainbow";
-        answ_error(req_val,answ_js);
-        return 1;
-      }
-    }
-
     else if(strncmp(req_val.algorithm.c_str(), "SPHINCS+",sizeof("SPHINCS+"))== 0){
       if(strncmp(req_val.parameter.c_str(), "haraka128s",sizeof("haraka128s")) == 0){
         req_val.paramsq_="SPHINCS+-Haraka-128s-simple";

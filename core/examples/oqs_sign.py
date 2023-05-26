@@ -39,12 +39,9 @@ def oqs_sig (algorithm, params):
         answ2=json.loads(data_js_n)
         print "Recived: \n" + data_js_n +"\n"
 
-oqs_alg=["DILITHIUM","RAINBOW","SPHINCS+"]
+oqs_alg=["DILITHIUM","FALCON","SPHINCS+"]
 
 dilithium_param=["dilithium2","dilithium3","dilithium5"]
-rainbow_param=["icompressed","iiicompressed"]
-sphincs_param=["haraka128s","haraka192s","haraka256s"]
 
 oqs_sig(oqs_alg[0],dilithium_param)
-oqs_sig(oqs_alg[1],rainbow_param)
-oqs_sig(oqs_alg[2],sphincs_param)
+

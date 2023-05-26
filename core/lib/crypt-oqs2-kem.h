@@ -24,36 +24,11 @@ int search_oqs_param_k(Document& d, stru_param& req_val, string& answ_js){
         return 1;
       }
     }
-    else if(strncmp(req_val.algorithm.c_str(), "SABER",sizeof("SABER"))== 0){
 
-      if(strncmp(req_val.parameter.c_str(), "light",sizeof("light")) == 0){
-        req_val.paramsq_="LightSaber-KEM";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "saber",sizeof("saber")) == 0){
-        req_val.paramsq_="Saber-KEM";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "fire",sizeof("fire")) == 0){
-        req_val.paramsq_="FireSaber-KEM";
-      }
-      else{
-        req_val.error="Bad parameter Saber ";
-        answ_error(req_val,answ_js);
-        return 1;
-      }
-    }
     else if(strncmp(req_val.algorithm.c_str(), "NTRU_KEM",sizeof("NTRU_KEM"))== 0){
 
-      if(strncmp(req_val.parameter.c_str(), "ntru509",sizeof("ntru509")) == 0){
-        req_val.paramsq_="NTRU-HPS-2048-509";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "ntru677",sizeof("ntru677")) == 0){
-        req_val.paramsq_="NTRU-HPS-2048-677";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "ntru821",sizeof("ntru821")) == 0){
-        req_val.paramsq_="NTRU-HPS-4096-821";
-      }
-      else if(strncmp(req_val.parameter.c_str(), "ntru701",sizeof("ntru701")) == 0){
-        req_val.paramsq_="NTRU-HRSS-701";
+      if(strncmp(req_val.parameter.c_str(), "sntrup761",sizeof("sntrup761")) == 0){
+        req_val.paramsq_="sntrup761";
       }
       else{
         req_val.error="Bad parameter Newhope ";

@@ -1,6 +1,5 @@
 #include <iostream>
 #include "cryptopp/oids.h"
-#include "libntru/src/ntru.h"
 
 #define _sha3
 #define _sha2
@@ -28,16 +27,11 @@
 #define _simeck64
 #define _rsa
 #define _ecc
-#define _ntru
 #define _ed25519
 #define _x25519
 #define _ecnr
 #define _dilithium
-#define _sphincs
-// #define _falcon
-#define _rainbow
 #define _kyber
-#define _saber
 #define _ntrukem
 
 using namespace  std;
@@ -103,7 +97,7 @@ typedef struct params{
   //NTRU
   string parameter;
   string paramsq_;
-  struct NtruEncParams params_;
+  // struct NtruEncParams params_;
   //json
   string tag;
   string value;
