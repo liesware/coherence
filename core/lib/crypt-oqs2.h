@@ -1,4 +1,4 @@
-#include "oqs_cpp.h"
+#include "oqs_cpp.hpp"
 
 using namespace oqs;
 

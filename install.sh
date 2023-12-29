@@ -23,21 +23,18 @@ make
 cd ..
 mkdir cryptopp
 cd cryptopp
-wget https://www.cryptopp.com/cryptopp870.zip
-unzip cryptopp870.zip
+wget https://www.cryptopp.com/cryptopp890.zip
+unzip cryptopp890.zip
 make libcryptopp.a libcryptopp.so
-
-cd ..
-git clone https://github.com/tbuktu/libntru.git
-cd libntru
-make
-make static-lib
 
 cd ..
 git clone https://github.com/Tencent/rapidjson.git
 
-
-git clone -b main https://github.com/open-quantum-safe/liboqs.git
+# git clone -b main https://github.com/open-quantum-safe/liboqs.git
+wget https://github.com/open-quantum-safe/liboqs/archive/refs/tags/0.9.1.zip
+unzip 0.9.1.zip
+mv liboqs-0.9.1 liboqs
+mv 0.9.1.zip liboqs
 cd liboqs
 mkdir build && cd build
 cmake -DBUILD_SHARED_LIBS=ON -GNinja ..
@@ -45,7 +42,7 @@ ninja
 
 cd ../../
 git clone https://github.com/open-quantum-safe/liboqs-cpp
-sed -i '40 i std::string OQS_CPP_VERSION="0.7.2";' liboqs-cpp/include/common.h
+sed -i '40 i std::string LIBOQS_CPP_VERSION="0.9.1";' liboqs-cpp/include/common.h
 
 git clone https://github.com/pistacheio/pistache.git
 cd pistache
