@@ -42,7 +42,7 @@ ninja
 
 cd ../../
 git clone https://github.com/open-quantum-safe/liboqs-cpp
-sed -i '40 i std::string LIBOQS_CPP_VERSION="0.9.1";' liboqs-cpp/include/common.h
+sed -i '40 i std::string LIBOQS_CPP_VERSION="0.7.2";' liboqs-cpp/include/common.hpp
 
 git clone https://github.com/pistacheio/pistache.git
 cd pistache
