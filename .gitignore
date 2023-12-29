@@ -51,3 +51,4 @@ core/grpc/coherence.pb*
 core/grpc/coherence_pb2*
 core/grpc/coherence_client
 core/grpc/coherence_grpc
+core/examples/get-pip.py
