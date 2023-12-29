@@ -53,11 +53,12 @@ cd ../../
 mkdir bin
 make
 
-cp lib/pistache/build/src/libpistache.so.0.1.1 /lib/x86_64-linux-gnu/libpistache.so.0
-cp lib/cryptopp/libcryptopp.so.8.7.0 /lib/x86_64-linux-gnu/libcryptopp.so.8
-cp lib/liboqs/build/lib/liboqs.so.0.8.0-rc1 /lib/x86_64-linux-gnu/liboqs.so.3
+cp lib/pistache/build/src/libpistache.so.0.2.7 /lib/x86_64-linux-gnu/libpistache.so.0
+cp lib/cryptopp/libcryptopp.so.8.9.0 /lib/x86_64-linux-gnu/libcryptopp.so.8
+cp lib/liboqs/build/lib/liboqs.so.0.9.1 /lib/x86_64-linux-gnu/liboqs.so.4
 ls -lha /lib/x86_64-linux-gnu/libpistache.so.0
 ls -lha /lib/x86_64-linux-gnu/libcryptopp.so.8
-ls -lha /lib/x86_64-linux-gnu/liboqs.so.0
+ls -lha /lib/x86_64-linux-gnu/liboqs.so.4
 ls -lha /lib/x86_64-linux-gnu/libargon2.so.1
 ls -lha /lib/x86_64-linux-gnu/libpistache.so.0
+ldd bin/coherence 
