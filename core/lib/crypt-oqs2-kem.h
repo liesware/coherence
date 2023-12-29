@@ -31,7 +31,7 @@ int search_oqs_param_k(Document& d, stru_param& req_val, string& answ_js){
         req_val.paramsq_="sntrup761";
       }
       else{
-        req_val.error="Bad parameter Newhope ";
+        req_val.error="Bad parameter NTRU ";
         answ_error(req_val,answ_js);
         return 1;
       }

@@ -31,6 +31,8 @@
 #define _x25519
 #define _ecnr
 #define _dilithium
+// #define _falcon
+#define _sphincs
 #define _kyber
 #define _ntrukem
 

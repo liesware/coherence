@@ -40,14 +40,14 @@ int search_oqs_param_(Document& d, stru_param& req_val, string& answ_js){
     }
 
     else if(strncmp(req_val.algorithm.c_str(), "SPHINCS+",sizeof("SPHINCS+"))== 0){
-      if(strncmp(req_val.parameter.c_str(), "haraka128s",sizeof("haraka128s")) == 0){
-        req_val.paramsq_="SPHINCS+-Haraka-128s-simple";
+      if(strncmp(req_val.parameter.c_str(), "shake128s",sizeof("shake128s")) == 0){
+        req_val.paramsq_="SPHINCS+-SHAKE-128s-simple";
       }
-      else if(strncmp(req_val.parameter.c_str(), "haraka192s",sizeof("haraka192s")) == 0){
-        req_val.paramsq_="SPHINCS+-Haraka-192s-simple";
+      else if(strncmp(req_val.parameter.c_str(), "shake192s",sizeof("shake192s")) == 0){
+        req_val.paramsq_="SPHINCS+-SHAKE-192s-simple";
       }
-      else if(strncmp(req_val.parameter.c_str(), "haraka256s",sizeof("haraka256s")) == 0){
-        req_val.paramsq_="SPHINCS+-Haraka-256s-simple";
+      else if(strncmp(req_val.parameter.c_str(), "shake256s",sizeof("shake256s")) == 0){
+        req_val.paramsq_="SPHINCS+-SHAKE-256s-simple"; 
       }
       else{
         req_val.error="Bad parameter SPHINCS+ ";

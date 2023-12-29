@@ -42,6 +42,11 @@ def oqs_sig (algorithm, params):
 oqs_alg=["DILITHIUM","FALCON","SPHINCS+"]
 
 dilithium_param=["dilithium2","dilithium3","dilithium5"]
+falcon_param=["falcon512","falcon1024"]
+sphincs_param=["shake128s","shake192s","shake256s"]
+
 
 oqs_sig(oqs_alg[0],dilithium_param)
+# oqs_sig(oqs_alg[1],falcon_param)
+oqs_sig(oqs_alg[2],sphincs_param)
 

@@ -303,6 +303,19 @@ int PARSING(string& str_json, string& answ_js ){
   }
   #endif
 
+  #ifdef _falcon
+  else if(strncmp(req_val.algorithm.c_str(), "FALCON",sizeof("FALCON")) == 0){
+    parse_oqs(d,req_val,answ_js);
+  }
+  #endif
+
+
+  #ifdef _sphincs
+  else if(strncmp(req_val.algorithm.c_str(), "SPHINCS+",sizeof("SPHINCS+")) == 0){
+    parse_oqs(d,req_val,answ_js);
+  }
+  #endif
+
   #ifdef _kyber
   else if(strncmp(req_val.algorithm.c_str(), "KYBER",sizeof("KYBER")) == 0){
     parse_oqs_kem(d,req_val,answ_js);
