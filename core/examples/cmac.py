@@ -1,28 +1,32 @@
 import requests
 import json
-import os,binascii
+import os
+import binascii
 
 from sending import sending
 
-algorithms=["aes", "rc6", "mars","serpent","twofish", "cast256"]
+def send_cmac_request(data_js):
+    cmac_js = json.loads(data_js)
+    cmac_js["key"] = binascii.b2a_hex(os.urandom(16)).decode('utf-8')
+    
+    algorithms = ["aes", "rc6", "mars", "serpent", "twofish", "cast256"]
+    
+    for algorithm in algorithms:
+        cmac_js["family"] = algorithm
+        response = sending(json.dumps(cmac_js))
+        print("Response for family", algorithm, ":\n", json.dumps(json.loads(response), indent=4))
+    
+    cmac_js["hex"] = 1
+    cmac_js["plaintext"] = binascii.hexlify(cmac_js["plaintext"].encode('utf-8')).decode('utf-8')
+    
+    for algorithm in algorithms:
+        cmac_js["family"] = algorithm
+        response = sending(json.dumps(cmac_js))
+        print("Response for family", algorithm, "with hex encoding:\n", json.dumps(json.loads(response), indent=4))
 
-data_js='{"version":1,"algorithm":"CMAC","type":"string","plaintext":"Hello world!","hex":0,"key":"","family":"aes"}'
+def main():
+    data_js = '{"version":1,"algorithm":"CMAC","type":"string","plaintext":"Hello world!","hex":0,"key":"","family":"aes"}'
+    send_cmac_request(data_js)
 
-cmac_js=json.loads(data_js)
-cmac_js["key"]=binascii.b2a_hex(os.urandom(16))
-for i in algorithms :
-    cmac_js["family"]=i
-    sending(json.dumps(cmac_js))
-
-cmac_js["hex"]=1
-cmac_js["plaintext"]=cmac_js["plaintext"].encode("hex")
-for i in algorithms :
-    cmac_js["family"]=i
-    sending(json.dumps(cmac_js))
-
-# data_js_f='{"version":1,"algorithm":"CMAC","type":"file","file":"./../file_test/Mayhem.txt","family":"aes"}'
-# cmac_js=json.loads(data_js_f)
-# cmac_js["key"]=binascii.b2a_hex(os.urandom(16))
-# for i in algorithms:
-#     cmac_js["family"]=i
-#     sending(json.dumps(cmac_js))
+if __name__ == "__main__":
+    main()
