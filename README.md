@@ -38,7 +38,8 @@ Coherence (ko.eˈɾen.s) performs and offloads cryptography operations with a fo
 * Post-Quantum Cryptography sign: Dilithium, SPHINCS+, Rainbow.
 * Post-Quantum Cryptography kem: NTRU, Kyber, Saber.
 
-**Be careful Post-Quantum Cryptography is not an standard yet and is experimental.**
+**Be careful Post-Quantum Cryptography is an standard in process.**
+**Tested only in Ubuntu 24.04**
 
 ## Quickstart (Docker image)
 
@@ -47,19 +48,21 @@ docker run -d liesware/coherence:latest /usr/bin/coherence
 ```
 Test:
 ```python
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import requests
 import json
-import os,binascii
+import os
+import binascii
 
 def sending(message):
-	url = 'http://localhost:6613/'
-	response=requests.post(url, data=message)
-	print response.content
+    url = 'http://localhost:6613/'
+    response = requests.post(url, data=message)
+    print(response.content)
 
-data_js='{"version":1,"algorithm":"SHA3_512","type":"string","plaintext":"Hello world!"}'
+data_js = '{"version":1,"algorithm":"SHA3_512","type":"string","plaintext":"Hello world!"}'
 sending(data_js)
+
 ```
 We are getting SHA3-512 for "Hello world!" string.
 
