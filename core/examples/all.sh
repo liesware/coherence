@@ -9,7 +9,6 @@ python3 ecc.py
 python3 xed25519.py
 python3 hash.py
 python3 mac.py
-python3 ntru.py
 python3 poly1305.py
 python3 oqs_sign.py
 python3 oqs_kem.py
