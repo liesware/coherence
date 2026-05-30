@@ -10,13 +10,13 @@ int search_oqs_param_(Document& d, stru_param& req_val, string& answ_js){
 
     if(strncmp(req_val.algorithm.c_str(), "DILITHIUM",sizeof("DILITHIUM"))== 0){
       if(strncmp(req_val.parameter.c_str(), "dilithium2",sizeof("dilithium2")) == 0){
-        req_val.paramsq_="DILITHIUM2";
+        req_val.paramsq_="ML-DSA-44";
       }
       else if(strncmp(req_val.parameter.c_str(), "dilithium3",sizeof("dilithium3")) == 0){
-        req_val.paramsq_="DILITHIUM3";
+        req_val.paramsq_="ML-DSA-65";
       }
       else if(strncmp(req_val.parameter.c_str(), "dilithium5",sizeof("dilithium5")) == 0){
-        req_val.paramsq_="DILITHIUM5";
+        req_val.paramsq_="ML-DSA-87";
       }
       else{
         req_val.error="Bad parameter Dilithium ";

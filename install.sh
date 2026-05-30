@@ -15,12 +15,6 @@ DEBIAN_FRONTEND="noninteractive" apt-get install -y autoconf automake gcc g++ ma
 git clone -b master https://github.com/liesware/coherence
 cd coherence/core/lib/
 
-git clone https://github.com/P-H-C/phc-winner-argon2
-mv phc-winner-argon2/ argon2
-cd argon2
-make
-
-cd ..
 mkdir cryptopp
 cd cryptopp
 wget https://github.com/weidai11/cryptopp/releases/download/CRYPTOPP_8_9_0/cryptopp890.zip
@@ -31,10 +25,10 @@ cd ..
 git clone https://github.com/Tencent/rapidjson.git
 
 # git clone -b main https://github.com/open-quantum-safe/liboqs.git
-wget https://github.com/open-quantum-safe/liboqs/archive/refs/tags/0.10.1.zip
-unzip 0.10.1.zip
-mv liboqs-0.10.1 liboqs
-mv liboqs-0.10.1.zip liboqs
+wget https://github.com/open-quantum-safe/liboqs/archive/refs/tags/0.15.0.zip
+unzip 0.15.0.zip
+mv liboqs-0.15.0 liboqs
+mv 0.15.0.zip liboqs
 cd liboqs
 mkdir build && cd build
 cmake -DBUILD_SHARED_LIBS=ON -GNinja ..
@@ -42,7 +36,7 @@ ninja
 
 cd ../../
 git clone https://github.com/open-quantum-safe/liboqs-cpp
-sed -i '40 i std::string LIBOQS_CPP_VERSION="0.10.1";' liboqs-cpp/include/common.hpp
+sed -i '41 i std::string LIBOQS_CPP_VERSION="0.10.1";' liboqs-cpp/include/common.hpp
 
 git clone https://github.com/pistacheio/pistache.git
 cd pistache
@@ -55,7 +49,7 @@ make
 
 cp lib/pistache/build/src/libpistache.so.0.3.1 /lib/x86_64-linux-gnu/libpistache.so.0
 cp lib/cryptopp/libcryptopp.so.8.9.0 /lib/x86_64-linux-gnu/libcryptopp.so.8
-cp lib/liboqs/build/lib/liboqs.so.0.10.1 /lib/x86_64-linux-gnu/liboqs.so.5
+cp lib/liboqs/build/lib/liboqs.so.0.15.0 /lib/x86_64-linux-gnu/liboqs.so.5
 ls -lha /lib/x86_64-linux-gnu/libpistache.so.0
 ls -lha /lib/x86_64-linux-gnu/libcryptopp.so.8
 ls -lha /lib/x86_64-linux-gnu/liboqs.so.5

@@ -12,7 +12,7 @@
 #define _vmac
 #define _sosemanuk
 #define _salsa20
-#define _argon2
+// #define _argon2
 #define _rand
 #define _dsa
 #define _dh

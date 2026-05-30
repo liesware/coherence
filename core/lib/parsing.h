@@ -12,7 +12,6 @@
 #include "crypt-hash.h"
 #include "crypt-mac.h"
 #include "crypt-stream.h"
-#include "crypt-argon2.h"
 #include "crypt-rand.h"
 #include "crypt-dsa.h"
 #include "crypt-dh.h"
@@ -171,12 +170,6 @@ int PARSING(string& str_json, string& answ_js ){
   #ifdef _salsa20
   else if(strncmp(req_val.algorithm.c_str(), "SALSA20",sizeof("SALSA20")) == 0){
     parse_stream(d,req_val,answ_js);
-  }
-  #endif
-
-  #ifdef _argon2
-  else if(strncmp(req_val.algorithm.c_str(), "ARGON2",sizeof("ARGON2")) == 0){
-    parse_argon2(d,req_val,answ_js);
   }
   #endif
 
