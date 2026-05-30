@@ -1,6 +1,5 @@
 #!/bin/bash
 
-python3 argon2.py
 python3 block.py
 python3 cmac.py
 python3 dh.py

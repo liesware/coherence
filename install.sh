@@ -12,8 +12,7 @@
 apt-get update
 DEBIAN_FRONTEND="noninteractive" apt-get install -y autoconf automake gcc g++ make libtool git wget unzip xsltproc libssl-dev bzip2 valgrind doxygen graphviz python3 python3-pip cmake libcurl4-openssl-dev cmake gcc ninja-build libssl-dev python3-pytest python3-pytest-xdist unzip xsltproc doxygen graphviz git wget libargon2-dev pkg-config meson astyle python3-yaml
 
-git clone -b master https://github.com/liesware/coherence
-cd coherence/core/lib/
+cd core/lib/
 
 mkdir cryptopp
 cd cryptopp
@@ -24,7 +23,6 @@ make libcryptopp.a libcryptopp.so
 cd ..
 git clone https://github.com/Tencent/rapidjson.git
 
-# git clone -b main https://github.com/open-quantum-safe/liboqs.git
 wget https://github.com/open-quantum-safe/liboqs/archive/refs/tags/0.15.0.zip
 unzip 0.15.0.zip
 mv liboqs-0.15.0 liboqs
@@ -47,12 +45,10 @@ cd ../../
 mkdir bin
 make
 
-cp lib/pistache/build/src/libpistache.so.0.3.1 /lib/x86_64-linux-gnu/libpistache.so.0
+cp lib/pistache/build/src/libpistache.so /lib/x86_64-linux-gnu/libpistache.so.0.5
 cp lib/cryptopp/libcryptopp.so.8.9.0 /lib/x86_64-linux-gnu/libcryptopp.so.8
-cp lib/liboqs/build/lib/liboqs.so.0.15.0 /lib/x86_64-linux-gnu/liboqs.so.5
-ls -lha /lib/x86_64-linux-gnu/libpistache.so.0
+cp lib/liboqs/build/lib/liboqs.so /lib/x86_64-linux-gnu/liboqs.so.9
+ls -lha /lib/x86_64-linux-gnu/libpistache.so.0.5
 ls -lha /lib/x86_64-linux-gnu/libcryptopp.so.8
-ls -lha /lib/x86_64-linux-gnu/liboqs.so.5
-ls -lha /lib/x86_64-linux-gnu/libargon2.so.1
-ls -lha /lib/x86_64-linux-gnu/libpistache.so.0
+ls -lha /lib/x86_64-linux-gnu/liboqs.so.9
 ldd bin/coherence 
