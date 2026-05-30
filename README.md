@@ -13,9 +13,9 @@
 
 # Some Words
 After all these years I decide the purpose of this project has ended. after 7 years new stacks and needs have risen. At these moment these project creates more friction than suitable solutions.
-At these point I think the right porpuse of this project is educational, it will help to explore cryptography algorithms with an easy interface.
-Unfortunately due to lack of time and vision I couldn't focus this project into the right way or at leas the way I wanted. But this project gave me so many fun and knowledge. now it helps me to understand better the current needs. 
-So, I need to put the same spirit into a new project. 
+At these point I think the right purpose of this project is educational, it will help to explore cryptography algorithms with an easy interface.
+Unfortunately due to lack of time and vision I couldn't focus this project into the right way or at leas the way I wanted. But this project gave me so many fun and knowledge. now it helps me to understand better the current needs.
+So, I need to put the same spirit into a new project.
 
 # Coherence
 
